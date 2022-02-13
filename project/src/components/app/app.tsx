@@ -1,12 +1,13 @@
 import {CityScreen} from '../city-screen/city-screen';
 
 type AppScreenProps = {
-  cityPlacesCount: number;
-}
+  cityName: string,
+  cityPlacesCount: number,
+};
 
-function App({cityPlacesCount}: AppScreenProps): JSX.Element {
+function App({cityName, cityPlacesCount}: AppScreenProps): JSX.Element {
   return (
-    <CityScreen cityPlacesCount={cityPlacesCount} />
+    <CityScreen cityName={cityName} cityPlacesCount={cityPlacesCount} />
   );
 }
 

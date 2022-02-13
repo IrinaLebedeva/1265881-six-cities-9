@@ -1,12 +1,16 @@
-function FavoritesCard(): JSX.Element {
+type FavoritesCardProps = {
+  id: number,
+};
+
+function FavoritesCard({id}: FavoritesCardProps): JSX.Element {
   return (
     <article className="favorites__card place-card">
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="img/apartment-small-03.jpg" width="150" height="110" alt="Place image" />
+        <a href={`/offer/${id}`}>
+          <img className="place-card__image" src="img/apartment-small-03.jpg" width="150" height="110" alt="" />
         </a>
       </div>
       <div className="favorites__card-info place-card__info">
@@ -17,7 +21,7 @@ function FavoritesCard(): JSX.Element {
           </div>
           <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
+              <use xlinkHref="#icon-bookmark" />
             </svg>
             <span className="visually-hidden">In bookmarks</span>
           </button>
@@ -29,7 +33,7 @@ function FavoritesCard(): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Nice, cozy, warm big bed apartment</a>
+          <a href={`/offer/${id}`}>Nice, cozy, warm big bed apartment</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>

@@ -1,3 +1,31 @@
+const cities = [
+  {
+    code: 'paris',
+    name: 'Paris',
+  },
+  {
+    code: 'cologne',
+    name: 'Cologne',
+  },
+  {
+    code: 'brussels',
+    name: 'Brussels',
+  },
+  {
+    code: 'amsterdam',
+    name: 'Amsterdam',
+  },
+  {
+    code: 'hamburg',
+    name: 'Hamburg',
+  },
+  {
+    code: 'dusseldorf',
+    name: 'Dusseldorf',
+  },
+];
+
+
 function CityTabs(): JSX.Element {
   return (
     <>
@@ -5,36 +33,13 @@ function CityTabs(): JSX.Element {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
+            {cities.map((city) => (
+              <li className="locations__item" key={city.code}>
+                <a className="locations__item-link tabs__item" href={`/${city.code}`}>
+                  <span>{city.name}</span>
+                </a>
+              </li>
+            ))}
           </ul>
         </section>
       </div>
