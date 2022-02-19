@@ -1,9 +1,21 @@
+import {AppRoute} from '../../const';
 import {Header} from '../header/header';
 import {PropertyHost} from '../property-host/property-host';
 import {PropertyReviews} from '../property-reviews/property-reviews';
 import {PropertyNearPlaces} from '../property-near-places/property-near-places';
+import {
+  Navigate,
+  useParams
+} from 'react-router-dom';
 
 function PropertyScreen(): JSX.Element {
+  const params = useParams();
+  const id = Number(params.id);
+
+  if (isNaN(id)) {
+    return <Navigate to={AppRoute.NotFound} />;
+  }
+
   return (
     <div className="page">
       <Header />

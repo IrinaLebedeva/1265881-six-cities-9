@@ -1,5 +1,12 @@
-import {AppRoute, AuthorizationStatus} from '../../const';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {
+  AppRoute,
+  AuthorizationStatus
+} from '../../const';
+import {
+  BrowserRouter,
+  Route,
+  Routes
+} from 'react-router-dom';
 import {CityScreen} from '../city-screen/city-screen';
 import {FavoritesScreen} from '../favorites-screen/favorites-screen';
 import {LoginScreen} from '../login-screen/login-screen';
@@ -25,7 +32,7 @@ function App({cityName, cityPlacesCount}: AppScreenProps): JSX.Element {
           element={<LoginScreen />}
         />
         <Route
-          path={AppRoute.Property}
+          path={`${AppRoute.Property}/:id`}
           element={<PropertyScreen />}
         />
         <Route
