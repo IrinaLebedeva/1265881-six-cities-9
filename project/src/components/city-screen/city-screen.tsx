@@ -3,8 +3,8 @@ import {Header} from '../header/header';
 import {CityPlacesList} from '../city-places-list/city-places-list';
 
 type CityScreenProps = {
-  cityName: string,
-  cityPlacesCount: number,
+  cityName: string;
+  cityPlacesCount: number;
 };
 
 function CityScreen({cityName, cityPlacesCount}: CityScreenProps): JSX.Element {

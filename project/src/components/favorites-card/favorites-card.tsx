@@ -2,7 +2,7 @@ import {AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 
 type FavoritesCardProps = {
-  id: number,
+  id: number;
 };
 
 function FavoritesCard({id}: FavoritesCardProps): JSX.Element {

@@ -2,7 +2,7 @@ import {AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 
 type NearPlaceCardProps = {
-  id: number,
+  id: number;
 };
 
 function NearPlaceCard({id}: NearPlaceCardProps): JSX.Element {

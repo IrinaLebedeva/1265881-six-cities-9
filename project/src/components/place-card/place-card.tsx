@@ -2,7 +2,7 @@ import {AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 
 type PlaceCardProps = {
-  id: number,
+  id: number;
 };
 
 function PlaceCard({id}: PlaceCardProps): JSX.Element {

@@ -2,7 +2,7 @@ import {AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 
 type FooterProps = {
-  additionalClassName ?: string,
+  additionalClassName ?: string;
 }
 
 function Footer({additionalClassName = ''}: FooterProps): JSX.Element {

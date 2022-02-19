@@ -3,8 +3,8 @@ import {PlaceCard} from '../place-card/place-card';
 import {PlacesSorting} from '../places-sorting/places-sorting';
 
 type CityPlacesListProps = {
-  cityName: string,
-  cityPlacesCount: number,
+  cityName: string;
+  cityPlacesCount: number;
 };
 
 const MOCK_PLACE_CARD_COUNT = 5;
