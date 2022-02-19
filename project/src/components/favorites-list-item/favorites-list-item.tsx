@@ -1,5 +1,5 @@
-import {FavoritesCard} from '../favorites-card/favorites-card';
-import {getStringHashCode} from '../../utils/get-string-hash-code';
+import {FavoritesCard} from 'components/favorites-card/favorites-card';
+import {getStringHashCode} from 'utils/get-string-hash-code';
 
 type FavoritesListItemProps = {
   cityCode: string;

@@ -1,21 +1,21 @@
-import {
-  AppRoute,
-  AuthorizationStatus
-} from '../../const';
+import {AppRoute} from 'settings/app-route';
+import {AuthorizationStatus} from 'settings/authorization-status';
 import {
   BrowserRouter,
   Route,
   Routes
 } from 'react-router-dom';
-import {CityScreen} from '../city-screen/city-screen';
-import {FavoritesScreen} from '../favorites-screen/favorites-screen';
-import {LoginScreen} from '../login-screen/login-screen';
-import {NotFoundScreen} from '../not-found-screen/not-found-screen';
-import {PropertyScreen} from '../property-screen/property-screen';
-import {PrivateRoute} from '../private-route/private-route';
+import {City} from 'settings/city';
+import {CityScreen} from 'components/city-screen/city-screen';
+import {FavoritesScreen} from 'components/favorites-screen/favorites-screen';
+import {LoginScreen} from 'components/login-screen/login-screen';
+import {NotFoundScreen} from 'components/not-found-screen/not-found-screen';
+import {PropertyScreen} from 'components/property-screen/property-screen';
+import {PrivateRoute} from 'components/private-route/private-route';
+
 
 type AppScreenProps = {
-  cityName: string;
+  cityName: City;
   cityPlacesCount: number;
 };
 

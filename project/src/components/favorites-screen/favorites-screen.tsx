@@ -1,6 +1,6 @@
-import {FavoritesListItem} from '../favorites-list-item/favorites-list-item';
-import {Footer} from '../footer/footer';
-import {Header} from '../header/header';
+import {FavoritesListItem} from 'components/favorites-list-item/favorites-list-item';
+import {Footer} from 'components/footer/footer';
+import {Header} from 'components/header/header';
 
 const mockFavoritesLocations = [
   {

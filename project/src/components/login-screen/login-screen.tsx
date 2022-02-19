@@ -1,4 +1,4 @@
-import {Header} from '../header/header';
+import {Header} from 'components/header/header';
 
 function LoginScreen(): JSX.Element {
   return (

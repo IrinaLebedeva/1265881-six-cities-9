@@ -1,9 +1,10 @@
-import {CityTabs} from '../city-tabs/city-tabs';
-import {Header} from '../header/header';
-import {CityPlacesList} from '../city-places-list/city-places-list';
+import {City} from 'settings/city';
+import {CityTabs} from 'components/city-tabs/city-tabs';
+import {Header} from 'components/header/header';
+import {CityPlacesList} from 'components/city-places-list/city-places-list';
 
 type CityScreenProps = {
-  cityName: string;
+  cityName: City;
   cityPlacesCount: number;
 };
 

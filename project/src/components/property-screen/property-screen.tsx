@@ -1,8 +1,8 @@
-import {AppRoute} from '../../const';
-import {Header} from '../header/header';
-import {PropertyHost} from '../property-host/property-host';
-import {PropertyReviews} from '../property-reviews/property-reviews';
-import {PropertyNearPlaces} from '../property-near-places/property-near-places';
+import {AppRoute} from 'settings/app-route';
+import {Header} from 'components/header/header';
+import {PropertyHost} from 'components/property-host/property-host';
+import {PropertyReviews} from 'components/property-reviews/property-reviews';
+import {PropertyNearPlaces} from 'components/property-near-places/property-near-places';
 import {
   Navigate,
   useParams

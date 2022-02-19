@@ -1,4 +1,4 @@
-import {PropertyReviewsForm} from '../property-reviews-form/property-reviews-form';
+import {PropertyReviewsForm} from 'components/property-reviews-form/property-reviews-form';
 
 function PropertyReviews(): JSX.Element {
   return (

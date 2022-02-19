@@ -1,4 +1,4 @@
-import {AppRoute} from '../../const';
+import {AppRoute} from 'settings/app-route';
 import {Link} from 'react-router-dom';
 
 type PlaceCardProps = {

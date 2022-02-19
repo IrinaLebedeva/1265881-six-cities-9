@@ -1,5 +1,5 @@
-import {NearPlaceCard} from '../near-place-card/near-place-card';
-import {getStringHashCode} from '../../utils/get-string-hash-code';
+import {NearPlaceCard} from 'components/near-place-card/near-place-card';
+import {getStringHashCode} from 'utils/get-string-hash-code';
 
 const MOCK_NEAR_PLACE_CARD_COUNT = 3;
 
