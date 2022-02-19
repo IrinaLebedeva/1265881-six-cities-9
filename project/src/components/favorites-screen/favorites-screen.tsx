@@ -1,4 +1,5 @@
 import {FavoritesListItem} from '../favorites-list-item/favorites-list-item';
+import {Footer} from '../footer/footer';
 import {Header} from '../header/header';
 
 const mockFavoritesLocations = [
@@ -30,11 +31,7 @@ function FavoritesScreen(): JSX.Element {
           </section>
         </div>
       </main>
-      <footer className="footer container">
-        <a className="footer__logo-link" href="/">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
-      </footer>
+      <Footer additionalClassName="container" />
     </div>
   );
 }

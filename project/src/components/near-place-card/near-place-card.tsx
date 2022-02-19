@@ -1,3 +1,6 @@
+import {AppRoute} from '../../const';
+import {Link} from 'react-router-dom';
+
 type NearPlaceCardProps = {
   id: number,
 };
@@ -9,9 +12,9 @@ function NearPlaceCard({id}: NearPlaceCardProps): JSX.Element {
         <span>Premium</span>
       </div>
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <a href={`/offer/${id}`}>
+        <Link to={`${AppRoute.Property}/${id}`}>
           <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -33,7 +36,7 @@ function NearPlaceCard({id}: NearPlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={`/offer/${id}`}>Nice, cozy, warm big bed apartment</a>
+          <Link to={`${AppRoute.Property}/${id}`}>Nice, cozy, warm big bed apartment</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
