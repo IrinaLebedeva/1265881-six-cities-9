@@ -3,7 +3,7 @@ enum AppRoute {
   FavoritesEmpty = '/favorites-empty',
   Login = '/login',
   NotFound = '/404',
-  Property = '/offer',
+  Property = '/offer/:id',
   Root = '/',
 }
 

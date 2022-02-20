@@ -1,5 +1,8 @@
 import {AppRoute} from 'settings/app-route';
-import {Link} from 'react-router-dom';
+import {
+  generatePath,
+  Link
+} from 'react-router-dom';
 
 type PlaceCardProps = {
   id: number;
@@ -12,7 +15,7 @@ function PlaceCard({id}: PlaceCardProps): JSX.Element {
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Property}/${id}`}>
+        <Link to={generatePath(AppRoute.Property, {id: id.toString()})}>
           <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="" />
         </Link>
       </div>
@@ -36,7 +39,7 @@ function PlaceCard({id}: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Property}/${id}`}>Beautiful &amp; luxurious apartment at great location</Link>
+          <Link to={generatePath(AppRoute.Property, {id: id.toString()})}>Beautiful &amp; luxurious apartment at great location</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>

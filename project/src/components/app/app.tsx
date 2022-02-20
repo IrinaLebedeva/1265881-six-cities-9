@@ -35,13 +35,13 @@ function App({cityName, cityPlacesCount}: AppScreenProps): JSX.Element {
             element={<LoginScreen />}
           />
           <Route
-            path={`${AppRoute.Property}/:id`}
+            path={`${AppRoute.Property}`}
             element={<PropertyScreen />}
           />
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NotAuth}>
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
                 <FavoritesScreen />
               </PrivateRoute>
             }

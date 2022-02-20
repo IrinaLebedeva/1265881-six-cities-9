@@ -1,5 +1,8 @@
 import {AppRoute} from 'settings/app-route';
-import {Link} from 'react-router-dom';
+import {
+  generatePath,
+  Link
+} from 'react-router-dom';
 
 type NearPlaceCardProps = {
   id: number;
@@ -12,7 +15,7 @@ function NearPlaceCard({id}: NearPlaceCardProps): JSX.Element {
         <span>Premium</span>
       </div>
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Property}/${id}`}>
+        <Link to={generatePath(AppRoute.Property, {id: id.toString()})}>
           <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="" />
         </Link>
       </div>
@@ -36,7 +39,7 @@ function NearPlaceCard({id}: NearPlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Property}/${id}`}>Nice, cozy, warm big bed apartment</Link>
+          <Link to={generatePath(AppRoute.Property, {id: id.toString()})}>Nice, cozy, warm big bed apartment</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
