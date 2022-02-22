@@ -1,5 +1,9 @@
+import {AppRoute} from 'settings/app-route';
+import {generatePath} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+
 type FavoritesCardProps = {
-  id: number,
+  id: number;
 };
 
 function FavoritesCard({id}: FavoritesCardProps): JSX.Element {
@@ -9,9 +13,9 @@ function FavoritesCard({id}: FavoritesCardProps): JSX.Element {
         <span>Premium</span>
       </div>
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href={`/offer/${id}`}>
+        <Link to={generatePath(AppRoute.Property, {id: id.toString()})}>
           <img className="place-card__image" src="img/apartment-small-03.jpg" width="150" height="110" alt="" />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -33,7 +37,7 @@ function FavoritesCard({id}: FavoritesCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={`/offer/${id}`}>Nice, cozy, warm big bed apartment</a>
+          <Link to={generatePath(AppRoute.Property, {id: id.toString()})}>Nice, cozy, warm big bed apartment</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>

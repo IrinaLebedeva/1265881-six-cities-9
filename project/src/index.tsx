@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app';
+import App from 'components/app/app';
+import {City} from 'settings/city';
 
 const Setting = {
-  CITY_NAME: 'Amsterdam',
+  CITY_NAME: City.Amsterdam,
   CITY_PLACES_COUNT: 312,
 };
 
