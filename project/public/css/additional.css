@@ -1,0 +1,11 @@
+.places__city-name {
+  text-transform: capitalize;
+}
+
+.cities__image-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: end;
+  align-items: end;
+}

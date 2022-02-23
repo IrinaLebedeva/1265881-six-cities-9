@@ -16,7 +16,7 @@ function CityPlacesList({cityName, cityPlacesCount}: CityPlacesListProps): JSX.E
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{cityPlacesCount} places to stay in <span style={{textTransform: 'capitalize'}}>{cityName}</span></b>
+          <b className="places__found">{cityPlacesCount} places to stay in <span className="places__city-name">{cityName}</span></b>
           <PlacesSorting />
           <div className="cities__places-list places__list tabs__content">
             {Array.from(Array(MOCK_PLACE_CARD_COUNT)).map((_, index) => <PlaceCard id={index + 1} key={getStringHashCode(`${index}${cityName}`)} />)}

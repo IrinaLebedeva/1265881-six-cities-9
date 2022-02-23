@@ -13,7 +13,7 @@ function FavoritesCard({id}: FavoritesCardProps): JSX.Element {
         <span>Premium</span>
       </div>
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={generatePath(AppRoute.Property, {id: id.toString()})}>
+        <Link to={generatePath(AppRoute.Property, {id: `${id}`})}>
           <img className="place-card__image" src="img/apartment-small-03.jpg" width="150" height="110" alt="" />
         </Link>
       </div>
@@ -37,7 +37,7 @@ function FavoritesCard({id}: FavoritesCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Property, {id: id.toString()})}>Nice, cozy, warm big bed apartment</Link>
+          <Link to={generatePath(AppRoute.Property, {id: `${id}`})}>Nice, cozy, warm big bed apartment</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
