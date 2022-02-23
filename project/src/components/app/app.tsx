@@ -12,23 +12,24 @@ import {FavoritesScreen} from 'components/favorites-screen/favorites-screen';
 import {Layout} from 'components/layout/layout';
 import {LoginScreen} from 'components/login-screen/login-screen';
 import {NotFoundScreen} from 'components/not-found-screen/not-found-screen';
+import {Offers} from 'types/offer';
 import {PropertyScreen} from 'components/property-screen/property-screen';
 import {PrivateRoute} from 'components/private-route/private-route';
-
 
 type AppScreenProps = {
   cityName: City;
   cityPlacesCount: number;
+  offers: Offers;
 };
 
-function App({cityName, cityPlacesCount}: AppScreenProps): JSX.Element {
+function App({cityName, cityPlacesCount, offers}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root} element={<Layout />}>
           <Route
             index
-            element={<CityScreen cityName={cityName} cityPlacesCount={cityPlacesCount} />}
+            element={<CityScreen cityName={cityName} cityPlacesCount={cityPlacesCount} offers={offers} />}
           />
           <Route
             path={AppRoute.Login}
