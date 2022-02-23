@@ -5,15 +5,14 @@ import {Offers} from 'types/offer';
 
 type CityScreenProps = {
   cityName: City;
-  cityPlacesCount: number;
   offers: Offers;
 };
 
-function CityScreen({cityName, cityPlacesCount, offers}: CityScreenProps): JSX.Element {
+function CityScreen({cityName, offers}: CityScreenProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
       <CityTabs />
-      <CityPlacesList cityName={cityName} cityPlacesCount={cityPlacesCount} offers={offers}/>
+      <CityPlacesList cityName={cityName} offers={offers}/>
     </main>
   );
 }

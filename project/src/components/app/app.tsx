@@ -18,18 +18,17 @@ import {PrivateRoute} from 'components/private-route/private-route';
 
 type AppScreenProps = {
   cityName: City;
-  cityPlacesCount: number;
   offers: Offers;
 };
 
-function App({cityName, cityPlacesCount, offers}: AppScreenProps): JSX.Element {
+function App({cityName, offers}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root} element={<Layout />}>
           <Route
             index
-            element={<CityScreen cityName={cityName} cityPlacesCount={cityPlacesCount} offers={offers} />}
+            element={<CityScreen cityName={cityName} offers={offers} />}
           />
           <Route
             path={AppRoute.Login}
