@@ -1,4 +1,9 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
+import {
+  ChangeEvent,
+  FormEvent,
+  useState
+} from 'react';
+import React from 'react';
 
 function PropertyReviewsForm(): JSX.Element {
   const [formReviewData, setFormReviewData] = useState({
@@ -46,7 +51,7 @@ function PropertyReviewsForm(): JSX.Element {
   const ratingElement: JSX.Element[] = [];
   ratingValues.map((rating) => {
     ratingElement.push(
-      <>
+      <React.Fragment key={`${rating.value}-rating`}>
         <input
           className="form__rating-input visually-hidden"
           name="rating"
@@ -60,7 +65,7 @@ function PropertyReviewsForm(): JSX.Element {
             <use xlinkHref="#icon-star"></use>
           </svg>
         </label>
-      </>,
+      </React.Fragment>,
     );
   });
 
