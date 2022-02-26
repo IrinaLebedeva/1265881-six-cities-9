@@ -27,7 +27,11 @@ function App({cityCode, offers, favoriteOffers}: AppScreenProps): JSX.Element {
   const cityRoutes = [];
   for (const routeCityCode in City) {
     cityRoutes.push(
-      <Route path={generatePath(AppRoute.City, {cityCode: routeCityCode})} element={<CityScreen cityCode={cityCode} offers={offers}/>} />,
+      <Route
+        path={generatePath(AppRoute.City, {cityCode: routeCityCode})}
+        element={<CityScreen cityCode={cityCode} offers={offers}/>}
+        key={`route${cityCode}`}
+      />,
     );
   }
 
