@@ -4,6 +4,7 @@ import {
   generatePath,
   Link
 } from 'react-router-dom';
+import {getOfferPremiumJsxElement} from 'utils/get-offer-premium-jsx-element';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {Offer} from 'types/offer';
 import {useState} from 'react';
@@ -13,19 +14,12 @@ type PlaceCardProps = {
 };
 
 function PlaceCard({offer}: PlaceCardProps): JSX.Element {
-  let premiumElement;
-  if (offer.isPremium) {
-    premiumElement = (
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
-    );
-  }
   const [activeCardId, setActiveCardId] = useState(0);
-
+  // eslint-disable-next-line  no-console
+  console.log(activeCardId);
   return (
     <article className="cities__place-card place-card" onMouseOver={() => setActiveCardId(offer.id)}>
-      {premiumElement}
+      {getOfferPremiumJsxElement(offer.isPremium)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={generatePath(AppRoute.Property, {id: `${offer.id}`})}>
           <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt=""/>

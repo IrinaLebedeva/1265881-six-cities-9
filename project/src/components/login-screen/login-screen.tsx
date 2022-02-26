@@ -1,3 +1,11 @@
+import {AppRoute} from 'settings/app-route';
+import {City} from 'settings/city';
+import {DEFAULT_CITY_CODE} from 'settings/const';
+import {
+  generatePath,
+  Link
+} from 'react-router-dom';
+
 function LoginScreen(): JSX.Element {
   return (
     <main className="page__main page__main--login">
@@ -18,9 +26,9 @@ function LoginScreen(): JSX.Element {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <a className="locations__item-link" href="/amsterdam">
-              <span>Amsterdam</span>
-            </a>
+            <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: DEFAULT_CITY_CODE})}>
+              <span>{City[DEFAULT_CITY_CODE as keyof typeof City]}</span>
+            </Link>
           </div>
         </section>
       </div>

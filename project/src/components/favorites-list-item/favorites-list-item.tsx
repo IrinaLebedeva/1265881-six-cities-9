@@ -1,25 +1,38 @@
+import {AppRoute} from 'settings/app-route';
+import {City} from 'settings/city';
 import {FavoritesCard} from 'components/favorites-card/favorites-card';
-import {getStringHashCode} from 'utils/get-string-hash-code';
+import {
+  generatePath,
+  Link
+} from 'react-router-dom';
+import {Offers} from 'types/offer';
 
 type FavoritesListItemProps = {
   cityCode: string;
-  cityName: string;
+  offers: Offers;
 };
 
-const MOCK_FAVORITES_CARD_COUNT = 2;
+function FavoritesListItem({cityCode, offers}:FavoritesListItemProps): JSX.Element {
+  const offersByCity: JSX.Element[] = [];
+  offers.map((offer) => {
+    if (offer.city.name === City[cityCode as keyof typeof City]) {
+      offersByCity.push(
+        <FavoritesCard offer={offer} key={offer.id} />,
+      );
+    }
+  });
 
-function FavoritesListItem({cityCode, cityName}:FavoritesListItemProps): JSX.Element {
   return (
     <>
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href={`/${cityCode}`}>
-            <span>{cityName}</span>
-          </a>
+          <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: cityCode})} >
+            <span>{City[cityCode as keyof typeof City]}</span>
+          </Link>
         </div>
       </div>
       <div className="favorites__places">
-        {Array.from(Array(MOCK_FAVORITES_CARD_COUNT)).map((_, index) => <FavoritesCard id={index + 1} key={getStringHashCode(`${index}${cityCode}`)} />)}
+        {offersByCity}
       </div>
     </>
   );

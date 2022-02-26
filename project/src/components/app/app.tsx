@@ -20,9 +20,10 @@ import {PrivateRoute} from 'components/private-route/private-route';
 type AppScreenProps = {
   cityCode: keyof typeof City;
   offers: Offers;
+  favoriteOffers: Offers;
 };
 
-function App({cityCode, offers}: AppScreenProps): JSX.Element {
+function App({cityCode, offers, favoriteOffers}: AppScreenProps): JSX.Element {
   const cityRoutes = [];
   for (const routeCityCode in City) {
     cityRoutes.push(
@@ -53,7 +54,7 @@ function App({cityCode, offers}: AppScreenProps): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <FavoritesScreen />
+                <FavoritesScreen offers={favoriteOffers} />
               </PrivateRoute>
             }
           />
