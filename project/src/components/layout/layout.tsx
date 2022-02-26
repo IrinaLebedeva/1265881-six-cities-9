@@ -10,8 +10,13 @@ import {
 function Layout(): JSX.Element {
   const location = useLocation();
 
+  const isLayoutWithFooter = [
+    `${AppRoute.Favorites}`,
+    `${AppRoute.FavoritesEmpty}`,
+  ].includes(location.pathname);
+
   let footerElement;
-  if (location.pathname === AppRoute.Favorites || location.pathname === AppRoute.FavoritesEmpty) {
+  if (isLayoutWithFooter) {
     footerElement = <Footer additionalClassName={location.pathname === AppRoute.Favorites ? 'container' : ''} />;
   }
 

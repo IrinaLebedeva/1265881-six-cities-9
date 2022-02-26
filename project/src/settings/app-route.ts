@@ -5,6 +5,7 @@ enum AppRoute {
   NotFound = '/404',
   Property = '/offer/:id',
   Root = '/',
+  City = '/:cityCode',
 }
 
 export {AppRoute};

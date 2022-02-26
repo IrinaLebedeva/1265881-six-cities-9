@@ -2,6 +2,7 @@ import {AppRoute} from 'settings/app-route';
 import {AuthorizationStatus} from 'settings/authorization-status';
 import {
   BrowserRouter,
+  generatePath,
   Route,
   Routes
 } from 'react-router-dom';
@@ -17,19 +18,29 @@ import {PropertyScreen} from 'components/property-screen/property-screen';
 import {PrivateRoute} from 'components/private-route/private-route';
 
 type AppScreenProps = {
-  cityName: City;
+  cityCode: keyof typeof City;
   offers: Offers;
 };
 
-function App({cityName, offers}: AppScreenProps): JSX.Element {
+function App({cityCode, offers}: AppScreenProps): JSX.Element {
+  const cityRoutes = [];
+  for (const routeCityCode in City) {
+    cityRoutes.push(
+      <Route path={generatePath(AppRoute.City, {cityCode: routeCityCode})} element={<CityScreen cityCode={cityCode} offers={offers}/>} />,
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root} element={<Layout />}>
-          <Route
-            index
-            element={<CityScreen cityName={cityName} offers={offers} />}
-          />
+          <Route path={AppRoute.Root}>
+            <Route
+              index
+              element={<CityScreen cityCode={cityCode} offers={offers}/>}
+            />
+            {cityRoutes}
+          </Route>
           <Route
             path={AppRoute.Login}
             element={<LoginScreen />}
@@ -41,7 +52,7 @@ function App({cityName, offers}: AppScreenProps): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NotAuth}>
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
                 <FavoritesScreen />
               </PrivateRoute>
             }
