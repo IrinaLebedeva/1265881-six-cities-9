@@ -97,7 +97,7 @@ function PropertyScreen({offers}: PropertyScreenProps): JSX.Element {
                 })}
               </ul>
             </div>
-            <PropertyHost />
+            <PropertyHost offer={offer} />
             <PropertyReviews />
           </div>
         </div>
