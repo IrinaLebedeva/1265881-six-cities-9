@@ -14,15 +14,7 @@ type FavoritesListItemProps = {
 };
 
 function FavoritesListItem({cityCode, offers}:FavoritesListItemProps): JSX.Element {
-  const offersByCity: JSX.Element[] = [];
-  offers.map((offer) => {
-    if (offer.city.name === City[cityCode as CityCode]) {
-      offersByCity.push(
-        <FavoritesCard offer={offer} key={offer.id} />,
-      );
-    }
-  });
-
+  const offersByCity = offers.filter((offer) => offer.city.name === City[cityCode as CityCode]);
   return (
     <>
       <div className="favorites__locations locations locations--current">
@@ -33,7 +25,7 @@ function FavoritesListItem({cityCode, offers}:FavoritesListItemProps): JSX.Eleme
         </div>
       </div>
       <div className="favorites__places">
-        {offersByCity}
+        {offersByCity.map((offer) => <FavoritesCard offer={offer} key={offer.id} />)}
       </div>
     </>
   );

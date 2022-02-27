@@ -9,20 +9,20 @@ type FavoritesScreenProps = {
 function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
   const cityValues: string[] = Object.values(City);
   const favoriteCities: string[] = [];
-  const favoritesElement: JSX.Element[] = [];
 
   offers.map((offer) => {
     if (!favoriteCities.includes(offer.city.name)) {
       favoriteCities.push(offer.city.name);
-
-      const cityCode = Object.keys(City)[cityValues.indexOf(offer.city.name)];
-
-      favoritesElement.push(
-        <li className="favorites__locations-items" key={cityCode} >
-          <FavoritesListItem cityCode={cityCode} offers={offers}/>
-        </li>,
-      );
     }
+  });
+
+  const favoritesElement: JSX.Element[] = favoriteCities.map((cityName) => {
+    const cityCode = Object.keys(City)[cityValues.indexOf(cityName)];
+    return (
+      <li className="favorites__locations-items" key={cityCode} >
+        <FavoritesListItem cityCode={cityCode} offers={offers}/>
+      </li>
+    );
   });
 
   return (
