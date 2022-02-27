@@ -53,7 +53,7 @@ function App({cityCode, offers, favoriteOffers}: AppScreenProps): JSX.Element {
           />
           <Route
             path={`${AppRoute.Property}`}
-            element={<PropertyScreen />}
+            element={<PropertyScreen offers={offers}/>}
           />
           <Route
             path={AppRoute.Favorites}

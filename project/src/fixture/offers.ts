@@ -9,6 +9,8 @@ const offers: Offers = [
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [
       'Heating',
+      'Dishwasher',
+      'Fridge',
     ],
     host: hosts[0],
     id: 1,
@@ -38,6 +40,10 @@ const offers: Offers = [
     description: 'A  a true asian pearl, middle-eastern paradise, full of of cozy canteens where you can try the best coffee in the Middle East, famous for its crowded street markets with the best street food in Amsterdam.',
     goods: [
       'Heating',
+      'Cabel TV',
+      'Towels',
+      'Dishwasher',
+      'Fridge',
     ],
     host: hosts[1],
     id: 2,
@@ -67,7 +73,9 @@ const offers: Offers = [
     city: cities[0],
     description: 'Apartments in a beautiful city, with crowded streets, in a middle of Europe, with an embankment of a mighty river as a centre of attraction',
     goods: [
-      'Heating',
+      'Cabel TV',
+      'Towels',
+      'Dishwasher',
     ],
     host: hosts[1],
     id: 3,
