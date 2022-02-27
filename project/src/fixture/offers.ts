@@ -1,8 +1,37 @@
-import {cities} from 'mocks/cities';
-import {hosts} from 'mocks/hosts';
+import {cities} from 'fixture/cities';
+import {hosts} from 'fixture/hosts';
 import {Offers} from 'types/offer';
 
-const favoriteOffers: Offers = [
+const offers: Offers = [
+  {
+    bedrooms: 3,
+    city: cities[0],
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    goods: [
+      'Heating',
+    ],
+    host: hosts[0],
+    id: 1,
+    images: [
+      'http://picsum.photos/260/200?r=3',
+      'http://picsum.photos/260/200?r=4',
+      'http://picsum.photos/260/200?r=5',
+      'http://picsum.photos/260/200?r=6',
+    ],
+    isFavorite: true,
+    isPremium: false,
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 8,
+    },
+    maxAdults: 4,
+    previewImage: 'http://picsum.photos/260/200?r=1',
+    price: 120,
+    rating: 3.5,
+    title: 'Beautiful & luxurious studio at great location',
+    type: 'Apartment',
+  },
   {
     bedrooms: 2,
     city: cities[0],
@@ -19,7 +48,7 @@ const favoriteOffers: Offers = [
       'http://picsum.photos/260/200?r=11',
       'http://picsum.photos/260/200?r=12',
     ],
-    isFavorite: true,
+    isFavorite: false,
     isPremium: true,
     location: {
       latitude: 52.55514938496378,
@@ -31,7 +60,7 @@ const favoriteOffers: Offers = [
     price: 320,
     rating: 5.0,
     title: 'Luxurious studio',
-    type: 'Hostel',
+    type: 'Private room',
   },
   {
     bedrooms: 1,
@@ -47,7 +76,7 @@ const favoriteOffers: Offers = [
       'http://picsum.photos/260/200?r=16',
     ],
     isFavorite: false,
-    isPremium: false,
+    isPremium: true,
     location: {
       latitude: 52.55514938496378,
       longitude: 4.573877537499948,
@@ -62,7 +91,7 @@ const favoriteOffers: Offers = [
   },
   {
     bedrooms: 2,
-    city: cities[1],
+    city: cities[0],
     description: 'Flat in a beautiful old town, middle-eastern paradise.',
     goods: [
       'Heating',
@@ -75,7 +104,7 @@ const favoriteOffers: Offers = [
       'http://picsum.photos/260/200?r=10',
     ],
     isFavorite: true,
-    isPremium: true,
+    isPremium: false,
     location: {
       latitude: 51.35514938496378,
       longitude: 4.673877537499948,
@@ -90,4 +119,4 @@ const favoriteOffers: Offers = [
   },
 ];
 
-export {favoriteOffers};
+export {offers};

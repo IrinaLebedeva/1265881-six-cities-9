@@ -16,9 +16,6 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
       favoriteCities.push(offer.city.name);
 
       const cityCode = Object.keys(City)[cityValues.indexOf(offer.city.name)];
-      if (typeof cityCode === 'undefined') {
-        return;
-      }
 
       favoritesElement.push(
         <li className="favorites__locations-items" key={cityCode} >

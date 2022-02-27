@@ -11,7 +11,7 @@ function CityTabs(): JSX.Element {
   for (const cityCode in City) {
     cityTabs.push(
       <li className="locations__item" key={cityCode}>
-        <Link to={generatePath(AppRoute.City, {cityCode: cityCode})} className="locations__item-link tabs__item">
+        <Link to={generatePath(AppRoute.City, {cityCode})} className="locations__item-link tabs__item">
           <span>{City[cityCode as CityCode]}</span>
         </Link>
       </li>);

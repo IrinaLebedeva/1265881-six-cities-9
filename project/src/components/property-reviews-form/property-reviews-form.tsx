@@ -1,9 +1,8 @@
-import {
+import React, {
   ChangeEvent,
   FormEvent,
   useState
 } from 'react';
-import React from 'react';
 
 function PropertyReviewsForm(): JSX.Element {
   const [formReviewData, setFormReviewData] = useState({
