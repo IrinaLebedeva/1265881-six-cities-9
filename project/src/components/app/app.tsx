@@ -7,6 +7,7 @@ import {
   Routes
 } from 'react-router-dom';
 import {City} from 'settings/city';
+import {CityCode} from 'types/city-code';
 import {CityScreen} from 'components/city-screen/city-screen';
 import {FavoritesEmptyScreen} from 'components/favorites-empty-screen/favorites-empty-screen';
 import {FavoritesScreen} from 'components/favorites-screen/favorites-screen';
@@ -18,7 +19,7 @@ import {PropertyScreen} from 'components/property-screen/property-screen';
 import {PrivateRoute} from 'components/private-route/private-route';
 
 type AppScreenProps = {
-  cityCode: keyof typeof City;
+  cityCode: CityCode;
   offers: Offers;
   favoriteOffers: Offers;
 };

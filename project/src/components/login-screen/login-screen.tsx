@@ -1,5 +1,6 @@
 import {AppRoute} from 'settings/app-route';
 import {City} from 'settings/city';
+import {CityCode} from 'types/city-code';
 import {DEFAULT_CITY_CODE} from 'settings/const';
 import {
   generatePath,
@@ -27,7 +28,7 @@ function LoginScreen(): JSX.Element {
         <section className="locations locations--login locations--current">
           <div className="locations__item">
             <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: DEFAULT_CITY_CODE})}>
-              <span>{City[DEFAULT_CITY_CODE as keyof typeof City]}</span>
+              <span>{City[DEFAULT_CITY_CODE as CityCode]}</span>
             </Link>
           </div>
         </section>

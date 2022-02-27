@@ -1,5 +1,6 @@
 import {AppRoute} from 'settings/app-route';
 import {City} from 'settings/city';
+import {CityCode} from 'types/city-code';
 import {
   generatePath,
   Link
@@ -11,7 +12,7 @@ function CityTabs(): JSX.Element {
     cityTabs.push(
       <li className="locations__item" key={cityCode}>
         <Link to={generatePath(AppRoute.City, {cityCode: cityCode})} className="locations__item-link tabs__item">
-          <span>{City[cityCode as keyof typeof City]}</span>
+          <span>{City[cityCode as CityCode]}</span>
         </Link>
       </li>);
   }

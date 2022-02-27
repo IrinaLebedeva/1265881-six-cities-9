@@ -1,10 +1,10 @@
-import {City} from 'settings/city';
+import {CityCode} from 'types/city-code';
 import {CityTabs} from 'components/city-tabs/city-tabs';
 import {CityPlacesList} from 'components/city-places-list/city-places-list';
 import {Offers} from 'types/offer';
 
 type CityScreenProps = {
-  cityCode: keyof typeof City;
+  cityCode: CityCode;
   offers: Offers;
 };
 
