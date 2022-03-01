@@ -18,10 +18,6 @@ function PropertyScreen({offers}: PropertyScreenProps): JSX.Element {
   const params = useParams();
   const id = Number(params.id);
 
-  if (isNaN(id)) {
-    return <Navigate to={AppRoute.NotFound} />;
-  }
-
   const offer = offers.find((currentOffer) => currentOffer.id === id);
   if (typeof offer === 'undefined') {
     return <Navigate to={AppRoute.NotFound} />;
