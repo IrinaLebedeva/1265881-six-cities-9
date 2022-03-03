@@ -8,18 +8,14 @@ type FavoritesScreenProps = {
 
 function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
   const cityValues: string[] = Object.values(City);
-  const favoriteCities: string[] = [];
-
-  offers.map((offer) => {
-    if (!favoriteCities.includes(offer.city.name)) {
-      favoriteCities.push(offer.city.name);
-    }
-  });
+  const favoriteCities: string[] = offers.reduce(
+    (total: string[], offer) => !total.includes(offer.city.name) ? [...total, offer.city.name] : total
+    , []);
 
   const favoritesElement: JSX.Element[] = favoriteCities.map((cityName) => {
     const cityCode = Object.keys(City)[cityValues.indexOf(cityName)];
     return (
-      <li className="favorites__locations-items" key={cityCode} >
+      <li className="favorites__locations-items" key={cityCode}>
         <FavoritesListItem cityCode={cityCode} offers={offers}/>
       </li>
     );
