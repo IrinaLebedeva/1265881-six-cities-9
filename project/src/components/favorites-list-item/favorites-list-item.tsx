@@ -19,7 +19,7 @@ function FavoritesListItem({cityCode, offers}:FavoritesListItemProps): JSX.Eleme
     <>
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: cityCode})} >
+          <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: cityCode.toLowerCase()})} >
             <span>{City[cityCode as CityCode]}</span>
           </Link>
         </div>

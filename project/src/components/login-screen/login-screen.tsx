@@ -27,7 +27,7 @@ function LoginScreen(): JSX.Element {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: DEFAULT_CITY_CODE})}>
+            <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: DEFAULT_CITY_CODE.toLowerCase()})}>
               <span>{City[DEFAULT_CITY_CODE as CityCode]}</span>
             </Link>
           </div>
