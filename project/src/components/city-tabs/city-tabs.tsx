@@ -7,15 +7,13 @@ import {
 } from 'react-router-dom';
 
 function CityTabs(): JSX.Element {
-  const cityTabs = [];
-  for (const cityCode in City) {
-    cityTabs.push(
-      <li className="locations__item" key={cityCode}>
-        <Link to={generatePath(AppRoute.City, {cityCode})} className="locations__item-link tabs__item">
-          <span>{City[cityCode as CityCode]}</span>
-        </Link>
-      </li>);
-  }
+  const cityTabs = Object.keys(City).map((cityCode) => (
+    <li className="locations__item" key={cityCode}>
+      <Link to={generatePath(AppRoute.City, {cityCode})} className="locations__item-link tabs__item">
+        <span>{City[cityCode as CityCode]}</span>
+      </Link>
+    </li>
+  ));
 
   return (
     <>
