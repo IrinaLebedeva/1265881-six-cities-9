@@ -10,16 +10,21 @@ import {
 function Layout(): JSX.Element {
   const location = useLocation();
 
+  const isLayoutWithFooter = [
+    `${AppRoute.Favorites}`,
+    `${AppRoute.FavoritesEmpty}`,
+  ].includes(location.pathname);
+
   let footerElement;
-  if (location.pathname === AppRoute.Favorites || location.pathname === AppRoute.FavoritesEmpty) {
+  if (isLayoutWithFooter) {
     footerElement = <Footer additionalClassName={location.pathname === AppRoute.Favorites ? 'container' : ''} />;
   }
 
   return (
     <div className={clsx('page',
-      location.pathname === AppRoute.Root && 'page--gray page--main',
-      location.pathname === AppRoute.FavoritesEmpty && 'page--favorites-empty',
-      location.pathname === AppRoute.Login && 'page--gray page--login')}
+      {'page--gray page--main': location.pathname === AppRoute.Root},
+      {'page--favorites-empty': location.pathname === AppRoute.FavoritesEmpty},
+      {'page--gray page--login': location.pathname === AppRoute.Login})}
     >
       <Header />
       <Outlet />

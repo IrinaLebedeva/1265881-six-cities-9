@@ -6,7 +6,7 @@ type FooterProps = {
   additionalClassName ?: string;
 }
 
-function Footer({additionalClassName = ''}: FooterProps): JSX.Element {
+function Footer({additionalClassName}: FooterProps): JSX.Element {
   return (
     <footer className={clsx('footer', additionalClassName)}>
       <Link className="footer__logo-link" to={AppRoute.Root}>

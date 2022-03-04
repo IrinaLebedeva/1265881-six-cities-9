@@ -1,25 +1,29 @@
 import {City} from 'settings/city';
-import {getStringHashCode} from 'utils/get-string-hash-code';
+import {CityCode} from 'types/city-code';
+import {Offers} from 'types/offer';
 import {PlaceCard} from 'components/place-card/place-card';
 import {PlacesSorting} from 'components/places-sorting/places-sorting';
+import {useState} from 'react';
 
 type CityPlacesListProps = {
-  cityName: City;
-  cityPlacesCount: number;
+  cityCode: CityCode;
+  offers: Offers;
 };
 
-const MOCK_PLACE_CARD_COUNT = 5;
+function CityPlacesList({cityCode, offers}: CityPlacesListProps): JSX.Element {
+  const [activeCardId, setActiveCardId] = useState(0);
+  // eslint-disable-next-line  no-console
+  console.log(activeCardId);
 
-function CityPlacesList({cityName, cityPlacesCount}: CityPlacesListProps): JSX.Element {
   return (
     <div className="cities">
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{cityPlacesCount} places to stay in <span style={{textTransform: 'capitalize'}}>{cityName}</span></b>
+          <b className="places__found">{offers.length} places to stay in <span className="places__city-name">{City[cityCode as CityCode]}</span></b>
           <PlacesSorting />
           <div className="cities__places-list places__list tabs__content">
-            {Array.from(Array(MOCK_PLACE_CARD_COUNT)).map((_, index) => <PlaceCard id={index + 1} key={getStringHashCode(`${index}${cityName}`)} />)}
+            {offers.map((offer) => <PlaceCard offer={offer} key={offer.id} setActiveCardIdCallback={setActiveCardId}/>)}
           </div>
         </section>
         <div className="cities__right-section">

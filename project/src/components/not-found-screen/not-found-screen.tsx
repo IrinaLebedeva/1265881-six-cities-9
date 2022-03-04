@@ -16,8 +16,8 @@ function NotFoundScreen(): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <div style={{display: 'flex', flexGrow: 1, justifyContent: 'center', alignItems: 'end'}}>
-                <img src="img/404.gif" alt="" width="379" height="369"/>
+              <div className="cities__image-container">
+                <img src="img/not-found.gif" alt="" width="379" height="369"/>
               </div>
             </div>
           </div>

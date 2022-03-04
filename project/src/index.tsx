@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from 'components/app/app';
-import {City} from 'settings/city';
-
-const Setting = {
-  CITY_NAME: City.Amsterdam,
-  CITY_PLACES_COUNT: 312,
-};
+import {DEFAULT_CITY_CODE} from 'settings/const';
+import {favoriteOffers} from 'fixture/favorite-offers';
+import {offers} from 'fixture/offers';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App cityName={Setting.CITY_NAME} cityPlacesCount={Setting.CITY_PLACES_COUNT}/>
+    <App
+      cityCode={DEFAULT_CITY_CODE}
+      offers={offers}
+      favoriteOffers={favoriteOffers}
+    />
   </React.StrictMode>,
   document.getElementById('root'));
