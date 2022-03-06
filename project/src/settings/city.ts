@@ -7,4 +7,9 @@ enum City {
   Dusseldorf = 'Dusseldorf',
 }
 
-export {City};
+const cityCodes = Object.keys(City);
+
+export {
+  City,
+  cityCodes
+};

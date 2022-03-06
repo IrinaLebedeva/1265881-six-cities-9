@@ -10,24 +10,16 @@ const VALID_REVIEW_MIN_LENGTH = 5;
 function PropertyReviewsForm(): JSX.Element {
   const [review, setReview] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
-  const [isValid, setValid] = useState<boolean>(false);
   const formReviewData = {review, rating};
 
-  const isValidFormReviewData = (): boolean => {
-    if (rating >= VALID_RATING_MIN_VALUE && review.length >= VALID_REVIEW_MIN_LENGTH) {
-      return true;
-    }
-    return false;
-  };
+  const isValid = rating >= VALID_RATING_MIN_VALUE && review.length >= VALID_REVIEW_MIN_LENGTH;
 
   const onReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setReview(evt.target.value);
-    setValid(isValidFormReviewData);
   };
 
   const onRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(evt.target.value));
-    setValid(isValidFormReviewData);
   };
 
   const submitFormReviewHandler = (evt: FormEvent<HTMLFormElement>) => {
