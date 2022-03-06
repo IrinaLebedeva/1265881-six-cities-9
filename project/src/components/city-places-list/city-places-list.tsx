@@ -2,7 +2,7 @@ import {City} from 'settings/city';
 import {CityCode} from 'types/city-code';
 import {Map} from 'components/map/map';
 import {Offers} from 'types/offer';
-import {PlaceCard} from 'components/place-card/place-card';
+import {PlaceCardContainer} from 'components/place-card-container/place-card-container';
 import {PlacesSorting} from 'components/places-sorting/places-sorting';
 import {useState} from 'react';
 
@@ -21,7 +21,7 @@ function CityPlacesList({cityCode, offers}: CityPlacesListProps): JSX.Element {
           <b className="places__found">{offers.length} places to stay in <span className="places__city-name">{City[cityCode as CityCode]}</span></b>
           <PlacesSorting />
           <div className="cities__places-list places__list tabs__content">
-            {offers.map((offer) => <PlaceCard offer={offer} key={offer.id} setActiveCardIdCallback={setActiveCardId}/>)}
+            {offers.map((offer) => <PlaceCardContainer offer={offer} key={offer.id} setActiveCardIdCallback={setActiveCardId}/>)}
           </div>
         </section>
         <div className="cities__right-section">

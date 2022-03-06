@@ -1,14 +1,16 @@
-import {NearPlaceCard} from 'components/near-place-card/near-place-card';
-import {getStringHashCode} from 'utils/get-string-hash-code';
+import {Offers} from 'types/offer';
+import {PlaceCardContainer} from 'components/place-card-container/place-card-container';
 
-const MOCK_NEAR_PLACE_CARD_COUNT = 3;
+type PropertyNearPlacesProps = {
+  offers: Offers;
+}
 
-function PropertyNearPlaces(): JSX.Element {
+function PropertyNearPlaces({offers}: PropertyNearPlacesProps): JSX.Element {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
       <div className="near-places__list places__list">
-        {Array.from(Array(MOCK_NEAR_PLACE_CARD_COUNT)).map((_, index) => <NearPlaceCard id={index + 1} key={getStringHashCode(`${index}NearPlaceCard`)}/>)}
+        {offers.map((offer) => <PlaceCardContainer offer={offer} key={offer.id}/>)}
       </div>
     </section>
   );

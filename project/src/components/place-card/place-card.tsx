@@ -8,21 +8,13 @@ import {getOfferPremiumJsxElement} from 'utils/get-offer-premium-jsx-element';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {Offer} from 'types/offer';
 
-type CallbackType = (offerId: number) => void;
-
 type PlaceCardProps = {
   offer: Offer;
-  setActiveCardIdCallback: CallbackType;
 };
 
-function PlaceCard({offer, setActiveCardIdCallback}: PlaceCardProps): JSX.Element {
-
+function PlaceCard({offer}: PlaceCardProps): JSX.Element {
   return (
-    <article
-      className="cities__place-card place-card"
-      onMouseOver={() => setActiveCardIdCallback(offer.id)}
-      onMouseLeave={() => setActiveCardIdCallback(0)}
-    >
+    <>
       {getOfferPremiumJsxElement(offer.isPremium)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={generatePath(AppRoute.Property, {id: `${offer.id}`})}>
@@ -56,7 +48,7 @@ function PlaceCard({offer, setActiveCardIdCallback}: PlaceCardProps): JSX.Elemen
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
-    </article>
+    </>
   );
 }
 

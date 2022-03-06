@@ -1,10 +1,12 @@
 import {AppRoute} from 'settings/app-route';
 import clsx from 'clsx';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
+import {Map} from 'components/map/map';
 import {
   Navigate,
   useParams
 } from 'react-router-dom';
+import {nearbyOffers} from 'fixture/nearby-offers';
 import {Offers} from 'types/offer';
 import {PropertyHost} from 'components/property-host/property-host';
 import {PropertyReviews} from 'components/property-reviews/property-reviews';
@@ -97,10 +99,12 @@ function PropertyScreen({offers}: PropertyScreenProps): JSX.Element {
             <PropertyReviews />
           </div>
         </div>
-        <section className="property__map map" />
+        <section className="property__map map">
+          <Map offers={[offer, ...nearbyOffers]} activeOfferId={offer.id}/>
+        </section>
       </section>
       <div className="container">
-        <PropertyNearPlaces />
+        <PropertyNearPlaces offers={nearbyOffers} />
       </div>
     </main>
   );
