@@ -2,8 +2,10 @@ import dayjs from 'dayjs';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {Review} from 'types/review';
 
-const DISPLAY_DATE_FORMAT = 'MMMM YYYY';
-const MARKUP_DATE_FORMAT = 'YYYY-MM-DD';
+const enum DateFormat {
+  Display = 'MMMM YYYY',
+  Markup = 'YYYY-MM-DD',
+}
 
 type PropertyReviewItemProps = {
   review: Review;
@@ -30,8 +32,8 @@ function PropertyReviewItem({review}: PropertyReviewItemProps): JSX.Element {
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime={dayjs(review.date).format(MARKUP_DATE_FORMAT)}>
-          {dayjs(review.date).format(DISPLAY_DATE_FORMAT)}
+        <time className="reviews__time" dateTime={dayjs(review.date).format(DateFormat.Markup)}>
+          {dayjs(review.date).format(DateFormat.Display)}
         </time>
       </div>
     </li>

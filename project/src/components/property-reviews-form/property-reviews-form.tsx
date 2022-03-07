@@ -22,7 +22,7 @@ function PropertyReviewsForm(): JSX.Element {
     setRating(Number(evt.target.value));
   };
 
-  const submitFormReviewHandler = (evt: FormEvent<HTMLFormElement>) => {
+  const handleReviewFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     // eslint-disable-next-line no-console
     console.log(formReviewData);
@@ -74,7 +74,7 @@ function PropertyReviewsForm(): JSX.Element {
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={submitFormReviewHandler}
+      onSubmit={handleReviewFormSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
