@@ -1,8 +1,8 @@
-export type Host = {
+export type User = {
   avatarUrl: string;
   name: string;
   id: number;
   isPro: boolean;
 };
 
-export type Hosts = Host[];
+export type Users = User[];

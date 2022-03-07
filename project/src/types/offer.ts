@@ -1,5 +1,5 @@
 import {City} from 'types/city';
-import {Host} from 'types/host';
+import {User} from 'types/user';
 import {Location} from 'types/location';
 
 export type Offer = {
@@ -12,7 +12,7 @@ export type Offer = {
   type: string;
   bedrooms: number;
   price: number;
-  host: Host;
+  host: User;
   maxAdults: number;
   location: Location;
   id: number;

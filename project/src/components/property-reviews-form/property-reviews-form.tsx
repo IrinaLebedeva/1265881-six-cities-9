@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 
 const VALID_RATING_MIN_VALUE = 1;
-const VALID_REVIEW_MIN_LENGTH = 5;
+const VALID_REVIEW_MIN_LENGTH = 50;
 
 function PropertyReviewsForm(): JSX.Element {
   const [review, setReview] = useState<string>('');
