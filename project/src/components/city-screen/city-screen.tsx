@@ -1,18 +1,27 @@
-import {CityCode} from 'types/city-code';
 import {CityTabs} from 'components/city-tabs/city-tabs';
 import {CityPlacesList} from 'components/city-places-list/city-places-list';
-import {Offers} from 'types/offer';
+import {setCityOffers} from 'store/action';
+import {
+  useAppDispatch,
+  useAppSelector
+} from 'hooks/use-redux-hooks';
+import {useParams} from 'react-router-dom';
 
-type CityScreenProps = {
-  cityCode: CityCode;
-  offers: Offers;
-};
+function CityScreen(): JSX.Element {
+  const {cityCode} = useParams();
+  // eslint-disable-next-line no-console
+  console.log(cityCode);
 
-function CityScreen({cityCode, offers}: CityScreenProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const currentCityCode = useAppSelector((state) => state.cityCode);
+
+  dispatch(setCityOffers());
+  const cityOffers = useAppSelector((state) => state.cityOffers);
+
   return (
     <main className="page__main page__main--index">
-      <CityTabs activeCityCode={cityCode}/>
-      <CityPlacesList cityCode={cityCode} offers={offers}/>
+      <CityTabs activeCityCode={currentCityCode}/>
+      <CityPlacesList cityCode={currentCityCode} offers={cityOffers}/>
     </main>
   );
 }

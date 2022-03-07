@@ -7,7 +7,6 @@ import {
   Routes
 } from 'react-router-dom';
 import {cityCodes} from 'settings/city';
-import {CityCode} from 'types/city-code';
 import {CityScreen} from 'components/city-screen/city-screen';
 import {FavoritesEmptyScreen} from 'components/favorites-empty-screen/favorites-empty-screen';
 import {FavoritesScreen} from 'components/favorites-screen/favorites-screen';
@@ -17,19 +16,23 @@ import {NotFoundScreen} from 'components/not-found-screen/not-found-screen';
 import {Offers} from 'types/offer';
 import {PropertyScreen} from 'components/property-screen/property-screen';
 import {PrivateRoute} from 'components/private-route/private-route';
+import {setOffers} from 'store/action';
+import {useAppDispatch} from 'hooks/use-redux-hooks';
 
 type AppScreenProps = {
-  cityCode: CityCode;
   offers: Offers;
   favoriteOffers: Offers;
 };
 
-function App({cityCode, offers, favoriteOffers}: AppScreenProps): JSX.Element {
+function App({offers, favoriteOffers}: AppScreenProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  dispatch(setOffers({offers: offers}));
+
   const cityRoutes = cityCodes.map((routeCityCode) => (
     <Route
       path={generatePath(AppRoute.City, {cityCode: routeCityCode})}
-      element={<CityScreen cityCode={cityCode} offers={offers}/>}
-      key={`route${cityCode}`}
+      element={<CityScreen/>}
+      key={`route${routeCityCode}`}
     />
   ));
 
@@ -40,7 +43,7 @@ function App({cityCode, offers, favoriteOffers}: AppScreenProps): JSX.Element {
           <Route path={AppRoute.Root}>
             <Route
               index
-              element={<CityScreen cityCode={cityCode} offers={offers}/>}
+              element={<CityScreen/>}
             />
             {cityRoutes}
           </Route>
