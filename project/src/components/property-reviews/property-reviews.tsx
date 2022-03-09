@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import {PropertyReviewsForm} from 'components/property-reviews-form/property-reviews-form';
 import {Review, Reviews} from 'types/review';
 import {PropertyReviewItem} from 'components/property-review-item/property-review-item';
+import {useMemo} from 'react';
 
 const REVIEWS_MAX_COUNT = 10;
 
@@ -21,12 +22,12 @@ type PropertyReviewsProps = {
 }
 
 function PropertyReviews({reviews}: PropertyReviewsProps): JSX.Element {
-  reviews.sort(sortReviews);
+  const sortedReviews = useMemo(() => reviews.slice().sort(sortReviews), reviews);
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        {reviews.slice(0, REVIEWS_MAX_COUNT).map((review) => (
+        {sortedReviews.slice(0, REVIEWS_MAX_COUNT).map((review) => (
           <li className="reviews__item" key={review.id}>
             <PropertyReviewItem review={review} />
           </li>

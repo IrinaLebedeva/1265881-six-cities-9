@@ -4,7 +4,7 @@ import {hosts} from 'fixture/hosts';
 const reviews: Reviews = [
   {
     'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    'date': 'Mon Jun 07 2022 02:35:02 GMT+0300 (Москва, стандартное время)',
+    'date': 'Mon Jun 07 2021 02:35:02 GMT+0300 (Москва, стандартное время)',
     'id': 1,
     'rating': 4,
     'user': hosts[1],
