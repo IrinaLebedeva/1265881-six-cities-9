@@ -1,8 +1,11 @@
 import {AppRoute} from 'settings/app-route';
 import {Header} from 'components/header/header';
 import {Link} from 'react-router-dom';
+import {resetCityCode} from 'store/action';
+import {useAppDispatch} from 'hooks/use-redux-hooks';
 
 function NotFoundScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -12,7 +15,7 @@ function NotFoundScreen(): JSX.Element {
             <section className="cities__no-places">
               <div className="cities__status-wrapper tabs__content">
                 <b className="cities__status">404. Page not found</b>
-                <p className="cities__status-description"><Link to={AppRoute.Root}>Back to the Main Page</Link></p>
+                <p className="cities__status-description"><Link to={AppRoute.Root} onClick={() => dispatch(resetCityCode())}>Back to the Main Page</Link></p>
               </div>
             </section>
             <div className="cities__right-section">

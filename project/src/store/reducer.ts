@@ -3,6 +3,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {DEFAULT_CITY_CODE} from 'settings/const';
 import {Offers} from 'types/offer';
 import {
+  resetCityCode,
   setCityCode,
   setOffers
 } from 'store/action';
@@ -19,6 +20,9 @@ const initialState: InitialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(resetCityCode, (state) => {
+      state.cityCode = DEFAULT_CITY_CODE;
+    })
     .addCase(setCityCode, (state, action) => {
       const {cityCode} = action.payload;
       state.cityCode = cityCode;
