@@ -9,17 +9,21 @@ import {
   generatePath,
   Link
 } from 'react-router-dom';
+import {setCityCode} from 'store/action';
+import {useAppDispatch} from 'hooks/use-redux-hooks';
 
 type CityTabsProps = {
   activeCityCode: CityCode;
 }
 
 function CityTabs({activeCityCode}: CityTabsProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const cityTabs = cityCodes.map((cityCode) => (
     <li className="locations__item" key={cityCode}>
       <Link
         to={generatePath(AppRoute.City, {cityCode: cityCode.toLowerCase()})}
         className={clsx('locations__item-link', 'tabs__item', {'tabs__item--active': cityCode === activeCityCode})}
+        onClick={() => dispatch(setCityCode({cityCode: cityCode as CityCode}))}
       >
         <span>{City[cityCode as CityCode]}</span>
       </Link>
