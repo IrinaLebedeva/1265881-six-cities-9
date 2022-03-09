@@ -13,7 +13,7 @@ type PropertyReviewItemProps = {
 
 function PropertyReviewItem({review}: PropertyReviewItemProps): JSX.Element {
   return (
-    <li className="reviews__item">
+    <>
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="54" height="54" alt="" />
@@ -36,7 +36,7 @@ function PropertyReviewItem({review}: PropertyReviewItemProps): JSX.Element {
           {dayjs(review.date).format(DateFormat.Display)}
         </time>
       </div>
-    </li>
+    </>
   );
 }
 

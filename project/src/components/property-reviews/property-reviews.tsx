@@ -26,7 +26,11 @@ function PropertyReviews({reviews}: PropertyReviewsProps): JSX.Element {
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        {reviews.slice(0, REVIEWS_MAX_COUNT).map((review) => <PropertyReviewItem review={review} key={review.id} />)}
+        {reviews.slice(0, REVIEWS_MAX_COUNT).map((review) => (
+          <li className="reviews__item" key={review.id}>
+            <PropertyReviewItem review={review} />
+          </li>
+        ))}
       </ul>
       <PropertyReviewsForm />
     </section>
