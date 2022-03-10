@@ -6,12 +6,12 @@ import {useMemo} from 'react';
 
 const REVIEWS_MAX_COUNT = 10;
 
-const sortReviews = (a: Review, b: Review): number => {
-  const diff = dayjs(a.date).diff(dayjs(b.date));
-  if (diff > 0) {
+const sortReviewsByDateDesc = (a: Review, b: Review): number => {
+  const diffInMilliseconds = dayjs(a.date).diff(dayjs(b.date));
+  if (diffInMilliseconds > 0) {
     return -1;
   }
-  if (diff < 0) {
+  if (diffInMilliseconds < 0) {
     return 1;
   }
   return 0;
@@ -22,7 +22,7 @@ type PropertyReviewsProps = {
 }
 
 function PropertyReviews({reviews}: PropertyReviewsProps): JSX.Element {
-  const sortedReviews = useMemo(() => reviews.slice().sort(sortReviews), reviews);
+  const sortedReviews = useMemo(() => reviews.slice().sort(sortReviewsByDateDesc), reviews);
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
