@@ -11,7 +11,7 @@ type CityScreenProps = {
 function CityScreen({cityCode, offers}: CityScreenProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
-      <CityTabs />
+      <CityTabs activeCityCode={cityCode}/>
       <CityPlacesList cityCode={cityCode} offers={offers}/>
     </main>
   );

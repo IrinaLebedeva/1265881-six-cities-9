@@ -1,33 +1,37 @@
+import dayjs from 'dayjs';
 import {PropertyReviewsForm} from 'components/property-reviews-form/property-reviews-form';
+import {Review, Reviews} from 'types/review';
+import {PropertyReviewItem} from 'components/property-review-item/property-review-item';
+import {useMemo} from 'react';
 
-function PropertyReviews(): JSX.Element {
+const REVIEWS_MAX_COUNT = 10;
+
+const sortReviewsByDateDesc = (a: Review, b: Review): number => {
+  const diffInMilliseconds = dayjs(a.date).diff(dayjs(b.date));
+  if (diffInMilliseconds > 0) {
+    return -1;
+  }
+  if (diffInMilliseconds < 0) {
+    return 1;
+  }
+  return 0;
+};
+
+type PropertyReviewsProps = {
+  reviews: Reviews;
+}
+
+function PropertyReviews({reviews}: PropertyReviewsProps): JSX.Element {
+  const sortedReviews = useMemo(() => reviews.slice().sort(sortReviewsByDateDesc), reviews);
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        <li className="reviews__item">
-          <div className="reviews__user user">
-            <div className="reviews__avatar-wrapper user__avatar-wrapper">
-              <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-            </div>
-            <span className="reviews__user-name">
-              Max
-            </span>
-          </div>
-          <div className="reviews__info">
-            <div className="reviews__rating rating">
-              <div className="reviews__stars rating__stars">
-                <span style={{width: '80%'}}></span>
-                <span className="visually-hidden">Rating</span>
-              </div>
-            </div>
-            <p className="reviews__text">
-              A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-              The building is green and from 18th century.
-            </p>
-            <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-          </div>
-        </li>
+        {sortedReviews.slice(0, REVIEWS_MAX_COUNT).map((review) => (
+          <li className="reviews__item" key={review.id}>
+            <PropertyReviewItem review={review} />
+          </li>
+        ))}
       </ul>
       <PropertyReviewsForm />
     </section>

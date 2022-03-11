@@ -1,6 +1,6 @@
-import {Hosts} from 'types/host';
+import {Users} from 'types/user';
 
-const hosts: Hosts = [
+const hosts: Users = [
   {
     avatarUrl: 'http://picsum.photos/74/74?r=2',
     id: 1,

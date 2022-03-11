@@ -1,4 +1,7 @@
-import {City} from 'settings/city';
+import {
+  City,
+  cityCodes
+} from 'settings/city';
 import {FavoritesListItem} from 'components/favorites-list-item/favorites-list-item';
 import {Offers} from 'types/offer';
 
@@ -13,7 +16,7 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
     , []);
 
   const favoritesElement: JSX.Element[] = favoriteCities.map((cityName) => {
-    const cityCode = Object.keys(City)[cityValues.indexOf(cityName)];
+    const cityCode = cityCodes[cityValues.indexOf(cityName)];
     return (
       <li className="favorites__locations-items" key={cityCode}>
         <FavoritesListItem cityCode={cityCode} offers={offers}/>

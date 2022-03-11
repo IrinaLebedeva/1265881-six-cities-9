@@ -5,32 +5,24 @@ import React, {
 } from 'react';
 
 const VALID_RATING_MIN_VALUE = 1;
-const VALID_REVIEW_MIN_LENGTH = 5;
+const VALID_REVIEW_MIN_LENGTH = 50;
 
 function PropertyReviewsForm(): JSX.Element {
   const [review, setReview] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
-  const [isValid, setValid] = useState<boolean>(false);
   const formReviewData = {review, rating};
 
-  const isValidFormReviewData = (): boolean => {
-    if (rating >= VALID_RATING_MIN_VALUE && review.length >= VALID_REVIEW_MIN_LENGTH) {
-      return true;
-    }
-    return false;
-  };
+  const isValid = rating >= VALID_RATING_MIN_VALUE && review.length >= VALID_REVIEW_MIN_LENGTH;
 
   const onReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setReview(evt.target.value);
-    setValid(isValidFormReviewData);
   };
 
   const onRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(evt.target.value));
-    setValid(isValidFormReviewData);
   };
 
-  const submitFormReviewHandler = (evt: FormEvent<HTMLFormElement>) => {
+  const handleReviewFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     // eslint-disable-next-line no-console
     console.log(formReviewData);
@@ -82,7 +74,7 @@ function PropertyReviewsForm(): JSX.Element {
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={submitFormReviewHandler}
+      onSubmit={handleReviewFormSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">

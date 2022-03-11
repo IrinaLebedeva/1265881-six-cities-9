@@ -6,7 +6,7 @@ import {
   Route,
   Routes
 } from 'react-router-dom';
-import {City} from 'settings/city';
+import {cityCodes} from 'settings/city';
 import {CityCode} from 'types/city-code';
 import {CityScreen} from 'components/city-screen/city-screen';
 import {FavoritesEmptyScreen} from 'components/favorites-empty-screen/favorites-empty-screen';
@@ -25,7 +25,7 @@ type AppScreenProps = {
 };
 
 function App({cityCode, offers, favoriteOffers}: AppScreenProps): JSX.Element {
-  const cityRoutes = Object.keys(City).map((routeCityCode) => (
+  const cityRoutes = cityCodes.map((routeCityCode) => (
     <Route
       path={generatePath(AppRoute.City, {cityCode: routeCityCode})}
       element={<CityScreen cityCode={cityCode} offers={offers}/>}
