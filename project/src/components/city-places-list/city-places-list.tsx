@@ -7,9 +7,9 @@ import {OffersSortTypeKey} from 'types/offers-sort-type-key';
 import {PlaceCard} from 'components/place-card/place-card';
 import {PlacesSorting} from 'components/places-sorting/places-sorting';
 import {
-  sortOffersByPriceHighToLow,
-  sortOffersByPriceLowToHigh,
-  sortOffersByTopRatedFirst
+  sortOffersByPriceDesc,
+  sortOffersByPriceAsc,
+  sortOffersByRatingDesc
 } from 'utils/sort-offers';
 import {
   useEffect,
@@ -25,13 +25,13 @@ const getSortedOffers = (sortType: OffersSortTypeKey, offers:Offers): Offers => 
   const sortedOffers = offers.slice();
   switch (sortType) {
     case OffersSortCodes.PRICE_HIGH_TO_LOW:
-      sortedOffers.sort(sortOffersByPriceHighToLow);
+      sortedOffers.sort(sortOffersByPriceDesc);
       break;
     case OffersSortCodes.PRICE_LOW_TO_HIGH:
-      sortedOffers.sort(sortOffersByPriceLowToHigh);
+      sortedOffers.sort(sortOffersByPriceAsc);
       break;
     case OffersSortCodes.TOP_RATED_FIRST:
-      sortedOffers.sort(sortOffersByTopRatedFirst);
+      sortedOffers.sort(sortOffersByRatingDesc);
       break;
     case OffersSortCodes.POPULAR:
     default:

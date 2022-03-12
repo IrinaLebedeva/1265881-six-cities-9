@@ -1,37 +1,37 @@
 import {Offer} from 'types/offer';
 
-const sortOffersByPriceHighToLow = (a: Offer, b: Offer): number => {
-  if (a.price > b.price) {
+const sortOffersByPriceDesc = (firstOffer: Offer, secondOffer: Offer): number => {
+  if (firstOffer.price > secondOffer.price) {
     return -1;
   }
-  if (a.price < b.price) {
+  if (firstOffer.price < secondOffer.price) {
     return 1;
   }
   return 0;
 };
 
-const sortOffersByPriceLowToHigh = (a: Offer, b: Offer): number => {
-  if (a.price > b.price) {
+const sortOffersByPriceAsc = (firstOffer: Offer, secondOffer: Offer): number => {
+  if (firstOffer.price > secondOffer.price) {
     return 1;
   }
-  if (a.price < b.price) {
+  if (firstOffer.price < secondOffer.price) {
     return -1;
   }
   return 0;
 };
 
-const sortOffersByTopRatedFirst = (a: Offer, b: Offer): number => {
-  if (a.rating > b.rating) {
+const sortOffersByRatingDesc = (firstOffer: Offer, secondOffer: Offer): number => {
+  if (firstOffer.rating > secondOffer.rating) {
     return -1;
   }
-  if (a.rating < b.rating) {
+  if (firstOffer.rating < secondOffer.rating) {
     return 1;
   }
   return 0;
 };
 
 export {
-  sortOffersByPriceHighToLow,
-  sortOffersByPriceLowToHigh,
-  sortOffersByTopRatedFirst
+  sortOffersByPriceDesc,
+  sortOffersByPriceAsc,
+  sortOffersByRatingDesc
 };
