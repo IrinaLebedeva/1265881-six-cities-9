@@ -50,7 +50,7 @@ function Map({offers, activeOfferId}: MapProps): JSX.Element {
       layerGroup.addTo(map);
 
       return () => {
-        map.removeLayer(layerGroup);
+        map?.removeLayer(layerGroup);
       };
     }
   }, [map, offers, activeOfferId]);
