@@ -1,4 +1,4 @@
-export const getOfferPremiumJsxElement = (offerIsPremium: boolean) => {
+export const getOfferPremiumJsxElement = (offerIsPremium: boolean): JSX.Element | null => {
   if (!offerIsPremium) {
     return null;
   }
