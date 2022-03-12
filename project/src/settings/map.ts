@@ -1,4 +1,4 @@
-export const enum MarkerIconUrl {
+export enum MarkerIconUrl {
   Default = './img/pin.svg',
   Active = './img/pin-active.svg',
 }
