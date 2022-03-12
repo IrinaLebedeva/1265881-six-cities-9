@@ -1,5 +1,6 @@
 import {City} from 'types/city';
 import {
+  LatLng,
   Map,
   TileLayer
 } from 'leaflet';
@@ -36,7 +37,13 @@ function useMap({mapRef, city}: useMapProps) {
       mapInstance.addLayer(layer);
 
       setMap(mapInstance);
+    } else if (map instanceof Map) {
+      map.setView(
+        new LatLng(city.location.latitude, city.location.longitude),
+        city.location.zoom,
+      );
     }
+
   }, [map, mapRef, city]);
 
   return map;
