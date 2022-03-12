@@ -37,7 +37,7 @@ function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${getRatingInPercent(offer.rating)}%`}}/>
+            <span style={{width: getRatingInPercent(offer.rating)}}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
