@@ -15,7 +15,7 @@ type useMapProps = {
   city: City;
 }
 
-function useMap({mapRef, city}: useMapProps) {
+function useMap({mapRef, city}: useMapProps): Map | null {
   const [map, setMap] = useState<Map|null>(null);
 
   useEffect(() => {
