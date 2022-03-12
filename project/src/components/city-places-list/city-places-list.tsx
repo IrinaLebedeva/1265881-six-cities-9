@@ -4,7 +4,7 @@ import {DEFAULT_OFFERS_SORT_TYPE, OffersSortCodes} from 'settings/offers-sort-ty
 import {Map} from 'components/map/map';
 import {Offers} from 'types/offer';
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
-import {PlaceCardContainer} from 'components/place-card-container/place-card-container';
+import {PlaceCard} from 'components/place-card/place-card';
 import {PlacesSorting} from 'components/places-sorting/places-sorting';
 import {
   sortOffersByPriceHighToLow,
@@ -57,7 +57,7 @@ function CityPlacesList({cityCode, offers}: CityPlacesListProps): JSX.Element {
           <b className="places__found">{offers.length} places to stay in <span className="places__city-name">{City[cityCode as CityCode]}</span></b>
           <PlacesSorting sortType={sortType} setSortTypeCallback={setSortType}/>
           <div className="cities__places-list places__list tabs__content">
-            {sortedOffers.map((offer) => <PlaceCardContainer offer={offer} key={offer.id} setActiveCardIdCallback={setActiveCardId}/>)}
+            {sortedOffers.map((offer) => <PlaceCard offer={offer} key={offer.id} handleMouseEventsCallback={setActiveCardId}/>)}
           </div>
         </section>
         <div className="cities__right-section">
