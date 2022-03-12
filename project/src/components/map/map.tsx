@@ -1,6 +1,6 @@
-import 'leaflet/dist/leaflet.css';
 import {
   Icon,
+  LayerGroup,
   Marker
 } from 'leaflet';
 import {MarkerIconUrl} from 'settings/map';
@@ -36,14 +36,22 @@ function Map({offers, activeOfferId}: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
-      offers.map((offer) => {
+      const markers:Marker[] = [];
+      offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude,
         });
 
-        marker.setIcon(offer.id === activeOfferId ? activeMarkerIcon : defaultMarkerIcon).addTo(map);
+        marker.setIcon(offer.id === activeOfferId ? activeMarkerIcon : defaultMarkerIcon);
+        markers.push(marker);
       });
+      const layerGroup = new LayerGroup(markers);
+      layerGroup.addTo(map);
+
+      return () => {
+        map.removeLayer(layerGroup);
+      };
     }
   }, [map, offers, activeOfferId]);
 
