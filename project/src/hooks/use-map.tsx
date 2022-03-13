@@ -37,14 +37,18 @@ function useMap({mapRef, city}: useMapProps): Map | null {
       mapInstance.addLayer(layer);
 
       setMap(mapInstance);
-    } else if (map instanceof Map) {
+    }
+
+  }, [map, mapRef]);
+
+  useEffect(() => {
+    if (map instanceof Map) {
       map.setView(
         new LatLng(city.location.latitude, city.location.longitude),
         city.location.zoom,
       );
     }
-
-  }, [map, mapRef, city]);
+  }, [city]);
 
   return map;
 }
