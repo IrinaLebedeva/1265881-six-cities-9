@@ -12,7 +12,11 @@ function CityScreen(): JSX.Element {
   const cityOffers = offers.filter((offer) => offer.city.name === City[cityCode as CityCode]);
 
   return (
-    <main className={clsx('page__main', 'page__main--index', {'page__main--index-empty': cityOffers.length === 0})}>
+    <main className={clsx(
+      'page__main',
+      'page__main--index',
+      {'page__main--index-empty': cityOffers.length === 0})}
+    >
       <CityTabs activeCityCode={cityCode}/>
       {(cityOffers.length === 0) ?
         <CityPlacesListEmpty cityCode={cityCode}/> :
