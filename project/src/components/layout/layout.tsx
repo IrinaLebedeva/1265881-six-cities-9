@@ -24,7 +24,7 @@ function Layout(): JSX.Element {
 
   return (
     <div className={clsx('page',
-      {'page--gray page--main': location.pathname === AppRoute.Root || matchCityRoute !== null},
+      {'page--gray page--main': location.pathname === AppRoute.Root || matchCityRoute},
       {'page--favorites-empty': location.pathname === AppRoute.FavoritesEmpty},
       {'page--gray page--login': location.pathname === AppRoute.Login})}
     >
