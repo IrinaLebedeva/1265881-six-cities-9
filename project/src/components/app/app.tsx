@@ -16,17 +16,14 @@ import {NotFoundScreen} from 'components/not-found-screen/not-found-screen';
 import {Offers} from 'types/offer';
 import {PropertyScreen} from 'components/property-screen/property-screen';
 import {PrivateRoute} from 'components/private-route/private-route';
-import {setOffers} from 'store/action';
-import {useAppDispatch} from 'hooks/use-redux-hooks';
+import {useAppSelector} from 'hooks/use-redux-hooks';
 
 type AppScreenProps = {
-  offers: Offers;
   favoriteOffers: Offers;
 };
 
-function App({offers, favoriteOffers}: AppScreenProps): JSX.Element {
-  const dispatch = useAppDispatch();
-  dispatch(setOffers({offers: offers}));
+function App({favoriteOffers}: AppScreenProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
 
   const cityRoutes = cityCodes.map((routeCityCode) => (
     <Route

@@ -2,10 +2,10 @@ import {CityCode} from 'types/city-code';
 import {createReducer} from '@reduxjs/toolkit';
 import {DEFAULT_CITY_CODE} from 'settings/const';
 import {Offers} from 'types/offer';
+import {offers as fixtureOffers} from 'fixture/offers';
 import {
   resetCityCode,
-  setCityCode,
-  setOffers
+  setCityCode
 } from 'store/action';
 
 type InitialState = {
@@ -15,7 +15,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   cityCode: DEFAULT_CITY_CODE,
-  offers: [],
+  offers: fixtureOffers,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -26,9 +26,6 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setCityCode, (state, action) => {
       const {cityCode} = action.payload;
       state.cityCode = cityCode;
-    })
-    .addCase(setOffers, (state, action) => {
-      state.offers = action.payload.offers;
     });
 });
 
