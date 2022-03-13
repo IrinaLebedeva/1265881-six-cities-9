@@ -15,7 +15,7 @@ function CityScreen(): JSX.Element {
     <main className={clsx('page__main', 'page__main--index', {'page__main--index-empty': cityOffers.length === 0})}>
       <CityTabs activeCityCode={cityCode}/>
       {(cityOffers.length === 0) ?
-        <CityPlacesListEmpty/> :
+        <CityPlacesListEmpty cityCode={cityCode}/> :
         <CityPlacesList cityCode={cityCode} offers={cityOffers}/>}
     </main>
   );
