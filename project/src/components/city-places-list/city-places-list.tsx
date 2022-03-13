@@ -34,7 +34,6 @@ const getSortedOffers = (sortType: OffersSortTypeKey, offers:Offers): Offers => 
       sortedOffers.sort(sortOffersByRatingDesc);
       break;
     case OffersSortCodes.POPULAR:
-    default:
       break;
   }
   return sortedOffers;
