@@ -4,18 +4,17 @@ import {
   offersSortTypes
 } from 'settings/offers-sort-type';
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
+import {setOffersSortType} from 'store/offers/action';
 import {useState} from 'react';
+import {useAppDispatch, useAppSelector} from 'hooks/use-redux-hooks';
 
-interface PlacesSortingProps {
-  sortType: OffersSortTypeKey;
-  setSortTypeCallback: (offerId: OffersSortTypeKey) => void;
-}
-
-function PlacesSorting({sortType, setSortTypeCallback}: PlacesSortingProps): JSX.Element {
+function PlacesSorting(): JSX.Element {
   const [isSortOpened, setIsSortOpened] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const sortType = useAppSelector((state) => state.offersReducer.offersSortType);
 
   const handleSortChange = (offersSortType: OffersSortTypeKey) => {
-    setSortTypeCallback(offersSortType);
+    dispatch(setOffersSortType({offersSortType}));
     setIsSortOpened(false);
   };
 
