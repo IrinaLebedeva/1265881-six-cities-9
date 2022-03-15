@@ -1,7 +1,7 @@
 import {AppRoute} from 'settings/app-route';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
-import {resetCityCode} from 'store/action';
+import {resetCityCode} from 'store/city/action';
 import {useAppDispatch} from 'hooks/use-redux-hooks';
 
 type FooterProps = {
