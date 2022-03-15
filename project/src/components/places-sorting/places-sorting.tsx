@@ -6,11 +6,9 @@ import {
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
 import {useState} from 'react';
 
-type CallbackType = (offerId: OffersSortTypeKey) => void;
-
-type PlacesSortingProps = {
+interface PlacesSortingProps {
   sortType: OffersSortTypeKey;
-  setSortTypeCallback: CallbackType;
+  setSortTypeCallback: (offerId: OffersSortTypeKey) => void;
 }
 
 function PlacesSorting({sortType, setSortTypeCallback}: PlacesSortingProps): JSX.Element {
