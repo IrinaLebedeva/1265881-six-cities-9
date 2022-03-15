@@ -4,14 +4,15 @@ import {CityTabs} from 'components/city-tabs/city-tabs';
 import {CityPlacesList} from 'components/city-places-list/city-places-list';
 import {CityPlacesListEmpty} from 'components/city-places-list-empty/city-places-list-empty';
 import clsx from 'clsx';
-import {setCityCode} from 'store/action';
+import {setCityCode} from 'store/city/action';
 import {
   useAppDispatch,
-  useAppSelector} from 'hooks/use-redux-hooks';
+  useAppSelector
+} from 'hooks/use-redux-hooks';
 
 function CityScreen(): JSX.Element {
-  const cityCode = useAppSelector((state) => state.cityCode);
-  const offers = useAppSelector((state) => state.offers);
+  const cityCode = useAppSelector((state) => state.cityReducer.cityCode);
+  const offers = useAppSelector((state) => state.offersReducer.offers);
   const cityOffers = offers.filter((offer) => offer.city.name === City[cityCode as CityCode]);
 
   const dispatch = useAppDispatch();
@@ -28,7 +29,7 @@ function CityScreen(): JSX.Element {
     >
       <CityTabs activeCityCode={cityCode} handleCityChange={handleCityCodeChange}/>
       {(cityOffers.length === 0) ?
-        <CityPlacesListEmpty cityCode={cityCode}/> :
+        <CityPlacesListEmpty/> :
         <CityPlacesList cityCode={cityCode} offers={cityOffers}/>}
     </main>
   );

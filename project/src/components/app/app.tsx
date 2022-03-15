@@ -23,7 +23,7 @@ type AppScreenProps = {
 };
 
 function App({favoriteOffers}: AppScreenProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.offersReducer.offers);
 
   const cityRoutes = cityCodes.map((routeCityCode) => (
     <Route

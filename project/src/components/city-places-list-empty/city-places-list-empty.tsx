@@ -1,11 +1,9 @@
 import {City} from 'settings/city';
-import {CityCode} from 'types/city-code';
+import {useAppSelector} from 'hooks/use-redux-hooks';
 
-type CityPlacesListEmptyProps = {
-  cityCode: CityCode;
-}
+function CityPlacesListEmpty(): JSX.Element {
+  const cityCode = useAppSelector((state) => state.cityReducer.cityCode);
 
-function CityPlacesListEmpty({cityCode}: CityPlacesListEmptyProps): JSX.Element {
   return (
     <div className="cities">
       <div className="cities__places-container cities__places-container--empty container">
