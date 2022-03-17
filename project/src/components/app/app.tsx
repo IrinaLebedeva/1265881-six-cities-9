@@ -10,6 +10,7 @@ import {CityScreen} from 'components/city-screen/city-screen';
 import {FavoritesEmptyScreen} from 'components/favorites-empty-screen/favorites-empty-screen';
 import {FavoritesScreen} from 'components/favorites-screen/favorites-screen';
 import {Layout} from 'components/layout/layout';
+import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {LoginScreen} from 'components/login-screen/login-screen';
 import {NotFoundScreen} from 'components/not-found-screen/not-found-screen';
 import {Offers} from 'types/offer';
@@ -27,6 +28,7 @@ type AppScreenProps = {
 };
 
 function App({favoriteOffers}: AppScreenProps): JSX.Element {
+  const isOffersLoaded = useAppSelector((state) => state.offersReducer.isOffersLoaded);
   const offers = useAppSelector((state) => state.offersReducer.offers);
 
   const location = useLocation();
@@ -37,6 +39,12 @@ function App({favoriteOffers}: AppScreenProps): JSX.Element {
       dispatch(resetCityCode());
     }
   }, [location]);
+
+  if (!isOffersLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   const cityRoutes = cityCodes.map((routeCityCode) => (
     <Route
