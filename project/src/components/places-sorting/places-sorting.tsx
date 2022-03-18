@@ -1,18 +1,43 @@
+import clsx from 'clsx';
+import {
+  OffersSortType,
+  offersSortTypes
+} from 'settings/offers-sort-type';
+import {OffersSortTypeKey} from 'types/offers-sort-type-key';
+import {setOffersSortType} from 'store/offers/action';
+import {useState} from 'react';
+import {useAppDispatch, useAppSelector} from 'hooks/use-redux-hooks';
+
 function PlacesSorting(): JSX.Element {
+  const [isSortOpened, setIsSortOpened] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const sortType = useAppSelector((state) => state.offersReducer.offersSortType);
+
+  const handleSortChange = (offersSortType: OffersSortTypeKey) => {
+    dispatch(setOffersSortType({offersSortType}));
+    setIsSortOpened(false);
+  };
+
   return (
     <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0}>
-        Popular
+      <span className="places__sorting-caption">Sort by&nbsp;</span>
+      <span className="places__sorting-type" tabIndex={0} onClick={() => setIsSortOpened(!isSortOpened)}>
+        {OffersSortType[sortType]}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className="places__options places__options--custom places__options--opened">
-        <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-        <li className="places__option" tabIndex={0}>Price: low to high</li>
-        <li className="places__option" tabIndex={0}>Price: high to low</li>
-        <li className="places__option" tabIndex={0}>Top rated first</li>
+      <ul className={clsx('places__options', 'places__options--custom', {'places__options--opened': isSortOpened})}>
+        {offersSortTypes.map((offersSortType) => (
+          <li
+            className={clsx('places__option', {'places__option--active' : offersSortType === sortType})}
+            tabIndex={0}
+            onClick={() => handleSortChange(offersSortType as OffersSortTypeKey)}
+            key={offersSortType}
+          >
+            {OffersSortType[offersSortType as OffersSortTypeKey]}
+          </li>
+        ))}
       </ul>
     </form>
   );

@@ -2,26 +2,29 @@ import {City} from 'settings/city';
 import {CityCode} from 'types/city-code';
 import {Map} from 'components/map/map';
 import {Offers} from 'types/offer';
-import {PlaceCardContainer} from 'components/place-card-container/place-card-container';
+import {PlaceCard} from 'components/place-card/place-card';
 import {PlacesSorting} from 'components/places-sorting/places-sorting';
-import {useState} from 'react';
+import {
+  useState
+} from 'react';
 
-type CityPlacesListProps = {
+interface CityPlacesListProps  {
   cityCode: CityCode;
   offers: Offers;
-};
+}
 
 function CityPlacesList({cityCode, offers}: CityPlacesListProps): JSX.Element {
-  const [activeCardId, setActiveCardId] = useState(0);
+  const [activeCardId, setActiveCardId] = useState<number>(0);
+
   return (
     <div className="cities">
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{offers.length} places to stay in <span className="places__city-name">{City[cityCode as CityCode]}</span></b>
-          <PlacesSorting />
+          <PlacesSorting/>
           <div className="cities__places-list places__list tabs__content">
-            {offers.map((offer) => <PlaceCardContainer offer={offer} key={offer.id} setActiveCardIdCallback={setActiveCardId}/>)}
+            {offers.map((offer) => <PlaceCard offer={offer} key={offer.id} handleMouseEventsCallback={setActiveCardId}/>)}
           </div>
         </section>
         <div className="cities__right-section">

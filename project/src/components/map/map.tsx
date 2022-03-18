@@ -31,7 +31,7 @@ type MapProps = {
 function Map({offers, activeOfferId}: MapProps): JSX.Element {
   const city = offers[0].city;
 
-  const mapRef = useRef(null);
+  const mapRef = useRef<HTMLDivElement|null>(null);
   const map = useMap({mapRef, city});
 
   useEffect(() => {
@@ -50,7 +50,7 @@ function Map({offers, activeOfferId}: MapProps): JSX.Element {
       layerGroup.addTo(map);
 
       return () => {
-        map.removeLayer(layerGroup);
+        map?.removeLayer(layerGroup);
       };
     }
   }, [map, offers, activeOfferId]);

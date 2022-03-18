@@ -8,13 +8,20 @@ import {getOfferPremiumJsxElement} from 'utils/get-offer-premium-jsx-element';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {Offer} from 'types/offer';
 
+type CallbackType = (offerId: number) => void;
+
 type PlaceCardProps = {
   offer: Offer;
+  handleMouseEventsCallback?: CallbackType;
 };
 
-function PlaceCard({offer}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, handleMouseEventsCallback}: PlaceCardProps): JSX.Element {
   return (
-    <>
+    <article
+      className="cities__place-card place-card"
+      onMouseOver={() => (handleMouseEventsCallback instanceof Function) ? handleMouseEventsCallback(offer.id) : null}
+      onMouseLeave={() => (handleMouseEventsCallback instanceof Function) ? handleMouseEventsCallback(0) : null}
+    >
       {getOfferPremiumJsxElement(offer.isPremium)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={generatePath(AppRoute.Property, {id: `${offer.id}`})}>
@@ -39,7 +46,7 @@ function PlaceCard({offer}: PlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${getRatingInPercent(offer.rating)}%`}}/>
+            <span style={{width: getRatingInPercent(offer.rating)}}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -48,7 +55,7 @@ function PlaceCard({offer}: PlaceCardProps): JSX.Element {
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
-    </>
+    </article>
   );
 }
 

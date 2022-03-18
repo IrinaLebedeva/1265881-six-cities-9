@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from 'components/app/app';
-import {DEFAULT_CITY_CODE} from 'settings/const';
+import {BrowserRouter} from 'react-router-dom';
 import {favoriteOffers} from 'fixture/favorite-offers';
 import 'leaflet/dist/leaflet.css';
-import {offers} from 'fixture/offers';
+import {Provider} from 'react-redux';
+import {store} from 'store/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App
-      cityCode={DEFAULT_CITY_CODE}
-      offers={offers}
-      favoriteOffers={favoriteOffers}
-    />
+    <Provider store={store}>
+      <BrowserRouter>
+        <App favoriteOffers={favoriteOffers}/>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

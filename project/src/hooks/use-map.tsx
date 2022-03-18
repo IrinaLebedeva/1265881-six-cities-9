@@ -1,5 +1,6 @@
 import {City} from 'types/city';
 import {
+  LatLng,
   Map,
   TileLayer
 } from 'leaflet';
@@ -14,7 +15,7 @@ type useMapProps = {
   city: City;
 }
 
-function useMap({mapRef, city}: useMapProps) {
+function useMap({mapRef, city}: useMapProps): Map | null {
   const [map, setMap] = useState<Map|null>(null);
 
   useEffect(() => {
@@ -37,7 +38,17 @@ function useMap({mapRef, city}: useMapProps) {
 
       setMap(mapInstance);
     }
-  }, [map, mapRef, city]);
+
+  }, [map, mapRef]);
+
+  useEffect(() => {
+    if (map instanceof Map) {
+      map.setView(
+        new LatLng(city.location.latitude, city.location.longitude),
+        city.location.zoom,
+      );
+    }
+  }, [city]);
 
   return map;
 }
