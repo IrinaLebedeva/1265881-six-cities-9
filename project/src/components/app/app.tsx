@@ -37,7 +37,6 @@ type AppScreenProps = {
 function App({favoriteOffers}: AppScreenProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
   const isOffersLoaded = useAppSelector((state) => state.offersReducer.isOffersLoaded);
-  const offers = useAppSelector((state) => state.offersReducer.offers);
 
   const location = useLocation();
   const dispatch = useAppDispatch();
@@ -82,7 +81,7 @@ function App({favoriteOffers}: AppScreenProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Property}`}
-          element={<PropertyScreen offers={offers}/>}
+          element={<PropertyScreen/>}
         />
         <Route
           path={AppRoute.Favorites}

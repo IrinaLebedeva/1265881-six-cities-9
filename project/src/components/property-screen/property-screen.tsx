@@ -1,29 +1,30 @@
-import {AppRoute} from 'settings/app-route';
 import clsx from 'clsx';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
+import {getOfferById} from 'store/offer/api-action';
+import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {Map} from 'components/map/map';
-import {
-  Navigate,
-  useParams
-} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {nearbyOffers} from 'fixture/nearby-offers';
-import {Offers} from 'types/offer';
 import {PropertyHost} from 'components/property-host/property-host';
 import {PropertyReviews} from 'components/property-reviews/property-reviews';
 import {PropertyNearPlaces} from 'components/property-near-places/property-near-places';
 import {reviews} from 'fixture/reviews';
+import {
+  useAppDispatch,
+  useAppSelector
+} from 'hooks/use-redux-hooks';
 
-type PropertyScreenProps = {
-  offers: Offers;
-}
-
-function PropertyScreen({offers}: PropertyScreenProps): JSX.Element {
+function PropertyScreen(): JSX.Element {
   const params = useParams();
-  const id = Number(params.id);
+  const dispatch = useAppDispatch();
+  const {isOfferLoaded, offer} = useAppSelector((state) => state.offerReducer);
 
-  const offer = offers.find((currentOffer) => currentOffer.id === id);
-  if (typeof offer === 'undefined') {
-    return <Navigate to={AppRoute.NotFound} />;
+  dispatch(getOfferById(`${params.id}`));
+
+  if (!isOfferLoaded) {
+    return (
+      <LoadingScreen />
+    );
   }
 
   return (
