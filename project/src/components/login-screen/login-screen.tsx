@@ -1,15 +1,13 @@
 import {AppRoute} from 'settings/app-route';
 import {AuthData} from 'types/auth-data';
 import {AuthorizationStatus} from 'settings/authorization-status';
-import {City} from 'settings/city';
-import {CityCode} from 'types/city-code';
-import {DEFAULT_CITY_CODE} from 'settings/const';
 import {
   generatePath,
   Link,
   Navigate
 } from 'react-router-dom';
 import {FormEvent, useRef} from 'react';
+import {getRandomCity} from 'utils/get-random-city';
 import {loginUser} from 'store/user/api-action';
 import {useAppDispatch, useAppSelector} from 'hooks/use-redux-hooks';
 
@@ -38,6 +36,8 @@ function LoginScreen(): JSX.Element {
     }
   };
 
+  const randomCity = getRandomCity();
+
   return (
     <main className="page__main page__main--login">
       <div className="page__login-container container">
@@ -57,8 +57,8 @@ function LoginScreen(): JSX.Element {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: DEFAULT_CITY_CODE.toLowerCase()})}>
-              <span>{City[DEFAULT_CITY_CODE as CityCode]}</span>
+            <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: randomCity.cityCode})}>
+              <span>{randomCity.cityName}</span>
             </Link>
           </div>
         </section>
