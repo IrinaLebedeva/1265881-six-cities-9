@@ -14,11 +14,11 @@ function PropertyReviewsForm(): JSX.Element {
 
   const isValid = rating >= VALID_RATING_MIN_VALUE && review.length >= VALID_REVIEW_MIN_LENGTH;
 
-  const onReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setReview(evt.target.value);
   };
 
-  const onRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(evt.target.value));
   };
 
@@ -59,7 +59,7 @@ function PropertyReviewsForm(): JSX.Element {
         value={appRating.value}
         id={`${appRating.value}-stars`}
         type="radio"
-        onChange={onRatingChange}
+        onChange={handleRatingChange}
       />
       <label htmlFor={`${appRating.value}-stars`} className="reviews__rating-label form__rating-label" title={appRating.name}>
         <svg className="form__star-image" width="37" height="33">
@@ -85,7 +85,7 @@ function PropertyReviewsForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={onReviewChange}
+        onChange={handleReviewChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

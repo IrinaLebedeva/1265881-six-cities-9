@@ -1,26 +1,56 @@
 import {AppRoute} from 'settings/app-route';
+import {AuthData} from 'types/auth-data';
+import {AuthorizationStatus} from 'settings/authorization-status';
 import {City} from 'settings/city';
 import {CityCode} from 'types/city-code';
 import {DEFAULT_CITY_CODE} from 'settings/const';
 import {
   generatePath,
-  Link
+  Link,
+  Navigate
 } from 'react-router-dom';
+import {FormEvent, useRef} from 'react';
+import {loginUser} from 'store/user/api-action';
+import {useAppDispatch, useAppSelector} from 'hooks/use-redux-hooks';
 
 function LoginScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.Root} />;
+  }
+
+  const onSubmit = (authData: AuthData) => {
+    dispatch(loginUser(authData));
+  };
+
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (loginRef.current && passwordRef.current) {
+      onSubmit({
+        email: loginRef.current.value,
+        password: passwordRef.current.value,
+      });
+    }
+  };
+
   return (
     <main className="page__main page__main--login">
       <div className="page__login-container container">
         <section className="login">
           <h1 className="login__title">Sign in</h1>
-          <form className="login__form form" action="#" method="post">
+          <form className="login__form form" action="#" method="post" onSubmit={handleFormSubmit}>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">E-mail</label>
-              <input className="login__input form__input" type="email" name="email" placeholder="Email" required />
+              <input className="login__input form__input" type="email" name="email" placeholder="Email" required ref={loginRef} />
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">Password</label>
-              <input className="login__input form__input" type="password" name="password" placeholder="Password" required />
+              <input className="login__input form__input" type="password" name="password" placeholder="Password" required ref={passwordRef}/>
             </div>
             <button className="login__submit form__submit button" type="submit">Sign in</button>
           </form>

@@ -1,8 +1,9 @@
 export type User = {
   avatarUrl: string;
-  name: string;
+  email: string;
   id: number;
   isPro: boolean;
+  name: string;
 };
 
 export type Users = User[];

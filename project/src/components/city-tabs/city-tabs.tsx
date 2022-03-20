@@ -12,10 +12,9 @@ import {
 
 interface CityTabsProps {
   activeCityCode: CityCode;
-  handleCityChange: (cityCode: CityCode) => () => void;
 }
 
-function CityTabs({activeCityCode, handleCityChange}: CityTabsProps): JSX.Element {
+function CityTabs({activeCityCode}: CityTabsProps): JSX.Element {
   const cityTabs = cityCodes.map((cityCode) => (
     <li className="locations__item" key={cityCode}>
       <Link
@@ -24,7 +23,6 @@ function CityTabs({activeCityCode, handleCityChange}: CityTabsProps): JSX.Elemen
           'locations__item-link',
           'tabs__item',
           {'tabs__item--active': cityCode === activeCityCode})}
-        onClick={handleCityChange(cityCode as CityCode)}
       >
         <span>{City[cityCode as CityCode]}</span>
       </Link>

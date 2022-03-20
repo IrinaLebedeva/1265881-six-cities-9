@@ -3,12 +3,16 @@ import {AuthorizationStatus} from 'settings/authorization-status';
 import {
   generatePath,
   Route,
-  Routes, useLocation
+  Routes,
+  useLocation,
+  useMatch
 } from 'react-router-dom';
 import {cityCodes} from 'settings/city';
+import {CityCode} from 'types/city-code';
 import {CityScreen} from 'components/city-screen/city-screen';
 import {FavoritesEmptyScreen} from 'components/favorites-empty-screen/favorites-empty-screen';
 import {FavoritesScreen} from 'components/favorites-screen/favorites-screen';
+import {formatCityCode} from 'utils/format-city-code';
 import {Layout} from 'components/layout/layout';
 import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {LoginScreen} from 'components/login-screen/login-screen';
@@ -16,7 +20,10 @@ import {NotFoundScreen} from 'components/not-found-screen/not-found-screen';
 import {Offers} from 'types/offer';
 import {PropertyScreen} from 'components/property-screen/property-screen';
 import {PrivateRoute} from 'components/private-route/private-route';
-import {resetCityCode} from 'store/city/action';
+import {
+  resetCityCode,
+  setCityCode
+} from 'store/city/action';
 import {
   useAppDispatch,
   useAppSelector
@@ -28,19 +35,24 @@ type AppScreenProps = {
 };
 
 function App({favoriteOffers}: AppScreenProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
   const isOffersLoaded = useAppSelector((state) => state.offersReducer.isOffersLoaded);
   const offers = useAppSelector((state) => state.offersReducer.offers);
 
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const matchCityRoute = useMatch(AppRoute.City);
 
   useEffect(() => {
     if (location.pathname === AppRoute.Root) {
       dispatch(resetCityCode());
     }
+    if (matchCityRoute && matchCityRoute.params.cityCode) {
+      dispatch(setCityCode({cityCode: formatCityCode(matchCityRoute.params.cityCode) as CityCode}));
+    }
   }, [location]);
 
-  if (!isOffersLoaded) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || !isOffersLoaded) {
     return (
       <LoadingScreen />
     );
@@ -75,7 +87,7 @@ function App({favoriteOffers}: AppScreenProps): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <FavoritesScreen offers={favoriteOffers} />
             </PrivateRoute>
           }

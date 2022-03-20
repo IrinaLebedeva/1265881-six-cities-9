@@ -1,6 +1,5 @@
 import {Api} from 'settings/api';
-
-type ApiAuthToken = string;
+import {ApiAuthToken} from 'types/api-auth-token';
 
 const deleteApiAuthToken = (): void => localStorage.removeItem(Api.AuthTokenLocalName);
 
