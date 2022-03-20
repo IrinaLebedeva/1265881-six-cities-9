@@ -6,8 +6,8 @@ import {
 import {Reviews} from 'types/review';
 import {
   setIsOfferLoaded,
-  setNearbyOffers,
   setOffer,
+  setOfferNearbyOffers,
   setOfferReviews
 } from 'store/offer/action';
 
@@ -36,7 +36,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setOfferReviews, (state, action) => {
       state.reviews = action.payload.reviews;
     })
-    .addCase(setNearbyOffers, (state, action) => {
+    .addCase(setOfferNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload.nearbyOffers;
     });
 });

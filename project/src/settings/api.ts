@@ -10,4 +10,5 @@ export enum ApiRoute {
   Login = '/login',
   Logout = '/logout',
   GetOffer = '/hotels/{offerId}',
+  GetOfferReviews = '/comments/{offerId}',
 }

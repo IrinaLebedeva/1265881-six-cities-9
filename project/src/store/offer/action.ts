@@ -9,6 +9,6 @@ export const setOffer = createAction<{offer: Offer}>('offer/setOffer');
 
 export const setIsOfferLoaded = createAction<{isOfferLoaded: boolean}>('offer/setIsOfferLoaded');
 
-export const setOfferReviews = createAction<{offerId: number, reviews: Reviews}>('offer/setOfferReviews');
+export const setOfferReviews = createAction<{reviews: Reviews}>('offer/setOfferReviews');
 
-export const setNearbyOffers = createAction<{offerId: number, nearbyOffers: Offers}>('offer/setNearbyOffers');
+export const setOfferNearbyOffers = createAction<{nearbyOffers: Offers}>('offer/setOfferNearbyOffers');

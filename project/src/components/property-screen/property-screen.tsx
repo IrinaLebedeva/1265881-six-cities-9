@@ -1,25 +1,28 @@
 import clsx from 'clsx';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
-import {getOfferById} from 'store/offer/api-action';
+import {getOfferById, getOfferReviews} from 'store/offer/api-action';
 import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {Map} from 'components/map/map';
-import {useParams} from 'react-router-dom';
 import {nearbyOffers} from 'fixture/nearby-offers';
 import {PropertyHost} from 'components/property-host/property-host';
 import {PropertyReviews} from 'components/property-reviews/property-reviews';
 import {PropertyNearPlaces} from 'components/property-near-places/property-near-places';
-import {reviews} from 'fixture/reviews';
 import {
   useAppDispatch,
   useAppSelector
 } from 'hooks/use-redux-hooks';
+import {useParams} from 'react-router-dom';
 
 function PropertyScreen(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const {isOfferLoaded, offer} = useAppSelector((state) => state.offerReducer);
+  const isOfferLoaded = useAppSelector((state) => state.offerReducer);
+  const offer = useAppSelector((state) => state.offerReducer.offer);
+  const reviews = useAppSelector((state) => state.offerReducer.reviews);
+  const id = String(params.id);
 
-  dispatch(getOfferById(`${params.id}`));
+  dispatch(getOfferById(id));
+  dispatch(getOfferReviews(id));
 
   if (!isOfferLoaded) {
     return (
