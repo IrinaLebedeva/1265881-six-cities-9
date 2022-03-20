@@ -1,3 +1,4 @@
+import {AuthorizationStatus} from 'settings/authorization-status';
 import clsx from 'clsx';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {getOfferById, getOfferReviews} from 'store/offer/api-action';
@@ -5,8 +6,9 @@ import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {Map} from 'components/map/map';
 import {nearbyOffers} from 'fixture/nearby-offers';
 import {PropertyHost} from 'components/property-host/property-host';
-import {PropertyReviews} from 'components/property-reviews/property-reviews';
 import {PropertyNearPlaces} from 'components/property-near-places/property-near-places';
+import {PropertyReviews} from 'components/property-reviews/property-reviews';
+import {PropertyReviewsForm} from 'components/property-reviews-form/property-reviews-form';
 import {
   useAppDispatch,
   useAppSelector
@@ -16,6 +18,7 @@ import {useParams} from 'react-router-dom';
 function PropertyScreen(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
   const isOfferLoaded = useAppSelector((state) => state.offerReducer);
   const offer = useAppSelector((state) => state.offerReducer.offer);
   const reviews = useAppSelector((state) => state.offerReducer.reviews);
@@ -23,6 +26,8 @@ function PropertyScreen(): JSX.Element {
 
   dispatch(getOfferById(id));
   dispatch(getOfferReviews(id));
+
+  const reviewsForm = (authorizationStatus !== AuthorizationStatus.Auth) ? <PropertyReviewsForm /> : null;
 
   if (!isOfferLoaded) {
     return (
@@ -101,7 +106,7 @@ function PropertyScreen(): JSX.Element {
               </ul>
             </div>
             <PropertyHost offer={offer} />
-            <PropertyReviews reviews={reviews}/>
+            <PropertyReviews reviews={reviews} reviewsForm={reviewsForm}/>
           </div>
         </div>
         <section className="property__map map">

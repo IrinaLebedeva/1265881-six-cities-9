@@ -19,9 +19,10 @@ const sortReviewsByDateDesc = (a: Review, b: Review): number => {
 
 type PropertyReviewsProps = {
   reviews: Reviews;
+  reviewsForm: JSX.Element | null;
 }
 
-function PropertyReviews({reviews}: PropertyReviewsProps): JSX.Element {
+function PropertyReviews({reviews, reviewsForm}: PropertyReviewsProps): JSX.Element {
   const sortedReviews = useMemo(() => reviews.slice().sort(sortReviewsByDateDesc), [reviews]);
   return (
     <section className="property__reviews reviews">
@@ -33,7 +34,7 @@ function PropertyReviews({reviews}: PropertyReviewsProps): JSX.Element {
           </li>
         ))}
       </ul>
-      <PropertyReviewsForm />
+      {reviewsForm}
     </section>
   );
 }
