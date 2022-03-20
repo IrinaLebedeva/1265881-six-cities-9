@@ -22,7 +22,7 @@ type PropertyReviewsProps = {
 }
 
 function PropertyReviews({reviews}: PropertyReviewsProps): JSX.Element {
-  const sortedReviews = useMemo(() => reviews.slice().sort(sortReviewsByDateDesc), reviews);
+  const sortedReviews = useMemo(() => reviews.slice().sort(sortReviewsByDateDesc), [reviews]);
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>

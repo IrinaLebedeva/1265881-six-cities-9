@@ -31,7 +31,7 @@ interface InitialState {
 const initialState: InitialState = {
   offers: [],
   reviews: [],
-  nearbyOffers: []
+  nearbyOffers: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {

@@ -50,7 +50,7 @@ function App({favoriteOffers}: AppScreenProps): JSX.Element {
     if (matchCityRoute && matchCityRoute.params.cityCode) {
       dispatch(setCityCode({cityCode: formatCityCode(matchCityRoute.params.cityCode) as CityCode}));
     }
-  }, [location]);
+  });
 
   if (authorizationStatus === AuthorizationStatus.Unknown || !isOffersLoaded) {
     return (
