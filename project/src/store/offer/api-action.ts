@@ -5,11 +5,11 @@ import {
 import {ApiRoute} from 'settings/api';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {handleError} from 'services/handleError';
-import {Offer} from 'types/offer';
+import {Offer, Offers} from 'types/offer';
 import {Reviews} from 'types/review';
 import {
   setIsOfferLoaded,
-  setOffer, setOfferReviews
+  setOffer, setOfferNearbyOffers, setOfferReviews
 } from 'store/offer/action';
 
 export const getOfferById = createAsyncThunk(
@@ -31,6 +31,18 @@ export const getOfferReviews = createAsyncThunk(
     try {
       const {data} = await api.get<Reviews>(ApiRoute.GetOfferReviews.replace('{offerId}', offerId));
       store.dispatch(setOfferReviews({reviews: data}));
+    } catch (error) {
+      handleError(error);
+    }
+  },
+);
+
+export const getOfferNearbyOffers = createAsyncThunk(
+  'offer/getOfferNearbyOffers',
+  async (offerId: string) => {
+    try {
+      const {data} = await api.get<Offers>(ApiRoute.GetOfferNearbyOffers.replace('{offerId}', offerId));
+      store.dispatch(setOfferNearbyOffers({nearbyOffers: data}));
     } catch (error) {
       handleError(error);
     }
