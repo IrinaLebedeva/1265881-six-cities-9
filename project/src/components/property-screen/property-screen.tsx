@@ -1,7 +1,10 @@
 import {AuthorizationStatus} from 'settings/authorization-status';
 import clsx from 'clsx';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
-import {getOfferById, getOfferReviews} from 'store/offer/api-action';
+import {
+  getOfferById,
+  getOfferReviews
+} from 'store/offer/api-action';
 import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {Map} from 'components/map/map';
 import {nearbyOffers} from 'fixture/nearby-offers';

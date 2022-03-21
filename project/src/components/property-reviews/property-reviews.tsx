@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import {PropertyReviewsForm} from 'components/property-reviews-form/property-reviews-form';
 import {Review, Reviews} from 'types/review';
 import {PropertyReviewItem} from 'components/property-review-item/property-review-item';
 import {useMemo} from 'react';

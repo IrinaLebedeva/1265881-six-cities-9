@@ -39,7 +39,7 @@ function useMap({mapRef, city}: useMapProps): Map | null {
       setMap(mapInstance);
     }
 
-  },  [mapRef, map, city.location.latitude, city.location.longitude, city.location.zoom]);
+  },  [mapRef, map, city]);
 
   useEffect(() => {
     if (map instanceof Map) {
@@ -48,7 +48,7 @@ function useMap({mapRef, city}: useMapProps): Map | null {
         city.location.zoom,
       );
     }
-  });
+  }, [map, city]);
 
   return map;
 }
