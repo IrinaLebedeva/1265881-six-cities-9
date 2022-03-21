@@ -5,7 +5,12 @@ import {AuthorizationStatus} from 'settings/authorization-status';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {handleError} from 'services/handleError';
 import {deleteApiAuthToken, saveApiAuthToken} from 'services/api-auth-token';
-import {resetUser, setAuthorization, setErrorMessage, setUser} from 'store/user/action';
+import {
+  resetUser,
+  setAuthorization,
+  setErrorMessage,
+  setUser
+} from 'store/user/action';
 import {SHOW_ERROR_TIMEOUT} from 'settings/const';
 
 export const resetErrorMessage = createAsyncThunk(

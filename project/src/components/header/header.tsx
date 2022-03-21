@@ -4,14 +4,16 @@ import {
   getAuthorizationStatus,
   getUser
 } from 'store/user/selector';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
+import {NavigationMenu} from 'components/header/navigation-menu';
 import {useAppSelector} from 'hooks/use-redux-hooks';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const user = useAppSelector(getUser);
+  const location = useLocation();
 
-  const isAuthorisedUser = authorizationStatus === AuthorizationStatus.Auth;
+  const isAuthorizedUser = authorizationStatus === AuthorizationStatus.Auth;
 
   return (
     <header className="header">
@@ -22,24 +24,7 @@ function Header(): JSX.Element {
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </Link>
           </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to={isAuthorisedUser ? AppRoute.Favorites : AppRoute.Login}>
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  {isAuthorisedUser && <span className="header__user-name user__name">{user.email}</span>}
-                  {!isAuthorisedUser && <span className="header__login">Sign in</span>}
-                </Link>
-              </li>
-              {isAuthorisedUser &&
-                <li className="header__nav-item">
-                  <Link className="header__nav-link" to={AppRoute.Logout}>
-                    <span className="header__signout">Sign out</span>
-                  </Link>
-                </li>}
-            </ul>
-          </nav>
+          {location.pathname !== AppRoute.Login && <NavigationMenu user={user} isAuthorizedUser={isAuthorizedUser} />}
         </div>
       </div>
     </header>
