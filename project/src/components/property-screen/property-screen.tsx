@@ -1,6 +1,11 @@
 import {AuthorizationStatus} from 'settings/authorization-status';
 import clsx from 'clsx';
 import {getAuthorizationStatus} from 'store/user/selector';
+import {
+  getNearbyOffers,
+  getOffer,
+  getReviews
+} from 'store/offer/selector';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {
   getOfferById,
@@ -25,9 +30,9 @@ function PropertyScreen(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const offer = useAppSelector((state) => state.offerReducer.offer);
-  const reviews = useAppSelector((state) => state.offerReducer.reviews);
-  const nearbyOffers = useAppSelector((state) => state.offerReducer.nearbyOffers);
+  const offer = useAppSelector(getOffer);
+  const reviews = useAppSelector(getReviews);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
   const id = Number(params.id);
 
   useEffect(() => {

@@ -12,7 +12,10 @@ import {
 } from 'utils/sort-offers';
 
 const getCurrentCityCode = (state: State): CityCode => state.cityReducer.cityCode;
+
 const getOffers = (state: State): Offers => state.offersReducer.offers;
+
+const getIsOffersLoaded = (state: State): boolean => state.offersReducer.isOffersLoaded;
 
 const selectOffersByCity = createSelector(
   [getCurrentCityCode, getOffers], (currentCityCode, offers) => (
@@ -43,6 +46,7 @@ const selectSortedOffersByCity = createSelector(
 
 export {
   getCurrentCityCode,
+  getIsOffersLoaded,
   getOffersSortType,
   selectOffersByCity,
   selectSortedOffersByCity
