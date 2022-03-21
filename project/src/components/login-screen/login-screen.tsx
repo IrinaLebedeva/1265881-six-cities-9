@@ -6,17 +6,24 @@ import {
   Link,
   Navigate
 } from 'react-router-dom';
-import {FormEvent, useRef} from 'react';
+import {
+  FormEvent,
+  useRef
+} from 'react';
+import {getAuthorizationStatus} from 'store/user/selector';
 import {getRandomCity} from 'utils/get-random-city';
 import {loginUser} from 'store/user/api-action';
-import {useAppDispatch, useAppSelector} from 'hooks/use-redux-hooks';
+import {
+  useAppDispatch,
+  useAppSelector
+} from 'hooks/use-redux-hooks';
 
 function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Root} />;
   }

@@ -1,4 +1,5 @@
 import {AppRoute} from 'settings/app-route';
+import {getAuthorizationStatus} from 'store/user/selector';
 import {Link} from 'react-router-dom';
 import {useAppSelector} from 'hooks/use-redux-hooks';
 import {AuthorizationStatus} from 'settings/authorization-status';
@@ -6,7 +7,7 @@ import {AuthorizedUserNavList} from 'components/header/authorized-user-nav-list'
 import {UnauthorizedUserNavList} from 'components/header/unauthorized-user-nav-list';
 
 function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const userNavList = authorizationStatus !== AuthorizationStatus.Auth ?
     <UnauthorizedUserNavList/> :

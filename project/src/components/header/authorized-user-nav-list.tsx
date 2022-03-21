@@ -1,4 +1,5 @@
 import {AppRoute} from 'settings/app-route';
+import {getUser} from 'store/user/selector';
 import {Link} from 'react-router-dom';
 import {logoutUser} from 'store/user/api-action';
 import {
@@ -8,7 +9,7 @@ import {
 
 export function AuthorizedUserNavList(): JSX.Element {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.userReducer.user);
+  const user = useAppSelector(getUser);
 
   return (
     <nav className="header__nav">

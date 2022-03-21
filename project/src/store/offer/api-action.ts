@@ -8,8 +8,9 @@ import {handleError} from 'services/handleError';
 import {Offer, Offers} from 'types/offer';
 import {Reviews} from 'types/review';
 import {
-  setIsOfferLoaded,
-  setOffer, setOfferNearbyOffers, setOfferReviews
+  setOffer,
+  setOfferNearbyOffers,
+  setOfferReviews
 } from 'store/offer/action';
 
 export const getOfferById = createAsyncThunk(
@@ -18,7 +19,6 @@ export const getOfferById = createAsyncThunk(
     try {
       const {data} = await api.get<Offer>(ApiRoute.GetOffer.replace('{offerId}', offerId));
       store.dispatch(setOffer({offer: data}));
-      store.dispatch(setIsOfferLoaded({isOfferLoaded: true}));
     } catch (error) {
       handleError(error);
     }

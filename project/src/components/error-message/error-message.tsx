@@ -1,7 +1,8 @@
+import {getErrorMessage} from 'store/user/selector';
 import {useAppSelector} from 'hooks/use-redux-hooks';
 
 function ErrorMessage(): JSX.Element | null {
-  const errorMessage = useAppSelector((state) => state.userReducer.errorMessage);
+  const errorMessage = useAppSelector(getErrorMessage);
 
   if (!errorMessage) {
     return null;

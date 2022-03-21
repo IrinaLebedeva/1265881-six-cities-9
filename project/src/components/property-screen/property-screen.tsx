@@ -1,5 +1,6 @@
 import {AuthorizationStatus} from 'settings/authorization-status';
 import clsx from 'clsx';
+import {getAuthorizationStatus} from 'store/user/selector';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {
   getOfferById,
@@ -21,8 +22,7 @@ import {useParams} from 'react-router-dom';
 function PropertyScreen(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
-  const isOfferLoaded = useAppSelector((state) => state.offerReducer);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const offer = useAppSelector((state) => state.offerReducer.offer);
   const reviews = useAppSelector((state) => state.offerReducer.reviews);
   const id = String(params.id);
@@ -32,7 +32,7 @@ function PropertyScreen(): JSX.Element {
 
   const reviewsForm = (authorizationStatus !== AuthorizationStatus.Auth) ? <PropertyReviewsForm /> : null;
 
-  if (!isOfferLoaded) {
+  if (!offer) {
     return (
       <LoadingScreen />
     );

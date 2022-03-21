@@ -13,6 +13,7 @@ import {CityScreen} from 'components/city-screen/city-screen';
 import {FavoritesEmptyScreen} from 'components/favorites-empty-screen/favorites-empty-screen';
 import {FavoritesScreen} from 'components/favorites-screen/favorites-screen';
 import {formatCityCode} from 'utils/format-city-code';
+import {getAuthorizationStatus} from 'store/user/selector';
 import {Layout} from 'components/layout/layout';
 import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {LoginScreen} from 'components/login-screen/login-screen';
@@ -35,7 +36,7 @@ type AppScreenProps = {
 };
 
 function App({favoriteOffers}: AppScreenProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.userReducer.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersLoaded = useAppSelector((state) => state.offersReducer.isOffersLoaded);
 
   const location = useLocation();
