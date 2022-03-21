@@ -5,7 +5,8 @@ import {
   Route,
   Routes,
   useLocation,
-  useMatch
+  useMatch,
+  useNavigate
 } from 'react-router-dom';
 import {cityCodes} from 'settings/city';
 import {CityCode} from 'types/city-code';
@@ -17,6 +18,7 @@ import {getAuthorizationStatus} from 'store/user/selector';
 import {Layout} from 'components/layout/layout';
 import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {LoginScreen} from 'components/login-screen/login-screen';
+import {logoutUser} from 'store/user/api-action';
 import {NotFoundScreen} from 'components/not-found-screen/not-found-screen';
 import {Offers} from 'types/offer';
 import {PropertyScreen} from 'components/property-screen/property-screen';
@@ -39,13 +41,20 @@ function App({favoriteOffers}: AppScreenProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersLoaded = useAppSelector((state) => state.offersReducer.isOffersLoaded);
 
-  const location = useLocation();
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const matchCityRoute = useMatch(AppRoute.City);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === AppRoute.Root) {
-      dispatch(resetCityCode());
+    switch (location.pathname) {
+      case AppRoute.Root:
+        dispatch(resetCityCode());
+        break;
+      case AppRoute.Logout:
+        dispatch(logoutUser());
+        navigate(AppRoute.Root);
+        break;
     }
     if (matchCityRoute && matchCityRoute.params.cityCode) {
       dispatch(setCityCode({cityCode: formatCityCode(matchCityRoute.params.cityCode) as CityCode}));
