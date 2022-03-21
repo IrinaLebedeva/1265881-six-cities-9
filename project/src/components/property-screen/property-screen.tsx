@@ -4,19 +4,21 @@ import {getAuthorizationStatus} from 'store/user/selector';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {
   getOfferById,
+  getOfferNearbyOffers,
   getOfferReviews
 } from 'store/offer/api-action';
 import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {Map} from 'components/map/map';
-import {nearbyOffers} from 'fixture/nearby-offers';
 import {PropertyHost} from 'components/property-host/property-host';
 import {PropertyNearPlaces} from 'components/property-near-places/property-near-places';
 import {PropertyReviews} from 'components/property-reviews/property-reviews';
 import {PropertyReviewsForm} from 'components/property-reviews-form/property-reviews-form';
+import {resetToInitialState} from 'store/offer/action';
 import {
   useAppDispatch,
   useAppSelector
 } from 'hooks/use-redux-hooks';
+import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 
 function PropertyScreen(): JSX.Element {
@@ -25,12 +27,19 @@ function PropertyScreen(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const offer = useAppSelector((state) => state.offerReducer.offer);
   const reviews = useAppSelector((state) => state.offerReducer.reviews);
-  const id = String(params.id);
+  const nearbyOffers = useAppSelector((state) => state.offerReducer.nearbyOffers);
+  const id = Number(params.id);
 
-  dispatch(getOfferById(id));
-  dispatch(getOfferReviews(id));
+  useEffect(() => {
+    if (!offer || offer.id !== id) {
+      dispatch(resetToInitialState());
+      dispatch(getOfferById(`${id}`));
+      dispatch(getOfferReviews(`${id}`));
+      dispatch(getOfferNearbyOffers(`${id}`));
+    }
+  }, [dispatch, id, offer, nearbyOffers, reviews]);
 
-  const reviewsForm = (authorizationStatus !== AuthorizationStatus.Auth) ? <PropertyReviewsForm /> : null;
+  const reviewsForm = (authorizationStatus === AuthorizationStatus.Auth) ? <PropertyReviewsForm /> : null;
 
   if (!offer) {
     return (
