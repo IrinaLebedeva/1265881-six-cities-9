@@ -11,7 +11,7 @@ export const handleError = (error: ErrorType): void => {
   }
 
   const handleAppError = (message: string) => {
-    store.dispatch(setErrorMessage({errorMessage: message}));
+    store.dispatch(setErrorMessage(message));
     store.dispatch(resetErrorMessage());
   };
 

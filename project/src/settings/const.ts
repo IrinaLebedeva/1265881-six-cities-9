@@ -5,4 +5,4 @@ export enum RatingMaxValue {
   InPercents = 100,
 }
 
-export const SHOW_ERROR_TIMEOUT = 10000;
+export const SHOW_ERROR_TIMEOUT = 5000;

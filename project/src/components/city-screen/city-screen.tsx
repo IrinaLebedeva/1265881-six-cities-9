@@ -4,13 +4,13 @@ import {CityPlacesListEmpty} from 'components/city-places-list-empty/city-places
 import clsx from 'clsx';
 import {
   getCurrentCityCode,
-  selectSortedOffersByCity
+  getSortedOffers
 } from 'store/offers/selector';
 import {useAppSelector} from 'hooks/use-redux-hooks';
 
 function CityScreen(): JSX.Element {
   const cityCode = useAppSelector(getCurrentCityCode);
-  const cityOffers = useAppSelector(selectSortedOffersByCity);
+  const cityOffers = useAppSelector(getSortedOffers);
 
   return (
     <main className={clsx(

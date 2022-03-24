@@ -1,10 +1,9 @@
-import {AuthorizationStatus} from 'settings/authorization-status';
 import clsx from 'clsx';
-import {getAuthorizationStatus} from 'store/user/selector';
+import {getIsUserAuthorized} from 'store/user/selector';
 import {
   getNearbyOffers,
   getOffer,
-  getReviews
+  getSortedReviews
 } from 'store/offer/selector';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {
@@ -29,22 +28,22 @@ import {useParams} from 'react-router-dom';
 function PropertyScreen(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const offer = useAppSelector(getOffer);
-  const reviews = useAppSelector(getReviews);
-  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const offerReviews = useAppSelector(getSortedReviews);
+  const offerNearbyOffers = useAppSelector(getNearbyOffers);
   const id = Number(params.id);
 
   useEffect(() => {
     if (!offer || offer.id !== id) {
       dispatch(resetToInitialState());
-      dispatch(getOfferById(`${id}`));
-      dispatch(getOfferReviews(`${id}`));
-      dispatch(getOfferNearbyOffers(`${id}`));
+      dispatch(getOfferById(id));
+      dispatch(getOfferReviews(id));
+      dispatch(getOfferNearbyOffers(id));
     }
-  }, [dispatch, id, offer, nearbyOffers, reviews]);
+  }, [dispatch, id, offer, offerNearbyOffers, offerReviews]);
 
-  const reviewsForm = (authorizationStatus === AuthorizationStatus.Auth) ? <PropertyReviewsForm /> : null;
+  const reviewsForm = (isUserAuthorized) ? <PropertyReviewsForm /> : null;
 
   if (!offer) {
     return (
@@ -123,15 +122,15 @@ function PropertyScreen(): JSX.Element {
               </ul>
             </div>
             <PropertyHost offer={offer} />
-            <PropertyReviews reviews={reviews} reviewsForm={reviewsForm}/>
+            <PropertyReviews reviews={offerReviews} reviewsForm={reviewsForm}/>
           </div>
         </div>
         <section className="property__map map">
-          <Map offers={[offer, ...nearbyOffers]} activeOfferId={offer.id}/>
+          <Map offers={[offer, ...offerNearbyOffers]} activeOfferId={offer.id}/>
         </section>
       </section>
       <div className="container">
-        <PropertyNearPlaces offers={nearbyOffers} />
+        <PropertyNearPlaces offers={offerNearbyOffers} />
       </div>
     </main>
   );

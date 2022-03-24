@@ -1,6 +1,5 @@
 import {AppRoute} from 'settings/app-route';
 import {AuthData} from 'types/auth-data';
-import {AuthorizationStatus} from 'settings/authorization-status';
 import {
   generatePath,
   Link,
@@ -10,7 +9,7 @@ import {
   FormEvent,
   useRef
 } from 'react';
-import {getAuthorizationStatus} from 'store/user/selector';
+import {getIsUserAuthorized} from 'store/user/selector';
 import {getRandomCity} from 'utils/get-random-city';
 import {loginUser} from 'store/user/api-action';
 import {
@@ -23,8 +22,8 @@ function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  if (authorizationStatus === AuthorizationStatus.Auth) {
+  const isUserAuthorized = useAppSelector(getIsUserAuthorized);
+  if (isUserAuthorized) {
     return <Navigate to={AppRoute.Root} />;
   }
 

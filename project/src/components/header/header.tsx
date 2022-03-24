@@ -1,19 +1,15 @@
 import {AppRoute} from 'settings/app-route';
-import {AuthorizationStatus} from 'settings/authorization-status';
 import {
-  getAuthorizationStatus,
+  getIsUserAuthorized,
   getUser
 } from 'store/user/selector';
-import {Link, useLocation} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {NavigationMenu} from 'components/header/navigation-menu';
 import {useAppSelector} from 'hooks/use-redux-hooks';
 
 function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const user = useAppSelector(getUser);
-  const location = useLocation();
-
-  const isAuthorizedUser = authorizationStatus === AuthorizationStatus.Auth;
 
   return (
     <header className="header">
@@ -24,7 +20,7 @@ function Header(): JSX.Element {
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </Link>
           </div>
-          {location.pathname !== AppRoute.Login && <NavigationMenu user={user} isAuthorizedUser={isAuthorizedUser} />}
+          <NavigationMenu user={user} isAuthorizedUser={isUserAuthorized} />
         </div>
       </div>
     </header>

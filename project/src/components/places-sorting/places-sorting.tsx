@@ -15,7 +15,7 @@ function PlacesSorting(): JSX.Element {
   const sortType = useAppSelector(getOffersSortType);
 
   const handleSortChange = (offersSortType: OffersSortTypeKey) => {
-    dispatch(setOffersSortType({offersSortType}));
+    dispatch(setOffersSortType(offersSortType));
     setIsSortOpened(false);
   };
 

@@ -1,9 +1,9 @@
 import {Api} from 'settings/api';
-import {getApiAuthToken} from 'services/api-auth-token';
 import axios, {
   AxiosInstance,
   AxiosRequestConfig
 } from 'axios';
+import {getApiAuthToken} from 'services/api-auth-token';
 
 export const createApi = (): AxiosInstance => {
   const api = axios.create({
@@ -16,7 +16,7 @@ export const createApi = (): AxiosInstance => {
       const token = getApiAuthToken();
 
       if (token) {
-        config.headers[Api.AuthTokenRequestName] = token;
+        config.headers[Api.TokenRequestName] = token;
       }
 
       return config;

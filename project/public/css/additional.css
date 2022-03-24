@@ -22,7 +22,7 @@
   height: 60px;
   width: 60px;
   border: 3px solid transparent;
-  border-top-color: #a04668;
+  border-top-color: #ff9000;
   top: 50%;
   left: 50%;
   margin: -30px;
@@ -38,7 +38,7 @@
 }
 
 .spin-wrapper .spinner:before {
-  border-top-color: #254e70;
+  border-top-color: #4481c3;
   top: -12px;
   left: -12px;
   right: -12px;
@@ -74,7 +74,7 @@
 
   text-align: center;
   color: white;
-  animation: backOutUp 10s ease-in;
+  animation: backOutUp 5s ease-in;
 }
 
 @keyframes backOutUp {
