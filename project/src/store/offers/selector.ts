@@ -17,15 +17,15 @@ const getOffers = (state: State): Offers => state.offersReducer.offers;
 
 const getIsOffersLoaded = (state: State): boolean => state.offersReducer.isOffersLoaded;
 
-const selectOffersByCity = createSelector(
+const getOffersByCity = createSelector(
   [getCurrentCityCode, getOffers], (currentCityCode, offers) => (
     offers.filter((offer) => offer.city.name === City[currentCityCode as CityCode])
   ));
 
 const getOffersSortType = (state: State): OffersSortTypeKey => state.offersReducer.offersSortType;
 
-const selectSortedOffersByCity = createSelector(
-  [getOffersSortType, selectOffersByCity],
+const getSortedOffers = createSelector(
+  [getOffersSortType, getOffersByCity],
   (offersSortType, offers) => {
     const sortedOffers = offers.slice();
     switch (offersSortType) {
@@ -48,6 +48,5 @@ export {
   getCurrentCityCode,
   getIsOffersLoaded,
   getOffersSortType,
-  selectOffersByCity,
-  selectSortedOffersByCity
+  getSortedOffers
 };

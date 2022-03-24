@@ -13,7 +13,7 @@ export const getOffers = createAsyncThunk(
   async () => {
     try {
       const {data} = await api.get<Offers>(ApiRoute.GetOffers);
-      store.dispatch(setOffers({offers: data}));
+      store.dispatch(setOffers(data));
     } catch (error) {
       handleError(error);
     }

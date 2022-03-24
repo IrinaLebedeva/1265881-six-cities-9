@@ -31,10 +31,10 @@ const initialState: InitialState = {
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload.authorizationStatus;
+      state.authorizationStatus = action.payload;
     })
     .addCase(setErrorMessage, (state, action) => {
-      state.errorMessage = action.payload.errorMessage;
+      state.errorMessage = action.payload;
     })
     .addCase(setUser, (state, action) => {
       state.user = action.payload;

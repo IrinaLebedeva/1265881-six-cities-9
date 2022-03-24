@@ -5,10 +5,10 @@ import {
 } from 'types/offer';
 import {Reviews} from 'types/review';
 
-export const setOffer = createAction<{offer: Offer}>('offer/setOffer');
+export const setOffer = createAction<Offer>('offer/setOffer');
 
-export const setOfferReviews = createAction<{reviews: Reviews}>('offer/setOfferReviews');
+export const setOfferReviews = createAction<Reviews>('offer/setOfferReviews');
 
-export const setOfferNearbyOffers = createAction<{nearbyOffers: Offers}>('offer/setOfferNearbyOffers');
+export const setOfferNearbyOffers = createAction<Offers>('offer/setOfferNearbyOffers');
 
 export const resetToInitialState = createAction('offer/resetToInitialState');

@@ -20,10 +20,10 @@ import {
 
 export const getOfferById = createAsyncThunk(
   'offer/getOfferById',
-  async (offerId: string) => {
+  async (offerId: number) => {
     try {
-      const {data} = await api.get<Offer>(ApiRoute.GetOffer.replace('{offerId}', offerId));
-      store.dispatch(setOffer({offer: data}));
+      const {data} = await api.get<Offer>(ApiRoute.GetOffer.replace('{offerId}', String(offerId)));
+      store.dispatch(setOffer(data));
     } catch (error) {
       handleError(error);
       store.dispatch(redirectToRoute(AppRoute.NotFound));
@@ -33,10 +33,10 @@ export const getOfferById = createAsyncThunk(
 
 export const getOfferReviews = createAsyncThunk(
   'offer/getOfferReviews',
-  async (offerId: string) => {
+  async (offerId: number) => {
     try {
-      const {data} = await api.get<Reviews>(ApiRoute.GetOfferReviews.replace('{offerId}', offerId));
-      store.dispatch(setOfferReviews({reviews: data}));
+      const {data} = await api.get<Reviews>(ApiRoute.GetOfferReviews.replace('{offerId}', String(offerId)));
+      store.dispatch(setOfferReviews(data));
     } catch (error) {
       handleError(error);
     }
@@ -45,10 +45,10 @@ export const getOfferReviews = createAsyncThunk(
 
 export const getOfferNearbyOffers = createAsyncThunk(
   'offer/getOfferNearbyOffers',
-  async (offerId: string) => {
+  async (offerId: number) => {
     try {
-      const {data} = await api.get<Offers>(ApiRoute.GetOfferNearbyOffers.replace('{offerId}', offerId));
-      store.dispatch(setOfferNearbyOffers({nearbyOffers: data}));
+      const {data} = await api.get<Offers>(ApiRoute.GetOfferNearbyOffers.replace('{offerId}', String(offerId)));
+      store.dispatch(setOfferNearbyOffers(data));
     } catch (error) {
       handleError(error);
     }

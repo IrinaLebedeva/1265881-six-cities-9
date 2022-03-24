@@ -26,13 +26,13 @@ const initialState: InitialState = {
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setOffer, (state, action) => {
-      state.offer = action.payload.offer;
+      state.offer = action.payload;
     })
     .addCase(setOfferReviews, (state, action) => {
-      state.reviews = action.payload.reviews;
+      state.reviews = action.payload;
     })
     .addCase(setOfferNearbyOffers, (state, action) => {
-      state.nearbyOffers = action.payload.nearbyOffers;
+      state.nearbyOffers = action.payload;
     })
     .addCase(resetToInitialState, (state) => {
       state = initialState;

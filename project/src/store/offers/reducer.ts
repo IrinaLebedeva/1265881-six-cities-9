@@ -22,11 +22,11 @@ const initialState: InitialState = {
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setOffers, (state, action) => {
-      state.offers = action.payload.offers;
+      state.offers = action.payload;
       state.isOffersLoaded = true;
     })
     .addCase(setOffersSortType, (state, action) => {
-      state.offersSortType = action.payload.offersSortType;
+      state.offersSortType = action.payload;
     });
 });
 

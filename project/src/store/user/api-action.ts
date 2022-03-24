@@ -18,7 +18,7 @@ export const resetErrorMessage = createAsyncThunk(
   () => {
     setTimeout(
       () => {
-        store.dispatch(setErrorMessage({errorMessage: ''}));
+        store.dispatch(setErrorMessage(''));
       },
       SHOW_ERROR_TIMEOUT,
     );
@@ -29,12 +29,18 @@ export const checkAuthorization = createAsyncThunk(
   'user/checkAuthorization',
   async () => {
     try {
-      deleteApiAuthToken();
-      await api.get(ApiRoute.Login);
-      store.dispatch(setAuthorization({authorizationStatus: AuthorizationStatus.Auth}));
+      const {data} = await api.get(ApiRoute.Login);
+      store.dispatch(setAuthorization(AuthorizationStatus.Auth));
+      store.dispatch(setUser({
+        avatarUrl: data.avatarUrl,
+        email: data.email,
+        id: data.id,
+        isPro: data.isPro,
+        name: data.name,
+      }));
     } catch(error) {
       handleError(error);
-      store.dispatch(setAuthorization({authorizationStatus: AuthorizationStatus.NotAuth}));
+      store.dispatch(setAuthorization(AuthorizationStatus.NotAuth));
     }
   },
 );
@@ -44,7 +50,7 @@ export const loginUser = createAsyncThunk(
   async ({email, password}: AuthData) => {
     try {
       const {data} = await api.post(ApiRoute.Login, {email, password});
-      store.dispatch(setAuthorization({authorizationStatus: AuthorizationStatus.Auth}));
+      store.dispatch(setAuthorization(AuthorizationStatus.Auth));
       store.dispatch(setUser({
         avatarUrl: data.avatarUrl,
         email: data.email,
@@ -55,7 +61,7 @@ export const loginUser = createAsyncThunk(
       saveApiAuthToken(data.token);
     } catch(error) {
       handleError(error);
-      store.dispatch(setAuthorization({authorizationStatus: AuthorizationStatus.NotAuth}));
+      store.dispatch(setAuthorization(AuthorizationStatus.NotAuth));
     }
   },
 );
@@ -66,11 +72,11 @@ export const logoutUser = createAsyncThunk(
     try {
       await api.delete(ApiRoute.Logout);
       deleteApiAuthToken();
-      store.dispatch(setAuthorization({authorizationStatus: AuthorizationStatus.NotAuth}));
+      store.dispatch(setAuthorization(AuthorizationStatus.NotAuth));
       store.dispatch(resetUser);
     } catch(error) {
       handleError(error);
-      store.dispatch(setAuthorization({authorizationStatus: AuthorizationStatus.NotAuth}));
+      store.dispatch(setAuthorization(AuthorizationStatus.NotAuth));
     }
   },
 );
