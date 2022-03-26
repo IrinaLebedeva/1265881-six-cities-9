@@ -50,7 +50,7 @@ function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
         dispatch(setNewReviewSendStatus(NewReviewSendStatus.NotSend));
         break;
     }
-  }, [newReviewSendStatus, dispatch]);
+  }, [newReviewSendStatus, dispatch, offerId]);
 
   const resetForm = () => {
     if (formRef.current) {
@@ -73,8 +73,10 @@ function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
 
   const isValidRating = () => rating >= ReviewRestriction.RatingMinValue;
 
-  const isValidComment = () => review.length >= ReviewRestriction.CommentMinLength &&
-    review.length <= ReviewRestriction.CommentMaxLength;
+  const isValidComment = () => (
+    review.length >= ReviewRestriction.CommentMinLength &&
+    review.length <= ReviewRestriction.CommentMaxLength
+  );
 
   const isValid = isValidRating() && isValidComment();
 

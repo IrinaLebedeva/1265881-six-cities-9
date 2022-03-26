@@ -1,17 +1,15 @@
 import {AppRoute} from 'settings/app-route';
 import {AuthData} from 'types/auth-data';
+import {Navigate} from 'react-router-dom';
 import {
-  generatePath,
-  Link,
-  Navigate
-} from 'react-router-dom';
-import {
+  ChangeEvent,
   FormEvent,
-  useRef
+  useState
 } from 'react';
 import {getIsUserAuthorized} from 'store/user/selector';
-import {getRandomCity} from 'utils/get-random-city';
 import {loginUser} from 'store/user/api-action';
+import RandomCityLink from 'components/login-screen/random-city-link';
+import {ValidationPattern} from 'settings/validation-pattern';
 import {
   useAppDispatch,
   useAppSelector
@@ -19,13 +17,26 @@ import {
 
 function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const loginRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const [login, setLogin] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   if (isUserAuthorized) {
     return <Navigate to={AppRoute.Root} />;
   }
+
+  const isValidLogin = (): boolean => ValidationPattern.EMAIL.test(login);
+
+  const isValidPassword = (): boolean => (
+    ValidationPattern.PASSWORD_CHARACTER.test(password) &&
+    ValidationPattern.PASSWORD_DIGIT.test(password)
+  );
+
+  const isValid = isValidLogin() && isValidPassword();
+
+  const handleLoginChange = (evt: ChangeEvent<HTMLInputElement>) => setLogin(evt.target.value.trim());
+
+  const handlePasswordChange = (evt: ChangeEvent<HTMLInputElement>) => setPassword(evt.target.value.trim());
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginUser(authData));
@@ -34,15 +45,11 @@ function LoginScreen(): JSX.Element {
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current && passwordRef.current) {
-      onSubmit({
-        email: loginRef.current.value,
-        password: passwordRef.current.value,
-      });
-    }
+    onSubmit({
+      email: login,
+      password,
+    });
   };
-
-  const randomCity = getRandomCity();
 
   return (
     <main className="page__main page__main--login">
@@ -52,20 +59,18 @@ function LoginScreen(): JSX.Element {
           <form className="login__form form" action="#" method="post" onSubmit={handleFormSubmit}>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">E-mail</label>
-              <input className="login__input form__input" type="email" name="email" placeholder="Email" required ref={loginRef} />
+              <input className="login__input form__input" type="email" name="email" placeholder="Email" required onChange={handleLoginChange}/>
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">Password</label>
-              <input className="login__input form__input" type="password" name="password" placeholder="Password" required ref={passwordRef}/>
+              <input className="login__input form__input" type="password" name="password" placeholder="Password" required onChange={handlePasswordChange}/>
             </div>
-            <button className="login__submit form__submit button" type="submit">Sign in</button>
+            <button className="login__submit form__submit button" type="submit" disabled={!isValid}>Sign in</button>
           </form>
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: randomCity.cityCode})}>
-              <span>{randomCity.cityName}</span>
-            </Link>
+            <RandomCityLink />
           </div>
         </section>
       </div>
