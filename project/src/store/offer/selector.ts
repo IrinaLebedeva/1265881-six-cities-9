@@ -1,4 +1,5 @@
 import {createSelector} from 'reselect';
+import {NewReviewSendStatus} from 'settings/new-review-send-status';
 import {Offer, Offers} from 'types/offer';
 import {Reviews} from 'types/review';
 import {State} from 'types/state';
@@ -14,3 +15,5 @@ export const getSortedReviews = createSelector(
   [getReviews],
   (reviews) => reviews.slice().sort(sortReviewsByDateDesc),
 );
+
+export const getNewReviewSendStatus = (state: State): NewReviewSendStatus => state.offerReducer.newReviewSendStatus;

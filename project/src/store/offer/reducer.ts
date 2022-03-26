@@ -1,4 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
+import {NewReviewSendStatus} from 'settings/new-review-send-status';
 import {
   Offer,
   Offers
@@ -6,6 +7,7 @@ import {
 import {Reviews} from 'types/review';
 import {
   resetToInitialState,
+  setNewReviewSendStatus,
   setOffer,
   setOfferNearbyOffers,
   setOfferReviews
@@ -15,12 +17,14 @@ interface InitialState {
   offer: Offer | null,
   reviews: Reviews,
   nearbyOffers: Offers,
+  newReviewSendStatus: NewReviewSendStatus,
 }
 
 const initialState: InitialState = {
   offer: null,
   reviews: [],
   nearbyOffers: [],
+  newReviewSendStatus: NewReviewSendStatus.NotSend,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -36,6 +40,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(resetToInitialState, (state) => {
       state = initialState;
+    })
+    .addCase(setNewReviewSendStatus, (state, action) => {
+      state.newReviewSendStatus = action.payload;
     });
 });
 

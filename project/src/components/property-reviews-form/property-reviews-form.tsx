@@ -1,18 +1,82 @@
+import {getNewReviewSendStatus} from 'store/offer/selector';
+import {NewReviewSendStatus} from 'settings/new-review-send-status';
 import React, {
   ChangeEvent,
   FormEvent,
+  useEffect,
+  useRef,
   useState
 } from 'react';
+import {setNewReviewSendStatus} from 'store/offer/action';
+import {
+  getOfferReviews,
+  setOfferReview
+} from 'store/offer/api-action';
+import {
+  useAppDispatch,
+  useAppSelector
+} from 'hooks/use-redux-hooks';
 
-const VALID_RATING_MIN_VALUE = 1;
-const VALID_REVIEW_MIN_LENGTH = 50;
+enum ReviewRestriction {
+  RatingMinValue = 1,
+  CommentMinLength = 50,
+  CommentMaxLength = 300,
+}
 
-function PropertyReviewsForm(): JSX.Element {
+type PropertyReviewsFormProps = {
+  offerId: number;
+}
+
+function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const [review, setReview] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
-  const formReviewData = {review, rating};
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const newReviewSendStatus = useAppSelector(getNewReviewSendStatus);
 
-  const isValid = rating >= VALID_RATING_MIN_VALUE && review.length >= VALID_REVIEW_MIN_LENGTH;
+  useEffect(() => {
+    switch (newReviewSendStatus) {
+      case NewReviewSendStatus.InProcess:
+        setFormIsActive(false);
+        break;
+      case NewReviewSendStatus.Success:
+        setFormIsActive(true);
+        resetForm();
+        dispatch(setNewReviewSendStatus(NewReviewSendStatus.NotSend));
+        dispatch(getOfferReviews(offerId));
+        break;
+      case NewReviewSendStatus.Error:
+        setFormIsActive(true);
+        dispatch(setNewReviewSendStatus(NewReviewSendStatus.NotSend));
+        break;
+    }
+  }, [newReviewSendStatus, dispatch]);
+
+  const resetForm = () => {
+    if (formRef.current) {
+      formRef.current.reset();
+      setRating(0);
+      setReview('');
+    }
+  };
+
+  const setFormIsActive = (isActive: boolean) => {
+    if (formRef.current) {
+      formRef.current.querySelectorAll('input, textarea, button').forEach(
+        (element) => {
+          (isActive) ?
+            element.removeAttribute('disabled') :
+            element.setAttribute('disabled', 'disabled');
+        });
+    }
+  };
+
+  const isValidRating = () => rating >= ReviewRestriction.RatingMinValue;
+
+  const isValidComment = () => review.length >= ReviewRestriction.CommentMinLength &&
+    review.length <= ReviewRestriction.CommentMaxLength;
+
+  const isValid = isValidRating() && isValidComment();
 
   const handleReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setReview(evt.target.value);
@@ -24,8 +88,12 @@ function PropertyReviewsForm(): JSX.Element {
 
   const handleReviewFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(formReviewData);
+    dispatch(setNewReviewSendStatus(NewReviewSendStatus.InProcess));
+    dispatch(setOfferReview({
+      offerId,
+      comment: review,
+      rating,
+    }));
   };
 
   const appRatingValues = [
@@ -75,6 +143,7 @@ function PropertyReviewsForm(): JSX.Element {
       action="#"
       method="post"
       onSubmit={handleReviewFormSubmit}
+      ref={formRef}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">

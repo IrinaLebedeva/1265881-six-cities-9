@@ -43,13 +43,13 @@ function PropertyScreen(): JSX.Element {
     }
   }, [dispatch, id, offer, offerNearbyOffers, offerReviews]);
 
-  const reviewsForm = (isUserAuthorized) ? <PropertyReviewsForm /> : null;
-
   if (!offer) {
     return (
       <LoadingScreen />
     );
   }
+
+  const reviewsForm = (isUserAuthorized) ? <PropertyReviewsForm offerId={offer.id}/> : null;
 
   return (
     <main className="page__main page__main--property">

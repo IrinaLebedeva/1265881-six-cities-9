@@ -7,12 +7,17 @@ import {AppRoute} from 'settings/app-route';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {handleError} from 'services/handleError';
 import {
+  NewReview,
+  Reviews
+} from 'types/review';
+import {NewReviewSendStatus} from 'settings/new-review-send-status';
+import {
   Offer,
   Offers
 } from 'types/offer';
 import {redirectToRoute} from 'store/user/action';
-import {Reviews} from 'types/review';
 import {
+  setNewReviewSendStatus,
   setOffer,
   setOfferNearbyOffers,
   setOfferReviews
@@ -39,6 +44,23 @@ export const getOfferReviews = createAsyncThunk(
       store.dispatch(setOfferReviews(data));
     } catch (error) {
       handleError(error);
+    }
+  },
+);
+
+export const setOfferReview = createAsyncThunk(
+  'offer/setOfferReview',
+  async (newOfferReview: NewReview) => {
+    try {
+      const {offerId, comment, rating} = newOfferReview;
+      await api.post(
+        ApiRoute.SetOfferReview.replace('{offerId}', String(offerId)),
+        {comment, rating},
+      );
+      store.dispatch(setNewReviewSendStatus(NewReviewSendStatus.Success));
+    } catch (error) {
+      handleError(error);
+      store.dispatch(setNewReviewSendStatus(NewReviewSendStatus.Error));
     }
   },
 );
