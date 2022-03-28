@@ -8,10 +8,10 @@ import {
 } from 'store/user/action';
 import {User} from 'types/user';
 
-type InitialState = {
-  authorizationStatus: AuthorizationStatus;
-  errorMessage: string;
-  user: User;
+interface InitialState {
+  authorizationStatus: AuthorizationStatus,
+  errorMessage: string,
+  user: User,
 }
 
 const initialUser = {
