@@ -29,34 +29,32 @@ type PropertyReviewsFormProps = {
 
 function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const [review, setReview] = useState<string>('');
+  const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
   const formRef = useRef<HTMLFormElement | null>(null);
   const newReviewSendStatus = useAppSelector(getNewReviewSendStatus);
 
   useEffect(() => {
-    switch (newReviewSendStatus) {
-      case NewReviewSendStatus.InProcess:
-        setFormIsActive(false);
-        break;
-      case NewReviewSendStatus.Success:
-        setFormIsActive(true);
-        resetForm();
-        dispatch(setNewReviewSendStatus(NewReviewSendStatus.NotSend));
-        dispatch(getOfferReviews(offerId));
-        break;
-      case NewReviewSendStatus.Error:
-        setFormIsActive(true);
-        dispatch(setNewReviewSendStatus(NewReviewSendStatus.NotSend));
-        break;
+    if (newReviewSendStatus === NewReviewSendStatus.InProcess) {
+      setFormIsActive(false);
+      return;
     }
+
+    if (newReviewSendStatus === NewReviewSendStatus.Success) {
+      resetForm();
+      dispatch(getOfferReviews(offerId));
+    }
+
+    setFormIsActive(true);
+    dispatch(setNewReviewSendStatus(NewReviewSendStatus.NotSend));
+
   }, [newReviewSendStatus, dispatch, offerId]);
 
   const resetForm = () => {
     if (formRef.current) {
       formRef.current.reset();
       setRating(0);
-      setReview('');
+      setComment('');
     }
   };
 
@@ -71,17 +69,12 @@ function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
     }
   };
 
-  const isValidRating = () => rating >= ReviewRestriction.RatingMinValue;
+  const isValid = ReviewRestriction.RatingMinValue &&
+    comment.length >= ReviewRestriction.CommentMinLength &&
+    comment.length <= ReviewRestriction.CommentMaxLength;
 
-  const isValidComment = () => (
-    review.length >= ReviewRestriction.CommentMinLength &&
-    review.length <= ReviewRestriction.CommentMaxLength
-  );
-
-  const isValid = isValidRating() && isValidComment();
-
-  const handleReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    setReview(evt.target.value);
+  const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(evt.target.value);
   };
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +86,7 @@ function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
     dispatch(setNewReviewSendStatus(NewReviewSendStatus.InProcess));
     dispatch(setOfferReview({
       offerId,
-      comment: review,
+      comment,
       rating,
     }));
   };
@@ -156,7 +149,7 @@ function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={handleReviewChange}
+        onChange={handleCommentChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

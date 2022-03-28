@@ -17,7 +17,7 @@ import {
 
 function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const [login, setLogin] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
@@ -25,16 +25,11 @@ function LoginScreen(): JSX.Element {
     return <Navigate to={AppRoute.Root} />;
   }
 
-  const isValidLogin = (): boolean => ValidationPattern.EMAIL.test(login);
-
-  const isValidPassword = (): boolean => (
+  const isValid = ValidationPattern.EMAIL.test(email) &&
     ValidationPattern.PASSWORD_CHARACTER.test(password) &&
-    ValidationPattern.PASSWORD_DIGIT.test(password)
-  );
+    ValidationPattern.PASSWORD_DIGIT.test(password);
 
-  const isValid = isValidLogin() && isValidPassword();
-
-  const handleLoginChange = (evt: ChangeEvent<HTMLInputElement>) => setLogin(evt.target.value.trim());
+  const handleEmailChange = (evt: ChangeEvent<HTMLInputElement>) => setEmail(evt.target.value.trim());
 
   const handlePasswordChange = (evt: ChangeEvent<HTMLInputElement>) => setPassword(evt.target.value.trim());
 
@@ -46,7 +41,7 @@ function LoginScreen(): JSX.Element {
     evt.preventDefault();
 
     onSubmit({
-      email: login,
+      email,
       password,
     });
   };
@@ -59,7 +54,7 @@ function LoginScreen(): JSX.Element {
           <form className="login__form form" action="#" method="post" onSubmit={handleFormSubmit}>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">E-mail</label>
-              <input className="login__input form__input" type="email" name="email" placeholder="Email" required onChange={handleLoginChange}/>
+              <input className="login__input form__input" type="email" name="email" placeholder="Email" required onChange={handleEmailChange}/>
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">Password</label>
