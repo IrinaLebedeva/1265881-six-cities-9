@@ -49,7 +49,7 @@ function PropertyScreen(): JSX.Element {
     );
   }
 
-  const reviewsForm = (isUserAuthorized) ? <PropertyReviewsForm offerId={offer.id}/> : null;
+  const reviewsForm = (isUserAuthorized) ? <PropertyReviewsForm offerId={offer.id}/> : undefined;
 
   return (
     <main className="page__main page__main--property">

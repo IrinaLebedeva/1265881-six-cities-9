@@ -3,9 +3,9 @@ import {PropertyReviewItem} from 'components/property-review-item/property-revie
 
 const REVIEWS_MAX_COUNT = 10;
 
-type PropertyReviewsProps = {
-  reviews: Reviews;
-  reviewsForm: JSX.Element | null;
+interface PropertyReviewsProps {
+  reviews: Reviews,
+  reviewsForm?: JSX.Element,
 }
 
 function PropertyReviews({reviews, reviewsForm}: PropertyReviewsProps): JSX.Element {
