@@ -1,30 +1,55 @@
-import {AppRoute} from 'settings/app-route';
 import clsx from 'clsx';
-import {getRatingInPercent} from 'utils/get-rating-in-percent';
-import {Map} from 'components/map/map';
+import {getIsUserAuthorized} from 'store/user/selector';
 import {
-  Navigate,
-  useParams
-} from 'react-router-dom';
-import {nearbyOffers} from 'fixture/nearby-offers';
-import {Offers} from 'types/offer';
+  getNearbyOffers,
+  getOffer,
+  getSortedReviews
+} from 'store/offer/selector';
+import {getRatingInPercent} from 'utils/get-rating-in-percent';
+import {
+  getOfferById,
+  getOfferNearbyOffers,
+  getOfferReviews
+} from 'store/offer/api-action';
+import {LoadingScreen} from 'components/loading-screen/loading-screen';
+import {Map} from 'components/map/map';
 import {PropertyHost} from 'components/property-host/property-host';
-import {PropertyReviews} from 'components/property-reviews/property-reviews';
 import {PropertyNearPlaces} from 'components/property-near-places/property-near-places';
-import {reviews} from 'fixture/reviews';
+import {PropertyReviews} from 'components/property-reviews/property-reviews';
+import {PropertyReviewsForm} from 'components/property-reviews-form/property-reviews-form';
+import {resetToInitialState} from 'store/offer/action';
+import {
+  useAppDispatch,
+  useAppSelector
+} from 'hooks/use-redux-hooks';
+import {useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 
-type PropertyScreenProps = {
-  offers: Offers;
-}
-
-function PropertyScreen({offers}: PropertyScreenProps): JSX.Element {
+function PropertyScreen(): JSX.Element {
   const params = useParams();
+  const dispatch = useAppDispatch();
+  const isUserAuthorized = useAppSelector(getIsUserAuthorized);
+  const offer = useAppSelector(getOffer);
+  const offerReviews = useAppSelector(getSortedReviews);
+  const offerNearbyOffers = useAppSelector(getNearbyOffers);
   const id = Number(params.id);
 
-  const offer = offers.find((currentOffer) => currentOffer.id === id);
-  if (typeof offer === 'undefined') {
-    return <Navigate to={AppRoute.NotFound} />;
+  useEffect(() => {
+    if (!offer || offer.id !== id) {
+      dispatch(resetToInitialState());
+      dispatch(getOfferById(id));
+      dispatch(getOfferReviews(id));
+      dispatch(getOfferNearbyOffers(id));
+    }
+  }, [dispatch, id, offer, offerNearbyOffers, offerReviews]);
+
+  if (!offer) {
+    return (
+      <LoadingScreen />
+    );
   }
+
+  const reviewsForm = (isUserAuthorized) ? <PropertyReviewsForm offerId={offer.id}/> : undefined;
 
   return (
     <main className="page__main page__main--property">
@@ -97,15 +122,15 @@ function PropertyScreen({offers}: PropertyScreenProps): JSX.Element {
               </ul>
             </div>
             <PropertyHost offer={offer} />
-            <PropertyReviews reviews={reviews}/>
+            <PropertyReviews reviews={offerReviews} reviewsForm={reviewsForm}/>
           </div>
         </div>
         <section className="property__map map">
-          <Map offers={[offer, ...nearbyOffers]} activeOfferId={offer.id}/>
+          <Map offers={[offer, ...offerNearbyOffers]} activeOfferId={offer.id}/>
         </section>
       </section>
       <div className="container">
-        <PropertyNearPlaces offers={nearbyOffers} />
+        <PropertyNearPlaces offers={offerNearbyOffers} />
       </div>
     </main>
   );

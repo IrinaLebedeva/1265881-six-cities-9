@@ -6,12 +6,14 @@ const hosts: Users = [
     id: 1,
     isPro: false,
     name: 'Angelina',
+    email: 'angelina@gmail.com',
   },
   {
     avatarUrl: 'http://picsum.photos/74/74?r=7',
     id: 2,
     isPro: true,
     name: 'Super Star',
+    email: 'super.star@gmail.com',
   },
 ];
 

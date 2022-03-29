@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import {getOffersSortType} from 'store/offers/selector';
 import {
   OffersSortType,
   offersSortTypes
@@ -11,10 +12,10 @@ import {useAppDispatch, useAppSelector} from 'hooks/use-redux-hooks';
 function PlacesSorting(): JSX.Element {
   const [isSortOpened, setIsSortOpened] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const sortType = useAppSelector((state) => state.offersReducer.offersSortType);
+  const sortType = useAppSelector(getOffersSortType);
 
   const handleSortChange = (offersSortType: OffersSortTypeKey) => {
-    dispatch(setOffersSortType({offersSortType}));
+    dispatch(setOffersSortType(offersSortType));
     setIsSortOpened(false);
   };
 

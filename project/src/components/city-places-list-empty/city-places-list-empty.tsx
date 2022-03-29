@@ -1,8 +1,9 @@
 import {City} from 'settings/city';
+import {getCurrentCityCode} from 'store/offers/selector';
 import {useAppSelector} from 'hooks/use-redux-hooks';
 
 function CityPlacesListEmpty(): JSX.Element {
-  const cityCode = useAppSelector((state) => state.cityReducer.cityCode);
+  const cityCode = useAppSelector(getCurrentCityCode);
 
   return (
     <div className="cities">

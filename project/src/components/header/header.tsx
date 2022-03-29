@@ -1,7 +1,20 @@
 import {AppRoute} from 'settings/app-route';
+import {
+  getIsUserAuthorized,
+  getUser
+} from 'store/user/selector';
 import {Link} from 'react-router-dom';
+import {NavigationMenu} from 'components/header/navigation-menu';
+import {useAppSelector} from 'hooks/use-redux-hooks';
 
-function Header(): JSX.Element {
+type HeaderProps = {
+  showNavigation: boolean;
+}
+
+function Header({showNavigation}: HeaderProps): JSX.Element {
+  const isUserAuthorized = useAppSelector(getIsUserAuthorized);
+  const user = useAppSelector(getUser);
+
   return (
     <header className="header">
       <div className="container">
@@ -11,22 +24,7 @@ function Header(): JSX.Element {
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </Link>
           </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </Link>
-              </li>
-              <li className="header__nav-item">
-                <Link className="header__nav-link" to={AppRoute.Root}>
-                  <span className="header__signout">Sign out</span>
-                </Link>
-              </li>
-            </ul>
-          </nav>
+          {showNavigation && <NavigationMenu user={user} isAuthorizedUser={isUserAuthorized} />}
         </div>
       </div>
     </header>

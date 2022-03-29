@@ -3,19 +3,31 @@ import {AuthorizationStatus} from 'settings/authorization-status';
 import {
   generatePath,
   Route,
-  Routes, useLocation
+  Routes,
+  useLocation,
+  useMatch,
+  useNavigate
 } from 'react-router-dom';
 import {cityCodes} from 'settings/city';
+import {CityCode} from 'types/city-code';
 import {CityScreen} from 'components/city-screen/city-screen';
 import {FavoritesEmptyScreen} from 'components/favorites-empty-screen/favorites-empty-screen';
 import {FavoritesScreen} from 'components/favorites-screen/favorites-screen';
+import {formatCityCode} from 'utils/format-city-code';
+import {getAuthorizationStatus} from 'store/user/selector';
+import {getIsOffersLoaded} from 'store/offers/selector';
 import {Layout} from 'components/layout/layout';
+import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {LoginScreen} from 'components/login-screen/login-screen';
+import {logoutUser} from 'store/user/api-action';
 import {NotFoundScreen} from 'components/not-found-screen/not-found-screen';
 import {Offers} from 'types/offer';
 import {PropertyScreen} from 'components/property-screen/property-screen';
 import {PrivateRoute} from 'components/private-route/private-route';
-import {resetCityCode} from 'store/city/action';
+import {
+  resetCityCode,
+  setCityCode
+} from 'store/city/action';
 import {
   useAppDispatch,
   useAppSelector
@@ -27,16 +39,34 @@ type AppScreenProps = {
 };
 
 function App({favoriteOffers}: AppScreenProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offersReducer.offers);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isOffersLoaded = useAppSelector(getIsOffersLoaded);
 
-  const location = useLocation();
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const matchCityRoute = useMatch(AppRoute.City);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === AppRoute.Root) {
-      dispatch(resetCityCode());
+    switch (location.pathname) {
+      case AppRoute.Root:
+        dispatch(resetCityCode());
+        break;
+      case AppRoute.Logout:
+        dispatch(logoutUser());
+        navigate(AppRoute.Root);
+        break;
     }
-  }, [location]);
+    if (matchCityRoute && matchCityRoute.params.cityCode) {
+      dispatch(setCityCode({cityCode: formatCityCode(matchCityRoute.params.cityCode) as CityCode}));
+    }
+  });
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || !isOffersLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   const cityRoutes = cityCodes.map((routeCityCode) => (
     <Route
@@ -62,12 +92,12 @@ function App({favoriteOffers}: AppScreenProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Property}`}
-          element={<PropertyScreen offers={offers}/>}
+          element={<PropertyScreen/>}
         />
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <FavoritesScreen offers={favoriteOffers} />
             </PrivateRoute>
           }

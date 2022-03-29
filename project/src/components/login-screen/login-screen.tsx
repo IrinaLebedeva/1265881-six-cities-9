@@ -1,35 +1,71 @@
 import {AppRoute} from 'settings/app-route';
-import {City} from 'settings/city';
-import {CityCode} from 'types/city-code';
-import {DEFAULT_CITY_CODE} from 'settings/const';
+import {AuthData} from 'types/auth-data';
+import {Navigate} from 'react-router-dom';
 import {
-  generatePath,
-  Link
-} from 'react-router-dom';
+  ChangeEvent,
+  FormEvent,
+  useState
+} from 'react';
+import {getIsUserAuthorized} from 'store/user/selector';
+import {loginUser} from 'store/user/api-action';
+import RandomCityLink from 'components/login-screen/random-city-link';
+import {ValidationPattern} from 'settings/validation-pattern';
+import {
+  useAppDispatch,
+  useAppSelector
+} from 'hooks/use-redux-hooks';
 
 function LoginScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const isUserAuthorized = useAppSelector(getIsUserAuthorized);
+  if (isUserAuthorized) {
+    return <Navigate to={AppRoute.Root} />;
+  }
+
+  const isValid = ValidationPattern.EMAIL.test(email) &&
+    ValidationPattern.PASSWORD_CHARACTER.test(password) &&
+    ValidationPattern.PASSWORD_DIGIT.test(password);
+
+  const handleEmailChange = (evt: ChangeEvent<HTMLInputElement>) => setEmail(evt.target.value.trim());
+
+  const handlePasswordChange = (evt: ChangeEvent<HTMLInputElement>) => setPassword(evt.target.value.trim());
+
+  const onSubmit = (authData: AuthData) => {
+    dispatch(loginUser(authData));
+  };
+
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    onSubmit({
+      email,
+      password,
+    });
+  };
+
   return (
     <main className="page__main page__main--login">
       <div className="page__login-container container">
         <section className="login">
           <h1 className="login__title">Sign in</h1>
-          <form className="login__form form" action="#" method="post">
+          <form className="login__form form" action="#" method="post" onSubmit={handleFormSubmit}>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">E-mail</label>
-              <input className="login__input form__input" type="email" name="email" placeholder="Email" required />
+              <input className="login__input form__input" type="email" name="email" placeholder="Email" required onChange={handleEmailChange}/>
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">Password</label>
-              <input className="login__input form__input" type="password" name="password" placeholder="Password" required />
+              <input className="login__input form__input" type="password" name="password" placeholder="Password" required onChange={handlePasswordChange}/>
             </div>
-            <button className="login__submit form__submit button" type="submit">Sign in</button>
+            <button className="login__submit form__submit button" type="submit" disabled={!isValid}>Sign in</button>
           </form>
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <Link className="locations__item-link" to={generatePath(AppRoute.City, {cityCode: DEFAULT_CITY_CODE.toLowerCase()})}>
-              <span>{City[DEFAULT_CITY_CODE as CityCode]}</span>
-            </Link>
+            <RandomCityLink />
           </div>
         </section>
       </div>
