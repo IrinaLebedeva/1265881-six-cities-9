@@ -44,4 +44,4 @@ const reducer = createReducer(initialState, (builder) => {
     });
 });
 
-export {reducer};
+export {reducer as userReducer};

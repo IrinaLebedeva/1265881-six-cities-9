@@ -1,8 +1,8 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import {reducer as cityReducer} from 'store/city/reducer';
-import {reducer as offerReducer} from 'store/offer/reducer';
-import {reducer as offersReducer} from 'store/offers/reducer';
-import {reducer as userReducer} from 'store/user/reducer';
+import {cityReducer} from 'store/city/reducer';
+import {offerReducer} from 'store/offer/reducer';
+import {offersReducer} from 'store/offers/reducer';
+import {userReducer} from 'store/user/reducer';
 
 export const reducer = combineReducers({
   cityReducer,
