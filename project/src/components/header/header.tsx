@@ -7,7 +7,11 @@ import {Link} from 'react-router-dom';
 import {NavigationMenu} from 'components/header/navigation-menu';
 import {useAppSelector} from 'hooks/use-redux-hooks';
 
-function Header(): JSX.Element {
+type HeaderProps = {
+  showNavigation: boolean;
+}
+
+function Header({showNavigation}: HeaderProps): JSX.Element {
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const user = useAppSelector(getUser);
 
@@ -20,7 +24,7 @@ function Header(): JSX.Element {
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </Link>
           </div>
-          <NavigationMenu user={user} isAuthorizedUser={isUserAuthorized} />
+          {showNavigation && <NavigationMenu user={user} isAuthorizedUser={isUserAuthorized} />}
         </div>
       </div>
     </header>

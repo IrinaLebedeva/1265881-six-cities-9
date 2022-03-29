@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 function NotFoundScreen(): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <Header/>
+      <Header showNavigation/>
       <main className="page__main page__main--index page__main--index-empty">
         <div className="cities">
           <div className="cities__places-container cities__places-container--empty container">

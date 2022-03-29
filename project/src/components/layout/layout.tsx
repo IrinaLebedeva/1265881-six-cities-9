@@ -12,6 +12,8 @@ function Layout(): JSX.Element {
   const location = useLocation();
   const matchCityRoute = useMatch(AppRoute.City);
 
+  const isLayoutWithHeaderNavigation = location.pathname !== AppRoute.Login;
+
   const isLayoutWithFooter = [
     `${AppRoute.Favorites}`,
     `${AppRoute.FavoritesEmpty}`,
@@ -28,7 +30,7 @@ function Layout(): JSX.Element {
       {'page--favorites-empty': location.pathname === AppRoute.FavoritesEmpty},
       {'page--gray page--login': location.pathname === AppRoute.Login})}
     >
-      <Header />
+      <Header showNavigation={isLayoutWithHeaderNavigation}/>
       <Outlet />
       {footerElement}
     </div>

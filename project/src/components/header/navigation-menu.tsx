@@ -1,8 +1,5 @@
 import {AppRoute} from 'settings/app-route';
-import {
-  Link,
-  useLocation
-} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {User} from 'types/user';
 
 type NavigationMenuProps = {
@@ -10,12 +7,7 @@ type NavigationMenuProps = {
   isAuthorizedUser: boolean;
 }
 
-function NavigationMenu({user, isAuthorizedUser}: NavigationMenuProps): JSX.Element | null {
-  const location = useLocation();
-  if (location.pathname === AppRoute.Login) {
-    return null;
-  }
-
+function NavigationMenu({user, isAuthorizedUser}: NavigationMenuProps): JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
