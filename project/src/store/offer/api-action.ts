@@ -27,7 +27,7 @@ export const getOfferById = createAsyncThunk(
   'offer/getOfferById',
   async (offerId: number) => {
     try {
-      const {data} = await api.get<Offer>(ApiRoute.GetOffer + offerId);
+      const {data} = await api.get<Offer>(`${ApiRoute.GetOffer}/${offerId}`);
       store.dispatch(setOffer(data));
     } catch (error) {
       handleError(error);
@@ -40,7 +40,7 @@ export const getOfferReviews = createAsyncThunk(
   'offer/getOfferReviews',
   async (offerId: number) => {
     try {
-      const {data} = await api.get<Reviews>(ApiRoute.GetOfferReviews + offerId);
+      const {data} = await api.get<Reviews>(`${ApiRoute.GetOfferReviews}/${offerId}`);
       store.dispatch(setOfferReviews(data));
     } catch (error) {
       handleError(error);
@@ -54,7 +54,7 @@ export const setOfferReview = createAsyncThunk(
     try {
       const {offerId, comment, rating} = newOfferReview;
       await api.post(
-        ApiRoute.SetOfferReview + offerId,
+        `${ApiRoute.SetOfferReview}/${offerId}`,
         {comment, rating},
       );
       store.dispatch(setNewReviewSendStatus(NewReviewSendStatus.Success));

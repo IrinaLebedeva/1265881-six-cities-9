@@ -8,8 +8,8 @@ export enum ApiRoute {
   GetOffers = '/hotels',
   Login = '/login',
   Logout = '/logout',
-  GetOffer = '/hotels/',
-  GetOfferReviews = '/comments/',
-  SetOfferReview = '/comments/',
+  GetOffer = '/hotels',
+  GetOfferReviews = '/comments',
+  SetOfferReview = '/comments',
   GetOfferNearbyOffers = '/hotels/{offerId}/nearby',
 }
