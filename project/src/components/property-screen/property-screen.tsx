@@ -17,7 +17,6 @@ import {PropertyHost} from 'components/property-host/property-host';
 import {PropertyNearPlaces} from 'components/property-near-places/property-near-places';
 import {PropertyReviews} from 'components/property-reviews/property-reviews';
 import {PropertyReviewsForm} from 'components/property-reviews-form/property-reviews-form';
-import {resetToInitialState} from 'store/offer/action';
 import {
   useAppDispatch,
   useAppSelector
@@ -36,7 +35,6 @@ function PropertyScreen(): JSX.Element {
 
   useEffect(() => {
     if (!offer || offer.id !== id) {
-      dispatch(resetToInitialState());
       dispatch(getOfferById(id));
       dispatch(getOfferReviews(id));
       dispatch(getOfferNearbyOffers(id));

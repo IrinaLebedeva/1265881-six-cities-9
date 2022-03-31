@@ -12,6 +12,4 @@ export const setOfferReviews = createAction<Reviews>('offer/setOfferReviews');
 
 export const setOfferNearbyOffers = createAction<Offers>('offer/setOfferNearbyOffers');
 
-export const resetToInitialState = createAction('offer/resetToInitialState');
-
 export const setNewReviewSendStatus = createAction<NewReviewSendStatus>('offer/setNewReviewSendStatus');

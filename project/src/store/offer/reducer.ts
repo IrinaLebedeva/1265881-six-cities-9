@@ -6,7 +6,6 @@ import {
 } from 'types/offer';
 import {Reviews} from 'types/review';
 import {
-  resetToInitialState,
   setNewReviewSendStatus,
   setOffer,
   setOfferNearbyOffers,
@@ -37,9 +36,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOfferNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;
-    })
-    .addCase(resetToInitialState, (state) => {
-      state = initialState;
     })
     .addCase(setNewReviewSendStatus, (state, action) => {
       state.newReviewSendStatus = action.payload;
