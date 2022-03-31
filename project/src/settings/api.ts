@@ -12,4 +12,6 @@ export enum ApiRoute {
   GetOfferReviews = '/comments',
   SetOfferReview = '/comments',
   GetOfferNearbyOffers = '/hotels/{offerId}/nearby',
+  GetFavoriteOffers = '/favorite',
+  SetFavoriteOfferStatus = '/favorite',
 }

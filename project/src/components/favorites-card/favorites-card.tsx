@@ -1,5 +1,5 @@
 import {AppRoute} from 'settings/app-route';
-import clsx from 'clsx';
+import {CardBookmarkButton} from 'components/card-bookmark-button/card-bookmark-button';
 import {generatePath} from 'react-router-dom';
 import {getOfferPremiumJsxElement} from 'utils/get-offer-premium-jsx-element';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
@@ -25,15 +25,7 @@ function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={clsx('place-card__bookmark-button', {'place-card__bookmark-button--active': offer.isFavorite}, 'button')}
-            type="button"
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-          </button>
+          <CardBookmarkButton offer={offer}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
