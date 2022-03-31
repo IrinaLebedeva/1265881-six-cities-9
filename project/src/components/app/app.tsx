@@ -52,7 +52,7 @@ function App(): JSX.Element {
         navigate(AppRoute.Root);
         break;
     }
-    if (matchCityRoute && matchCityRoute.params.cityCode) {
+    if (matchCityRoute?.params?.cityCode) {
       dispatch(setCityCode({cityCode: formatCityCode(matchCityRoute.params.cityCode) as CityCode}));
     }
   });

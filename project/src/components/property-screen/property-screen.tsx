@@ -21,7 +21,10 @@ import {
   useAppDispatch,
   useAppSelector
 } from 'hooks/use-redux-hooks';
-import {useEffect} from 'react';
+import {
+  useEffect,
+  useMemo
+} from 'react';
 import {useParams} from 'react-router-dom';
 
 function PropertyScreen(): JSX.Element {
@@ -31,7 +34,7 @@ function PropertyScreen(): JSX.Element {
   const offer = useAppSelector(getOffer);
   const offerReviews = useAppSelector(getSortedReviews);
   const offerNearbyOffers = useAppSelector(getNearbyOffers);
-  const id = Number(params.id);
+  const id = +(params?.id || 0);
 
   useEffect(() => {
     if (!offer || offer.id !== id) {
@@ -40,6 +43,9 @@ function PropertyScreen(): JSX.Element {
       dispatch(getOfferNearbyOffers(id));
     }
   }, [dispatch, id, offer, offerNearbyOffers, offerReviews]);
+
+  const mapOffers = useMemo(() => !offer ? [] : [offer, ...offerNearbyOffers],
+    [offer, offerNearbyOffers]);
 
   if (!offer) {
     return (
@@ -124,7 +130,7 @@ function PropertyScreen(): JSX.Element {
           </div>
         </div>
         <section className="property__map map">
-          <Map offers={[offer, ...offerNearbyOffers]} activeOfferId={offer.id}/>
+          <Map offers={mapOffers} activeOfferId={offer.id}/>
         </section>
       </section>
       <div className="container">
