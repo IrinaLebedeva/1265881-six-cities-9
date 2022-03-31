@@ -9,11 +9,13 @@ interface PropertyReviewsProps {
 }
 
 function PropertyReviews({reviews, reviewsForm}: PropertyReviewsProps): JSX.Element {
+  const limitedReviews = reviews.slice(0, REVIEWS_MAX_COUNT);
+
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{limitedReviews.length}</span></h2>
       <ul className="reviews__list">
-        {reviews.slice(0, REVIEWS_MAX_COUNT).map((review) => (
+        {limitedReviews.map((review) => (
           <li className="reviews__item" key={review.id}>
             <PropertyReviewItem review={review} />
           </li>
