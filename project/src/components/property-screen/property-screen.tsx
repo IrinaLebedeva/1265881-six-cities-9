@@ -6,21 +6,14 @@ import {
   getSortedReviews
 } from 'store/offer/selector';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
-import {
-  getOfferById,
-  getOfferNearbyOffers,
-  getOfferReviews
-} from 'store/offer/api-action';
+import {loadOfferData} from 'store/offer/api-action';
 import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {Map} from 'components/map/map';
 import {PropertyHost} from 'components/property-host/property-host';
 import {PropertyNearPlaces} from 'components/property-near-places/property-near-places';
 import {PropertyReviews} from 'components/property-reviews/property-reviews';
 import {PropertyReviewsForm} from 'components/property-reviews-form/property-reviews-form';
-import {
-  useAppDispatch,
-  useAppSelector
-} from 'hooks/use-redux-hooks';
+import {useAppSelector} from 'hooks/use-redux-hooks';
 import {
   useEffect,
   useMemo
@@ -29,7 +22,6 @@ import {useParams} from 'react-router-dom';
 
 function PropertyScreen(): JSX.Element {
   const params = useParams();
-  const dispatch = useAppDispatch();
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const offer = useAppSelector(getOffer);
   const offerReviews = useAppSelector(getSortedReviews);
@@ -38,11 +30,9 @@ function PropertyScreen(): JSX.Element {
 
   useEffect(() => {
     if (!offer || offer.id !== id) {
-      dispatch(getOfferById(id));
-      dispatch(getOfferReviews(id));
-      dispatch(getOfferNearbyOffers(id));
+      loadOfferData(id);
     }
-  }, [dispatch, id, offer, offerNearbyOffers, offerReviews]);
+  }, [id, offer, offerNearbyOffers, offerReviews]);
 
   const mapOffers = useMemo(() => !offer ? [] : [offer, ...offerNearbyOffers],
     [offer, offerNearbyOffers]);

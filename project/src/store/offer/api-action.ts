@@ -76,3 +76,17 @@ export const getOfferNearbyOffers = createAsyncThunk(
     }
   },
 );
+
+export const loadOfferData = (id?: number) => {
+  if (!id) {
+    id = store.getState().offerReducer.offer?.id;
+
+    if (typeof id === 'undefined') {
+      return;
+    }
+  }
+
+  store.dispatch(getOfferById(id));
+  store.dispatch(getOfferReviews(id));
+  store.dispatch(getOfferNearbyOffers(id));
+};
