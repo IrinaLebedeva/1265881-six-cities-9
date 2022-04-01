@@ -10,11 +10,14 @@ import {
 } from 'hooks/use-redux-hooks';
 import {useNavigate} from 'react-router-dom';
 
-type CardBookmarkButtonProps = {
-  offer: Offer;
+interface CardBookmarkButtonProps {
+  offer: Offer,
+  cssElement?: string,
+  iconWidth?: number,
+  iconHeight?: number,
 }
 
-function CardBookmarkButton({offer}: CardBookmarkButtonProps): JSX.Element {
+function CardBookmarkButton({offer, cssElement = 'place-card', iconWidth = 18, iconHeight = 19}: CardBookmarkButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const navigate = useNavigate();
@@ -33,11 +36,11 @@ function CardBookmarkButton({offer}: CardBookmarkButtonProps): JSX.Element {
 
   return (
     <button
-      className={clsx('place-card__bookmark-button', {'place-card__bookmark-button--active': offer.isFavorite}, 'button')}
+      className={clsx(`${cssElement}__bookmark-button`, offer.isFavorite && `${cssElement}__bookmark-button--active`, 'button')}
       type="button"
       onClick={handleButtonClick}
     >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
+      <svg className={`${cssElement}__bookmark-icon`} width={iconWidth} height={iconHeight}>
         <use xlinkHref="#icon-bookmark"/>
       </svg>
       <span className="visually-hidden">{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
