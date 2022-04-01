@@ -86,7 +86,7 @@ function App(): JSX.Element {
           element={<LoginScreen />}
         />
         <Route
-          path={`${AppRoute.Property}`}
+          path={AppRoute.Property}
           element={<PropertyScreen/>}
         />
         <Route
