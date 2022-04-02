@@ -1,4 +1,8 @@
 import {getNewReviewSendStatus} from 'store/offer/selector';
+import {
+  getOfferReviews,
+  setOfferReview
+} from 'store/offer/api-action';
 import {NewReviewSendStatus} from 'settings/new-review-send-status';
 import React, {
   ChangeEvent,
@@ -8,10 +12,6 @@ import React, {
   useState
 } from 'react';
 import {setNewReviewSendStatus} from 'store/offer/action';
-import {
-  getOfferReviews,
-  setOfferReview
-} from 'store/offer/api-action';
 import {
   useAppDispatch,
   useAppSelector

@@ -7,7 +7,10 @@ import {
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
 import {setOffersSortType} from 'store/offers/action';
 import {useState} from 'react';
-import {useAppDispatch, useAppSelector} from 'hooks/use-redux-hooks';
+import {
+  useAppDispatch,
+  useAppSelector
+} from 'hooks/use-redux-hooks';
 
 function PlacesSorting(): JSX.Element {
   const [isSortOpened, setIsSortOpened] = useState<boolean>(false);

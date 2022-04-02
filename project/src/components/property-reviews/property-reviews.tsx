@@ -1,5 +1,5 @@
-import {Reviews} from 'types/review';
 import {PropertyReviewItem} from 'components/property-review-item/property-review-item';
+import {Reviews} from 'types/review';
 
 const REVIEWS_MAX_COUNT = 10;
 
