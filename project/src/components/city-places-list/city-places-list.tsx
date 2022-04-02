@@ -8,6 +8,8 @@ import {
   useState
 } from 'react';
 
+import './css/places.css';
+
 interface CityPlacesListProps  {
   cityCode: CityCode;
   offers: Offers;
