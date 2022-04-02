@@ -12,15 +12,15 @@ type CallbackType = (offerId: number) => void;
 
 type PlaceCardProps = {
   offer: Offer;
-  handleMouseEventsCallback?: CallbackType;
+  onMouseOverAndLeave?: CallbackType;
 };
 
-function PlaceCard({offer, handleMouseEventsCallback}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, onMouseOverAndLeave}: PlaceCardProps): JSX.Element {
   return (
     <article
       className="cities__place-card place-card"
-      onMouseOver={() => (handleMouseEventsCallback instanceof Function) ? handleMouseEventsCallback(offer.id) : null}
-      onMouseLeave={() => (handleMouseEventsCallback instanceof Function) ? handleMouseEventsCallback(0) : null}
+      onMouseOver={() => (onMouseOverAndLeave instanceof Function) ? onMouseOverAndLeave(offer.id) : null}
+      onMouseLeave={() => (onMouseOverAndLeave instanceof Function) ? onMouseOverAndLeave(0) : null}
     >
       {getOfferPremiumJsxElement(offer.isPremium)}
       <div className="cities__image-wrapper place-card__image-wrapper">
