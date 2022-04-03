@@ -6,7 +6,10 @@ import {
 } from 'settings/offers-sort-type';
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
 import {setOffersSortType} from 'store/offers/offers-reducer';
-import {useState} from 'react';
+import {
+  memo,
+  useState
+} from 'react';
 import {
   useAppDispatch,
   useAppSelector
@@ -47,4 +50,4 @@ function PlacesSorting(): JSX.Element {
   );
 }
 
-export {PlacesSorting};
+export default memo(PlacesSorting);

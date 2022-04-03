@@ -1,7 +1,10 @@
 import {AppRoute} from 'settings/app-route';
 import clsx from 'clsx';
 import {getIsUserAuthorized} from 'store/user/selector';
-import {MouseEvent} from 'react';
+import {
+  memo,
+  MouseEvent
+} from 'react';
 import {Offer} from 'types/offer';
 import {setFavoriteOfferStatus} from 'store/favorite-offers/api-action';
 import {
@@ -50,4 +53,4 @@ function CardBookmarkButton({offer, cssElement = 'place-card', iconSize = {width
   );
 }
 
-export {CardBookmarkButton};
+export default memo(CardBookmarkButton);

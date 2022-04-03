@@ -1,4 +1,4 @@
-import {CardBookmarkButton} from 'components/card-bookmark-button/card-bookmark-button';
+import CardBookmarkButton from 'components/card-bookmark-button/card-bookmark-button';
 import {getIsUserAuthorized} from 'store/user/selector';
 import {
   getNearbyOffers,

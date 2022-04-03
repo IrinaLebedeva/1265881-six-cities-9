@@ -1,12 +1,12 @@
 import {AppRoute} from 'settings/app-route';
+import CardBookmarkButton from 'components/card-bookmark-button/card-bookmark-button';
 import {
   generatePath,
   Link
 } from 'react-router-dom';
-import {getOfferPremiumJsxElement} from 'utils/get-offer-premium-jsx-element';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {Offer} from 'types/offer';
-import {CardBookmarkButton} from 'components/card-bookmark-button/card-bookmark-button';
+import {useCallback} from 'react';
 
 type CallbackType = (offerId: number) => void;
 
@@ -16,13 +16,26 @@ type PlaceCardProps = {
 };
 
 function PlaceCard({offer, onMouseOverAndLeave}: PlaceCardProps): JSX.Element {
+  const handleMouseOver = useCallback(
+    () => (onMouseOverAndLeave instanceof Function) ? onMouseOverAndLeave(offer.id) : null,
+    [onMouseOverAndLeave, offer.id]);
+
+  const handleMouseLeave = useCallback(
+    () => (onMouseOverAndLeave instanceof Function) ? onMouseOverAndLeave(0) : null,
+    [onMouseOverAndLeave]);
+
   return (
     <article
       className="cities__place-card place-card"
-      onMouseOver={() => (onMouseOverAndLeave instanceof Function) ? onMouseOverAndLeave(offer.id) : null}
-      onMouseLeave={() => (onMouseOverAndLeave instanceof Function) ? onMouseOverAndLeave(0) : null}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
     >
-      {getOfferPremiumJsxElement(offer.isPremium)}
+      {
+        offer.isPremium &&
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={generatePath(AppRoute.Property, {id: `${offer.id}`})}>
           <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt=""/>
