@@ -25,7 +25,7 @@ import {PrivateRoute} from 'components/private-route/private-route';
 import {
   resetCityCode,
   setCityCode
-} from 'store/city/action';
+} from 'store/city/city-reducer';
 import {
   useAppDispatch,
   useAppSelector

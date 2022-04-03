@@ -10,8 +10,9 @@ import {
   sortOffersByPriceDesc,
   sortOffersByRatingDesc
 } from 'utils/sort-offers';
+import {StoreNamespace} from 'settings/store-namespace';
 
-const getCurrentCityCode = (state: State): CityCode => state.cityReducer.cityCode;
+const getCurrentCityCode = (state: State): CityCode => state[StoreNamespace.City].cityCode;
 
 const getOffers = (state: State): Offers => state.offersReducer.offers;
 
