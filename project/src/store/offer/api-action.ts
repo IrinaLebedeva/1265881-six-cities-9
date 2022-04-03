@@ -5,6 +5,7 @@ import {
 import {ApiRoute} from 'settings/api';
 import {AppRoute} from 'settings/app-route';
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import {generatePath} from 'react-router-dom';
 import {handleError} from 'services/handleError';
 import {
   NewReview,
@@ -70,7 +71,11 @@ export const getOfferNearbyOffers = createAsyncThunk(
   'offer/getOfferNearbyOffers',
   async (offerId: number) => {
     try {
-      const {data} = await api.get<Offers>(ApiRoute.GetOfferNearbyOffers.replace('{offerId}', String(offerId)));
+      const {data} = await api.get<Offers>(
+        generatePath(ApiRoute.GetOfferNearbyOffers, {
+          offerId: `${offerId}`,
+        }),
+      );
       store.dispatch(setOfferNearbyOffers(data));
     } catch (error) {
       handleError(error);
