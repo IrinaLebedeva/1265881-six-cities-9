@@ -1,5 +1,6 @@
 import {AuthorizationStatus} from 'settings/authorization-status';
 import {createSlice} from '@reduxjs/toolkit';
+import {PayloadAction} from '@reduxjs/toolkit/dist/createAction';
 import {StoreNamespace} from 'settings/store-namespace';
 import {User} from 'types/user';
 
@@ -27,13 +28,13 @@ const userReducer = createSlice({
   name: StoreNamespace.User,
   initialState,
   reducers: {
-    setAuthorization: (state, action) => {
+    setAuthorization: (state, action:PayloadAction<AuthorizationStatus>) => {
       state.authorizationStatus = action.payload;
     },
-    setErrorMessage: (state, action) => {
+    setErrorMessage: (state, action:PayloadAction<string>) => {
       state.errorMessage = action.payload;
     },
-    setUser: (state, action) => {
+    setUser: (state, action:PayloadAction<User>) => {
       state.user = action.payload;
     },
     resetUser: (state) => {

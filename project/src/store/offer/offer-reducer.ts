@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {NewReviewSendStatus} from 'settings/new-review-send-status';
+import {PayloadAction} from '@reduxjs/toolkit/dist/createAction';
 import {StoreNamespace} from 'settings/store-namespace';
 import {
   Offer,
@@ -25,16 +26,16 @@ export const offerReducer = createSlice({
   name: StoreNamespace.Offer,
   initialState,
   reducers: {
-    setOffer: (state, action) => {
+    setOffer: (state, action:PayloadAction<Offer>) => {
       state.offer = action.payload;
     },
-    setOfferReviews: (state, action) => {
+    setOfferReviews: (state, action:PayloadAction<Reviews>) => {
       state.reviews = action.payload;
     },
-    setOfferNearbyOffers: (state, action) => {
+    setOfferNearbyOffers: (state, action:PayloadAction<Offers>) => {
       state.nearbyOffers = action.payload;
     },
-    setNewReviewSendStatus: (state, action) => {
+    setNewReviewSendStatus: (state, action:PayloadAction<NewReviewSendStatus>) => {
       state.newReviewSendStatus = action.payload;
     },
   },

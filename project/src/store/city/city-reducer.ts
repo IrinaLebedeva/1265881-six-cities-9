@@ -1,6 +1,7 @@
 import {CityCode} from 'types/city-code';
 import {createSlice} from '@reduxjs/toolkit';
 import {DEFAULT_CITY_CODE} from 'settings/const';
+import {PayloadAction} from '@reduxjs/toolkit/dist/createAction';
 import {StoreNamespace} from 'settings/store-namespace';
 
 type InitialState = {
@@ -18,7 +19,7 @@ export const cityReducer = createSlice({
     resetCityCode: (state) => {
       state.cityCode = DEFAULT_CITY_CODE;
     },
-    setCityCode: (state, action) => {
+    setCityCode: (state, action:PayloadAction<{cityCode: CityCode}>) => {
       const {cityCode} = action.payload;
       state.cityCode = cityCode;
     },
