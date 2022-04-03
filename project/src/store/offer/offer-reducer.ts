@@ -1,16 +1,11 @@
-import {createReducer} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {NewReviewSendStatus} from 'settings/new-review-send-status';
+import {StoreNamespace} from 'settings/store-namespace';
 import {
   Offer,
   Offers
 } from 'types/offer';
 import {Reviews} from 'types/review';
-import {
-  setNewReviewSendStatus,
-  setOffer,
-  setOfferNearbyOffers,
-  setOfferReviews
-} from 'store/offer/action';
 
 interface InitialState {
   offer: Offer | null,
@@ -26,20 +21,28 @@ const initialState: InitialState = {
   newReviewSendStatus: NewReviewSendStatus.NotSend,
 };
 
-const reducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(setOffer, (state, action) => {
+export const offerReducer = createSlice({
+  name: StoreNamespace.Offer,
+  initialState,
+  reducers: {
+    setOffer: (state, action) => {
       state.offer = action.payload;
-    })
-    .addCase(setOfferReviews, (state, action) => {
+    },
+    setOfferReviews: (state, action) => {
       state.reviews = action.payload;
-    })
-    .addCase(setOfferNearbyOffers, (state, action) => {
+    },
+    setOfferNearbyOffers: (state, action) => {
       state.nearbyOffers = action.payload;
-    })
-    .addCase(setNewReviewSendStatus, (state, action) => {
+    },
+    setNewReviewSendStatus: (state, action) => {
       state.newReviewSendStatus = action.payload;
-    });
+    },
+  },
 });
 
-export {reducer as offerReducer};
+export const {
+  setOffer,
+  setOfferReviews,
+  setOfferNearbyOffers,
+  setNewReviewSendStatus,
+} = offerReducer.actions;

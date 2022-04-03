@@ -21,7 +21,8 @@ import {
   setOffer,
   setOfferNearbyOffers,
   setOfferReviews
-} from 'store/offer/action';
+} from 'store/offer/offer-reducer';
+import {StoreNamespace} from 'settings/store-namespace';
 
 export const getOfferById = createAsyncThunk(
   'offer/getOfferById',
@@ -79,7 +80,7 @@ export const getOfferNearbyOffers = createAsyncThunk(
 
 export const loadOfferData = (id?: number) => {
   if (!id) {
-    id = store.getState().offerReducer.offer?.id;
+    id = store.getState()[StoreNamespace.Offer].offer?.id;
 
     if (typeof id === 'undefined') {
       return;
