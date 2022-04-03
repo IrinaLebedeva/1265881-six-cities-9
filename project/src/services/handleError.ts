@@ -2,7 +2,7 @@ import {ErrorType} from 'types/api-error-type';
 import {HttpCode} from 'settings/http-code';
 import {resetErrorMessage} from 'store/user/api-action';
 import request from 'axios';
-import {setErrorMessage} from 'store/user/action';
+import {setErrorMessage} from 'store/user/user-reducer';
 import {store} from 'store/store';
 
 export const handleError = (error: ErrorType): void => {

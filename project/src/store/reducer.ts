@@ -4,12 +4,12 @@ import {favoriteOffersReducer} from 'store/favorite-offers/favorite-offers-reduc
 import {offerReducer} from 'store/offer/reducer';
 import {offersReducer} from 'store/offers/reducer';
 import {StoreNamespace} from 'settings/store-namespace';
-import {userReducer} from 'store/user/reducer';
+import {userReducer} from 'store/user/user-reducer';
 
 export const reducer = combineReducers({
   [StoreNamespace.City]: cityReducer.reducer,
   [StoreNamespace.FavoriteOffers]: favoriteOffersReducer.reducer,
   offerReducer,
   offersReducer,
-  userReducer,
+  [StoreNamespace.User]: userReducer.reducer,
 });

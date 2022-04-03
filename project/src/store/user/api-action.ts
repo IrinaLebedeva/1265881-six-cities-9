@@ -1,4 +1,7 @@
-import {api, store} from 'store/store';
+import {
+  api,
+  store
+} from 'store/store';
 import {ApiRoute} from 'settings/api';
 import {AuthData} from 'types/auth-data';
 import {AuthorizationStatus} from 'settings/authorization-status';
@@ -10,7 +13,7 @@ import {
   setAuthorization,
   setErrorMessage,
   setUser
-} from 'store/user/action';
+} from 'store/user/user-reducer';
 import {SHOW_ERROR_TIMEOUT} from 'settings/const';
 
 export const resetErrorMessage = createAsyncThunk(
