@@ -9,7 +9,7 @@ import {getOffers} from 'store/offers/api-action';
 import {handleError} from 'services/handleError';
 import {loadOfferData} from 'store/offer/api-action';
 import {Offers} from 'types/offer';
-import {setFavoriteOffers} from 'store/favorite-offers/action';
+import {setFavoriteOffers} from 'store/favorite-offers/favorite-offers-reducer';
 
 export const getFavoriteOffersData = createAsyncThunk(
   'favorite-offers/getFavoriteOffersData',

@@ -1,5 +1,6 @@
 import {State} from 'types/state';
+import {StoreNamespace} from 'settings/store-namespace';
 
-export const getFavoriteOffers = (state: State) => state.favoriteOffersReducer.favoriteOffers;
+export const getFavoriteOffers = (state: State) => state[StoreNamespace.FavoriteOffers].favoriteOffers;
 
-export const getIsFavoriteOffersDataLoaded = (state: State) => state.favoriteOffersReducer.isFavoriteOffersDataLoaded;
+export const getIsFavoriteOffersDataLoaded = (state: State) => state[StoreNamespace.FavoriteOffers].isFavoriteOffersDataLoaded;
