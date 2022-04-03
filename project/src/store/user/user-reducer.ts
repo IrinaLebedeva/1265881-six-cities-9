@@ -43,7 +43,10 @@ const userReducer = createSlice({
   },
 });
 
-export {userReducer as userReducer};
+export {
+  initialUser,
+  userReducer
+};
 
 export const {
   setAuthorization,
