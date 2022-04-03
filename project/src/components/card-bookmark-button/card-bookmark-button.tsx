@@ -13,11 +13,13 @@ import {useNavigate} from 'react-router-dom';
 interface CardBookmarkButtonProps {
   offer: Offer,
   cssElement?: string,
-  iconWidth?: number,
-  iconHeight?: number,
+  iconSize?: {
+    width: number,
+    height: number,
+  },
 }
 
-function CardBookmarkButton({offer, cssElement = 'place-card', iconWidth = 18, iconHeight = 19}: CardBookmarkButtonProps): JSX.Element {
+function CardBookmarkButton({offer, cssElement = 'place-card', iconSize = {width: 18, height: 19}}: CardBookmarkButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const navigate = useNavigate();
@@ -30,7 +32,7 @@ function CardBookmarkButton({offer, cssElement = 'place-card', iconWidth = 18, i
 
     dispatch(setFavoriteOfferStatus({
       offerId: offer.id,
-      status: +!offer.isFavorite,
+      status: offer.isFavorite ? 1 : 0,
     }));
   };
 
@@ -40,7 +42,7 @@ function CardBookmarkButton({offer, cssElement = 'place-card', iconWidth = 18, i
       type="button"
       onClick={handleButtonClick}
     >
-      <svg className={`${cssElement}__bookmark-icon`} width={iconWidth} height={iconHeight}>
+      <svg className={`${cssElement}__bookmark-icon`} width={iconSize.width} height={iconSize.height}>
         <use xlinkHref="#icon-bookmark"/>
       </svg>
       <span className="visually-hidden">{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
