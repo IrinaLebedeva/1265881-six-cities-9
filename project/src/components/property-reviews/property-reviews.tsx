@@ -1,5 +1,6 @@
 import {PropertyReviewItem} from 'components/property-review-item/property-review-item';
 import {Reviews} from 'types/review';
+import {useMemo} from 'react';
 
 const REVIEWS_MAX_COUNT = 10;
 
@@ -9,7 +10,10 @@ interface PropertyReviewsProps {
 }
 
 function PropertyReviews({reviews, reviewsForm}: PropertyReviewsProps): JSX.Element {
-  const limitedReviews = reviews.slice(0, REVIEWS_MAX_COUNT);
+  const limitedReviews = useMemo(
+    () => reviews.slice(0, REVIEWS_MAX_COUNT),
+    [reviews],
+  );
 
   return (
     <section className="property__reviews reviews">
