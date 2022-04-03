@@ -5,7 +5,7 @@ import {
   offersSortTypes
 } from 'settings/offers-sort-type';
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
-import {setOffersSortType} from 'store/offers/action';
+import {setOffersSortType} from 'store/offers/offers-reducer';
 import {useState} from 'react';
 import {
   useAppDispatch,

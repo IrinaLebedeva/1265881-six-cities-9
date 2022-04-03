@@ -11,7 +11,7 @@ import React, {
   useRef,
   useState
 } from 'react';
-import {setNewReviewSendStatus} from 'store/offer/action';
+import {setNewReviewSendStatus} from 'store/offer/offer-reducer';
 import {
   useAppDispatch,
   useAppSelector

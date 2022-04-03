@@ -5,7 +5,7 @@ import {
 import {ApiRoute} from 'settings/api';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Offers} from 'types/offer';
-import {setOffers} from 'store/offers/action';
+import {setOffers} from 'store/offers/offers-reducer';
 import {handleError} from 'services/handleError';
 
 export const getOffers = createAsyncThunk(

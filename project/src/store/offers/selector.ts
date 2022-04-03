@@ -14,16 +14,16 @@ import {StoreNamespace} from 'settings/store-namespace';
 
 const getCurrentCityCode = (state: State): CityCode => state[StoreNamespace.City].cityCode;
 
-const getOffers = (state: State): Offers => state.offersReducer.offers;
+const getOffers = (state: State): Offers => state[StoreNamespace.Offers].offers;
 
-const getIsOffersLoaded = (state: State): boolean => state.offersReducer.isOffersLoaded;
+const getIsOffersLoaded = (state: State): boolean => state[StoreNamespace.Offers].isOffersLoaded;
 
 const getOffersByCity = createSelector(
   [getCurrentCityCode, getOffers], (currentCityCode, offers) => (
     offers.filter((offer) => offer.city.name === City[currentCityCode as CityCode])
   ));
 
-const getOffersSortType = (state: State): OffersSortTypeKey => state.offersReducer.offersSortType;
+const getOffersSortType = (state: State): OffersSortTypeKey => state[StoreNamespace.Offers].offersSortType;
 
 const getSortedOffers = createSelector(
   [getOffersSortType, getOffersByCity],
