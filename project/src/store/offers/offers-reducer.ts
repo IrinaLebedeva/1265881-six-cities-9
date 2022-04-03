@@ -5,7 +5,7 @@ import {
 import {DEFAULT_OFFERS_SORT_TYPE} from 'settings/offers-sort-type';
 import {Offers} from 'types/offer';
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
-import {StoreNamespace} from 'settings/store-namespace';
+import {NameSpace} from 'settings/name-space';
 
 type InitialState = {
   offers: Offers;
@@ -20,7 +20,7 @@ const initialState: InitialState = {
 };
 
 export const offersReducer = createSlice({
-  name: StoreNamespace.Offers,
+  name: NameSpace.Offers,
   initialState,
   reducers: {
     setOffers: (state, action:PayloadAction<Offers>) => {

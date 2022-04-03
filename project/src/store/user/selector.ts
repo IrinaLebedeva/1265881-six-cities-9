@@ -1,12 +1,12 @@
 import {AuthorizationStatus} from 'settings/authorization-status';
 import {State} from 'types/state';
-import {StoreNamespace} from 'settings/store-namespace';
+import {NameSpace} from 'settings/name-space';
 import {User} from 'types/user';
 
-export const getAuthorizationStatus = (state: State): AuthorizationStatus => state[StoreNamespace.User].authorizationStatus;
+export const getAuthorizationStatus = (state: State): AuthorizationStatus => state[NameSpace.User].authorizationStatus;
 
-export const getIsUserAuthorized = (state: State): boolean => state[StoreNamespace.User].authorizationStatus === AuthorizationStatus.Auth;
+export const getIsUserAuthorized = (state: State): boolean => state[NameSpace.User].authorizationStatus === AuthorizationStatus.Auth;
 
-export const getErrorMessage = (state: State): string => state[StoreNamespace.User].errorMessage;
+export const getErrorMessage = (state: State): string => state[NameSpace.User].errorMessage;
 
-export const getUser = (state: State): User => state[StoreNamespace.User].user;
+export const getUser = (state: State): User => state[NameSpace.User].user;

@@ -3,7 +3,7 @@ import {
   PayloadAction
 } from '@reduxjs/toolkit';
 import {NewReviewSendStatus} from 'settings/new-review-send-status';
-import {StoreNamespace} from 'settings/store-namespace';
+import {NameSpace} from 'settings/name-space';
 import {
   Offer,
   Offers
@@ -25,7 +25,7 @@ const initialState: InitialState = {
 };
 
 export const offerReducer = createSlice({
-  name: StoreNamespace.Offer,
+  name: NameSpace.Offer,
   initialState,
   reducers: {
     setOffer: (state, action:PayloadAction<Offer>) => {

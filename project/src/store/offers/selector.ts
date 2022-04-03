@@ -10,20 +10,20 @@ import {
   sortOffersByPriceDesc,
   sortOffersByRatingDesc
 } from 'utils/sort-offers';
-import {StoreNamespace} from 'settings/store-namespace';
+import {NameSpace} from 'settings/name-space';
 
-const getCurrentCityCode = (state: State): CityCode => state[StoreNamespace.City].cityCode;
+const getCurrentCityCode = (state: State): CityCode => state[NameSpace.City].cityCode;
 
-const getOffers = (state: State): Offers => state[StoreNamespace.Offers].offers;
+const getOffers = (state: State): Offers => state[NameSpace.Offers].offers;
 
-const getIsOffersLoaded = (state: State): boolean => state[StoreNamespace.Offers].isOffersLoaded;
+const getIsOffersLoaded = (state: State): boolean => state[NameSpace.Offers].isOffersLoaded;
 
 const getOffersByCity = createSelector(
   [getCurrentCityCode, getOffers], (currentCityCode, offers) => (
     offers.filter((offer) => offer.city.name === City[currentCityCode as CityCode])
   ));
 
-const getOffersSortType = (state: State): OffersSortTypeKey => state[StoreNamespace.Offers].offersSortType;
+const getOffersSortType = (state: State): OffersSortTypeKey => state[NameSpace.Offers].offersSortType;
 
 const getSortedOffers = createSelector(
   [getOffersSortType, getOffersByCity],

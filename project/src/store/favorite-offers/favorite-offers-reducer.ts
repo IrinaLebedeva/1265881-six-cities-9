@@ -3,7 +3,7 @@ import {
   PayloadAction
 } from '@reduxjs/toolkit';
 import {Offers} from 'types/offer';
-import {StoreNamespace} from 'settings/store-namespace';
+import {NameSpace} from 'settings/name-space';
 
 type InitialState = {
   favoriteOffers: Offers;
@@ -16,7 +16,7 @@ const initialState: InitialState = {
 };
 
 export const favoriteOffersReducer = createSlice({
-  name: StoreNamespace.FavoriteOffers,
+  name: NameSpace.FavoriteOffers,
   initialState,
   reducers: {
     setFavoriteOffers: (state, action:PayloadAction<Offers>) => {

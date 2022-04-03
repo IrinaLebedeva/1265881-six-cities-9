@@ -1,4 +1,4 @@
-export enum StoreNamespace {
+export enum NameSpace {
   City = 'City',
   FavoriteOffers = 'FavoriteOffers',
   Offer = 'Offer',

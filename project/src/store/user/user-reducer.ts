@@ -3,7 +3,7 @@ import {
   createSlice,
   PayloadAction
 } from '@reduxjs/toolkit';
-import {StoreNamespace} from 'settings/store-namespace';
+import {NameSpace} from 'settings/name-space';
 import {User} from 'types/user';
 
 interface InitialState {
@@ -27,7 +27,7 @@ const initialState: InitialState = {
 };
 
 const userReducer = createSlice({
-  name: StoreNamespace.User,
+  name: NameSpace.User,
   initialState,
   reducers: {
     setAuthorization: (state, action:PayloadAction<AuthorizationStatus>) => {

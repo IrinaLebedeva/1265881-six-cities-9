@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import {getIsUserAuthorized} from 'store/user/selector';
 import {
   memo,
-  MouseEvent
+  MouseEvent,
+  useCallback
 } from 'react';
 import {Offer} from 'types/offer';
 import {setFavoriteOfferStatus} from 'store/favorite-offers/api-action';
@@ -27,7 +28,7 @@ function CardBookmarkButton({offer, cssElement = 'place-card', iconSize = {width
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const navigate = useNavigate();
 
-  const handleButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
+  const handleButtonClick = useCallback((evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     if (!isUserAuthorized) {
       navigate(AppRoute.Login);
@@ -37,7 +38,7 @@ function CardBookmarkButton({offer, cssElement = 'place-card', iconSize = {width
       offerId: offer.id,
       status: offer.isFavorite ? 0 : 1,
     }));
-  };
+  }, [dispatch, isUserAuthorized, navigate, offer]);
 
   return (
     <button
