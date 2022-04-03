@@ -1,6 +1,8 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {
+  createSlice,
+  PayloadAction
+} from '@reduxjs/toolkit';
 import {Offers} from 'types/offer';
-import {PayloadAction} from '@reduxjs/toolkit/dist/createAction';
 import {StoreNamespace} from 'settings/store-namespace';
 
 type InitialState = {

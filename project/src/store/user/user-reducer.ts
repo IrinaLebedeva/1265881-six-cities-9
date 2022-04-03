@@ -1,6 +1,8 @@
 import {AuthorizationStatus} from 'settings/authorization-status';
-import {createSlice} from '@reduxjs/toolkit';
-import {PayloadAction} from '@reduxjs/toolkit/dist/createAction';
+import {
+  createSlice,
+  PayloadAction
+} from '@reduxjs/toolkit';
 import {StoreNamespace} from 'settings/store-namespace';
 import {User} from 'types/user';
 

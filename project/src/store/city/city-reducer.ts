@@ -1,7 +1,9 @@
 import {CityCode} from 'types/city-code';
-import {createSlice} from '@reduxjs/toolkit';
+import {
+  createSlice,
+  PayloadAction
+} from '@reduxjs/toolkit';
 import {DEFAULT_CITY_CODE} from 'settings/const';
-import {PayloadAction} from '@reduxjs/toolkit/dist/createAction';
 import {StoreNamespace} from 'settings/store-namespace';
 
 type InitialState = {

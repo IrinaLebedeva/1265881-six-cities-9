@@ -32,7 +32,7 @@ function CardBookmarkButton({offer, cssElement = 'place-card', iconSize = {width
 
     dispatch(setFavoriteOfferStatus({
       offerId: offer.id,
-      status: offer.isFavorite ? 1 : 0,
+      status: offer.isFavorite ? 0 : 1,
     }));
   };
 
