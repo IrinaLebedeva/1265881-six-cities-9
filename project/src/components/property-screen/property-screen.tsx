@@ -47,7 +47,7 @@ function PropertyScreen(): JSX.Element {
 
   const iconSize = {
     width: 31,
-    height: 33
+    height: 33,
   };
 
   return (

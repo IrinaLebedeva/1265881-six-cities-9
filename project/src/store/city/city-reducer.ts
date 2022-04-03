@@ -21,9 +21,8 @@ export const cityReducer = createSlice({
     resetCityCode: (state) => {
       state.cityCode = DEFAULT_CITY_CODE;
     },
-    setCityCode: (state, action:PayloadAction<{cityCode: CityCode}>) => {
-      const {cityCode} = action.payload;
-      state.cityCode = cityCode;
+    setCityCode: (state, action:PayloadAction<CityCode>) => {
+      state.cityCode = action.payload;
     },
   },
 });
