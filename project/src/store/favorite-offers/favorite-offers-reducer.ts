@@ -5,12 +5,12 @@ import {
 import {Offers} from 'types/offer';
 import {NameSpace} from 'settings/name-space';
 
-type InitialState = {
+export type FavoriteOffersInitialState = {
   favoriteOffers: Offers;
   isFavoriteOffersDataLoaded: boolean;
 }
 
-const initialState: InitialState = {
+const initialState: FavoriteOffersInitialState = {
   favoriteOffers: [],
   isFavoriteOffersDataLoaded: false,
 };

@@ -40,7 +40,7 @@ describe('userReducer', () => {
       });
   });
 
-  it(`should set user`, () => {
+  it('should set user', () => {
     const fakeUser = makeFakeUser();
     expect(userReducer.reducer(fakeUserInitialState, setUser(fakeUser)))
       .toEqual({
@@ -50,7 +50,7 @@ describe('userReducer', () => {
       });
   });
 
-  it(`should reset user`, () => {
+  it('should reset user', () => {
     expect(userReducer.reducer(fakeUserInitialState, resetUser))
       .toEqual({
         authorizationStatus: AuthorizationStatus.Unknown,

@@ -42,7 +42,7 @@ const fakeApp = (
 );
 
 describe('Component: App', () => {
-  it(`should render Main Page with number of places found when user navigate to "/"`, () => {
+  it('should render Main Page with number of places found when user navigate to "/"', () => {
     render(fakeApp);
 
     history.push(AppRoute.Root);

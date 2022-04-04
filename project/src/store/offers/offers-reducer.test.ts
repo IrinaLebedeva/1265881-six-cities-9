@@ -9,7 +9,7 @@ import {
   setOffers,
   setOffersSortType
 } from './offers-reducer';
-import {OffersSortTypeKey} from "../../types/offers-sort-type-key";
+import {OffersSortTypeKey} from 'types/offers-sort-type-key';
 
 const fakeOffersInitialState: OffersReducerInitialState = {
   offers: [],
@@ -25,7 +25,7 @@ describe('offersReducer', () => {
       .toEqual(fakeOffersInitialState);
   });
 
-  it(`should set offers`, () => {
+  it('should set offers', () => {
     expect(offersReducer.reducer(fakeOffersInitialState, setOffers(fakeOffers)))
       .toEqual({
         offers: fakeOffers,
@@ -36,9 +36,9 @@ describe('offersReducer', () => {
 
   it(`should set offers sort type to "${OfferSortCode.PriceHighToLow}"`, () => {
     expect(offersReducer.reducer(
-        fakeOffersInitialState,
-        setOffersSortType(OfferSortCode.PriceHighToLow as OffersSortTypeKey),
-      ))
+      fakeOffersInitialState,
+      setOffersSortType(OfferSortCode.PriceHighToLow as OffersSortTypeKey),
+    ))
       .toEqual({
         offers: [],
         offersSortType: OfferSortCode.PriceHighToLow,

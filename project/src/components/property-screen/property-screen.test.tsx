@@ -24,7 +24,7 @@ const store = mockStore({
     offer: makeFakeOffer(),
     reviews: makeFakeReviews(),
     nearbyOffers: makeFakeNearbyOffers(),
-    newReviewSendStatus: NewReviewSendStatus.NotSend
+    newReviewSendStatus: NewReviewSendStatus.NotSend,
   },
   [NameSpace.User]: {
     authorizationStatus: AuthorizationStatus.Auth,
@@ -42,7 +42,7 @@ const fakePropertyScreen = (
 );
 
 describe('Component: PropertyScreen', () => {
-  it(`should render Room Page`, () => {
+  it('should render Room Page', () => {
     render(fakePropertyScreen);
 
     expect(screen.getByTestId('property-container')).toBeInTheDocument();

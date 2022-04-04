@@ -30,7 +30,7 @@ describe('offerReducer', () => {
       .toEqual(fakeOfferInitialState);
   });
 
-  it(`should set offer`, () => {
+  it('should set offer', () => {
     expect(offerReducer.reducer(fakeOfferInitialState, setOffer(fakeOffer)))
       .toEqual({
         offer: fakeOffer,
@@ -40,7 +40,7 @@ describe('offerReducer', () => {
       });
   });
 
-  it(`should set offer reviews`, () => {
+  it('should set offer reviews', () => {
     expect(offerReducer.reducer(fakeOfferInitialState, setOfferReviews(fakeReviews)))
       .toEqual({
         offer: null,
@@ -50,7 +50,7 @@ describe('offerReducer', () => {
       });
   });
 
-  it(`should set offer's nearby offers`, () => {
+  it('should set offer\'s nearby offers', () => {
     expect(offerReducer.reducer(fakeOfferInitialState, setOfferNearbyOffers(fakeNearbyOffers)))
       .toEqual({
         offer: null,
@@ -62,9 +62,9 @@ describe('offerReducer', () => {
 
   it(`should set new review send status ${NewReviewSendStatus.Success}`, () => {
     expect(offerReducer.reducer(
-        fakeOfferInitialState,
-        setNewReviewSendStatus(NewReviewSendStatus.Success)
-      ))
+      fakeOfferInitialState,
+      setNewReviewSendStatus(NewReviewSendStatus.Success),
+    ))
       .toEqual({
         offer: null,
         reviews: [],

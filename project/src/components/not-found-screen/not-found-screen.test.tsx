@@ -23,7 +23,7 @@ describe('Component: NotFoundScreen', () => {
         <HistoryRouteContainer history={history}>
           <NotFoundScreen/>
         </HistoryRouteContainer>
-      </Provider>
+      </Provider>,
     );
 
     expect(screen.getByText('404. Page not found')).toBeInTheDocument();
