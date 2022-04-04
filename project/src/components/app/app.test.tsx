@@ -13,20 +13,20 @@ import {
   render,
   screen
 } from '@testing-library/react';
-import {StoreNamespace} from 'settings/store-namespace';
+import {NameSpace} from 'settings/name-space';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
 const store = mockStore({
-  [StoreNamespace.City]: {
+  [NameSpace.City]: {
     cityCode: DEFAULT_CITY_CODE,
   },
-  [StoreNamespace.Offers]: {
+  [NameSpace.Offers]: {
     offers: makeFakeOffers(),
     offersSortType: DEFAULT_OFFERS_SORT_TYPE,
     isOffersLoaded: true,
   },
-  [StoreNamespace.User]: {
+  [NameSpace.User]: {
     authorizationStatus: AuthorizationStatus.Auth,
     errorMessage: '',
     user: makeFakeUser(),

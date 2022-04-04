@@ -10,14 +10,14 @@ import {
 } from 'types/offer';
 import {Reviews} from 'types/review';
 
-interface InitialState {
+export interface OfferReducerInitialState {
   offer: Offer | null,
   reviews: Reviews,
   nearbyOffers: Offers,
   newReviewSendStatus: NewReviewSendStatus,
 }
 
-const initialState: InitialState = {
+const initialState: OfferReducerInitialState = {
   offer: null,
   reviews: [],
   nearbyOffers: [],

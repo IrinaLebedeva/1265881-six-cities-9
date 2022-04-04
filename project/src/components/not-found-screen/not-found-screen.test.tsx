@@ -7,12 +7,12 @@ import {
   render,
   screen
 } from '@testing-library/react';
-import {StoreNamespace} from 'settings/store-namespace';
+import {NameSpace} from 'settings/name-space';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
 const store = mockStore({
-  [StoreNamespace.User]: {},
+  [NameSpace.User]: {},
 });
 
 describe('Component: NotFoundScreen', () => {
