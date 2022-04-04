@@ -3,7 +3,7 @@ import {City} from 'settings/city';
 import {CityCode} from 'types/city-code';
 import {createSelector} from 'reselect';
 import {Offers} from 'types/offer';
-import {OffersSortCodes} from 'settings/offers-sort-type';
+import {OfferSortCode} from 'settings/offers-sort-type';
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
 import {
   sortOffersByPriceAsc,
@@ -30,16 +30,16 @@ const getSortedOffers = createSelector(
   (offersSortType, offers) => {
     const sortedOffers = offers.slice();
     switch (offersSortType) {
-      case OffersSortCodes.PRICE_HIGH_TO_LOW:
+      case OfferSortCode.PriceHighToLow:
         sortedOffers.sort(sortOffersByPriceDesc);
         break;
-      case OffersSortCodes.PRICE_LOW_TO_HIGH:
+      case OfferSortCode.PriceLowToHigh:
         sortedOffers.sort(sortOffersByPriceAsc);
         break;
-      case OffersSortCodes.TOP_RATED_FIRST:
+      case OfferSortCode.TopRatedFirst:
         sortedOffers.sort(sortOffersByRatingDesc);
         break;
-      case OffersSortCodes.POPULAR:
+      case OfferSortCode.Popular:
         break;
     }
     return sortedOffers;

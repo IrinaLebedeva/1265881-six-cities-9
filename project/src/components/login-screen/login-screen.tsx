@@ -25,9 +25,9 @@ function LoginScreen(): JSX.Element {
     return <Navigate to={AppRoute.Root} />;
   }
 
-  const isValid = ValidationPattern.EMAIL.test(email) &&
-    ValidationPattern.PASSWORD_CHARACTER.test(password) &&
-    ValidationPattern.PASSWORD_DIGIT.test(password);
+  const isValid = ValidationPattern.email.test(email) &&
+    ValidationPattern.passwordCharacter.test(password) &&
+    ValidationPattern.passwordDigit.test(password);
 
   const handleEmailChange = (evt: ChangeEvent<HTMLInputElement>) => setEmail(evt.target.value.trim());
 

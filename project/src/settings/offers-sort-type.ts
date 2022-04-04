@@ -5,12 +5,12 @@ export enum OffersSortType {
   TopRatedFirst = 'Top rated first',
 }
 
-export const OffersSortCodes = {
-  POPULAR: 'Popular',
-  PRICE_LOW_TO_HIGH: 'PriceLowToHigh',
-  PRICE_HIGH_TO_LOW: 'PriceHighToLow',
-  TOP_RATED_FIRST: 'TopRatedFirst',
-};
+export enum OfferSortCode {
+  Popular = 'Popular',
+  PriceLowToHigh = 'PriceLowToHigh',
+  PriceHighToLow = 'PriceHighToLow',
+  TopRatedFirst = 'TopRatedFirst',
+}
 
 export const offersSortTypes = Object.keys(OffersSortType);
 
