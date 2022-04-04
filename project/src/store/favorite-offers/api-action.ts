@@ -15,7 +15,7 @@ export const getFavoriteOffersData = createAsyncThunk(
   'favorite-offers/getFavoriteOffersData',
   async () => {
     try {
-      const {data} = await api.get<Offers>(ApiRoute.GetFavoriteOffers);
+      const {data} = await api.get<Offers>(ApiRoute.FavoriteOffers);
       store.dispatch(setFavoriteOffers(data));
     } catch (error) {
       handleError(error);
@@ -27,7 +27,7 @@ export const setFavoriteOfferStatus = createAsyncThunk(
   'favorite-offers/setFavoriteOfferStatus',
   async ({offerId, status}: FavoriteOfferStatusData) => {
     try {
-      await api.post(`${ApiRoute.SetFavoriteOfferStatus}/${offerId}/${status}`);
+      await api.post(`${ApiRoute.FavoriteOffers}/${offerId}/${status}`);
       store.dispatch(getOffers());
       store.dispatch(getFavoriteOffersData());
       loadOfferData();

@@ -13,7 +13,7 @@ type FavoritesListItemProps = {
   offers: Offers;
 };
 
-function FavoritesListItem({cityCode, offers}:FavoritesListItemProps): JSX.Element {
+function FavoritesListItem({cityCode, offers}: FavoritesListItemProps): JSX.Element {
   const offersByCity = offers.filter((offer) => offer.city.name === City[cityCode as CityCode]);
   return (
     <>

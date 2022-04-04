@@ -19,13 +19,13 @@ export const handleError = (error: ErrorType): void => {
 
   if (response && response.status) {
     switch (response.status) {
-      case HttpCode.BAD_REQUEST:
+      case HttpCode.BadRequest:
         handleAppError(response.data.error);
         break;
-      case HttpCode.UNAUTHORIZED:
+      case HttpCode.Unauthorized:
         handleAppError(response.data.error);
         break;
-      case HttpCode.NOT_FOUND:
+      case HttpCode.NotFound:
         handleAppError(response.data.error);
         break;
     }

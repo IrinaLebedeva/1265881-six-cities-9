@@ -3,10 +3,8 @@ import {CityCode} from 'types/city-code';
 import {Map} from 'components/map/map';
 import {Offers} from 'types/offer';
 import {PlaceCard} from 'components/place-card/place-card';
-import {PlacesSorting} from 'components/places-sorting/places-sorting';
-import {
-  useState
-} from 'react';
+import PlacesSorting from 'components/places-sorting/places-sorting';
+import {useState} from 'react';
 
 import './css/places.css';
 

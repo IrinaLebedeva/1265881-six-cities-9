@@ -5,6 +5,7 @@ import {
 import {ApiRoute} from 'settings/api';
 import {AppRoute} from 'settings/app-route';
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import {generatePath} from 'react-router-dom';
 import {handleError} from 'services/handleError';
 import {
   NewReview,
@@ -22,13 +23,13 @@ import {
   setOfferNearbyOffers,
   setOfferReviews
 } from 'store/offer/offer-reducer';
-import {StoreNamespace} from 'settings/store-namespace';
+import {NameSpace} from 'settings/name-space';
 
 export const getOfferById = createAsyncThunk(
   'offer/getOfferById',
   async (offerId: number) => {
     try {
-      const {data} = await api.get<Offer>(`${ApiRoute.GetOffer}/${offerId}`);
+      const {data} = await api.get<Offer>(`${ApiRoute.GetOffers}/${offerId}`);
       store.dispatch(setOffer(data));
     } catch (error) {
       handleError(error);
@@ -41,7 +42,7 @@ export const getOfferReviews = createAsyncThunk(
   'offer/getOfferReviews',
   async (offerId: number) => {
     try {
-      const {data} = await api.get<Reviews>(`${ApiRoute.GetOfferReviews}/${offerId}`);
+      const {data} = await api.get<Reviews>(`${ApiRoute.OfferReviews}/${offerId}`);
       store.dispatch(setOfferReviews(data));
     } catch (error) {
       handleError(error);
@@ -55,7 +56,7 @@ export const setOfferReview = createAsyncThunk(
     try {
       const {offerId, comment, rating} = newOfferReview;
       await api.post(
-        `${ApiRoute.SetOfferReview}/${offerId}`,
+        `${ApiRoute.OfferReviews}/${offerId}`,
         {comment, rating},
       );
       store.dispatch(setNewReviewSendStatus(NewReviewSendStatus.Success));
@@ -70,7 +71,11 @@ export const getOfferNearbyOffers = createAsyncThunk(
   'offer/getOfferNearbyOffers',
   async (offerId: number) => {
     try {
-      const {data} = await api.get<Offers>(ApiRoute.GetOfferNearbyOffers.replace('{offerId}', String(offerId)));
+      const {data} = await api.get<Offers>(
+        generatePath(ApiRoute.GetOfferNearbyOffers, {
+          offerId: `${offerId}`,
+        }),
+      );
       store.dispatch(setOfferNearbyOffers(data));
     } catch (error) {
       handleError(error);
@@ -80,7 +85,7 @@ export const getOfferNearbyOffers = createAsyncThunk(
 
 export const loadOfferData = (id?: number) => {
   if (!id) {
-    id = store.getState()[StoreNamespace.Offer].offer?.id;
+    id = store.getState()[NameSpace.Offer].offer?.id;
 
     if (typeof id === 'undefined') {
       return;
