@@ -30,7 +30,12 @@ interface CardBookmarkButtonProps {
   },
 }
 
-function CardBookmarkButton({offer, cardType = 'Default' as cardTypes, iconSize = {width: 18, height: 19}}: CardBookmarkButtonProps): JSX.Element {
+function CardBookmarkButton(
+  {
+    offer,
+    cardType = 'Default' as cardTypes,
+    iconSize = {width: 18, height: 19},
+  }: CardBookmarkButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const navigate = useNavigate();
