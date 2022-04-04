@@ -14,16 +14,23 @@ import {
 } from 'hooks/use-redux-hooks';
 import {useNavigate} from 'react-router-dom';
 
+enum CardCssClassByType {
+  Default = 'place-card__bookmark',
+  Property = 'property__bookmark',
+}
+
+type cardTypes = keyof typeof CardCssClassByType;
+
 interface CardBookmarkButtonProps {
   offer: Offer,
-  cssElement?: string,
+  cardType?: cardTypes,
   iconSize?: {
     width: number,
     height: number,
   },
 }
 
-function CardBookmarkButton({offer, cssElement = 'place-card', iconSize = {width: 18, height: 19}}: CardBookmarkButtonProps): JSX.Element {
+function CardBookmarkButton({offer, cardType = 'Default' as cardTypes, iconSize = {width: 18, height: 19}}: CardBookmarkButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const navigate = useNavigate();
@@ -40,13 +47,19 @@ function CardBookmarkButton({offer, cssElement = 'place-card', iconSize = {width
     }));
   }, [dispatch, isUserAuthorized, navigate, offer]);
 
+  const cssClassByType = CardCssClassByType[cardType];
+
   return (
     <button
-      className={clsx(`${cssElement}__bookmark-button`, offer.isFavorite && `${cssElement}__bookmark-button--active`, 'button')}
+      className={clsx(
+        `${cssClassByType}-button`,
+        offer.isFavorite && `${cssClassByType}-button--active`,
+        'button',
+      )}
       type="button"
       onClick={handleButtonClick}
     >
-      <svg className={`${cssElement}__bookmark-icon`} width={iconSize.width} height={iconSize.height}>
+      <svg className={`${cssClassByType}-icon`} width={iconSize.width} height={iconSize.height}>
         <use xlinkHref="#icon-bookmark"/>
       </svg>
       <span className="visually-hidden">{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>

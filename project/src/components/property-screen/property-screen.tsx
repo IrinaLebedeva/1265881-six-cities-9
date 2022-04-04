@@ -75,7 +75,7 @@ function PropertyScreen(): JSX.Element {
               <h1 className="property__name">
                 {offer.title}
               </h1>
-              <CardBookmarkButton offer={offer} cssElement={'property'} iconSize={iconSize}/>
+              <CardBookmarkButton offer={offer} cardType={'Property'} iconSize={iconSize}/>
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
