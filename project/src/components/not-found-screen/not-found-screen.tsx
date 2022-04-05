@@ -2,6 +2,8 @@ import {AppRoute} from 'settings/app-route';
 import {Header} from 'components/header/header';
 import {Link} from 'react-router-dom';
 
+import './css/image-container.css';
+
 function NotFoundScreen(): JSX.Element {
   return (
     <div className="page page--gray page--main">
@@ -16,7 +18,7 @@ function NotFoundScreen(): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <div className="cities__image-container">
+              <div className="cities__image-container image-container">
                 <img src="img/not-found.gif" alt="" width="379" height="369"/>
               </div>
             </div>

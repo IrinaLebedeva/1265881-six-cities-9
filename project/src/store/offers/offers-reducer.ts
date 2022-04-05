@@ -1,11 +1,11 @@
-import {createReducer} from '@reduxjs/toolkit';
+import {
+  createSlice,
+  PayloadAction
+} from '@reduxjs/toolkit';
 import {DEFAULT_OFFERS_SORT_TYPE} from 'settings/offers-sort-type';
 import {Offers} from 'types/offer';
-import {
-  setOffers,
-  setOffersSortType
-} from 'store/offers/action';
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
+import {NameSpace} from 'settings/name-space';
 
 type InitialState = {
   offers: Offers;
@@ -19,15 +19,21 @@ const initialState: InitialState = {
   isOffersLoaded: false,
 };
 
-const reducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(setOffers, (state, action) => {
+export const offersReducer = createSlice({
+  name: NameSpace.Offers,
+  initialState,
+  reducers: {
+    setOffers: (state, action:PayloadAction<Offers>) => {
       state.offers = action.payload;
       state.isOffersLoaded = true;
-    })
-    .addCase(setOffersSortType, (state, action) => {
+    },
+    setOffersSortType: (state, action:PayloadAction<OffersSortTypeKey>) => {
       state.offersSortType = action.payload;
-    });
+    },
+  },
 });
 
-export {reducer as offersReducer};
+export const {
+  setOffers,
+  setOffersSortType,
+} = offersReducer.actions;

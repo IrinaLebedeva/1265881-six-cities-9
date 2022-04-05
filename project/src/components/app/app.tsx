@@ -11,7 +11,6 @@ import {
 import {cityCodes} from 'settings/city';
 import {CityCode} from 'types/city-code';
 import {CityScreen} from 'components/city-screen/city-screen';
-import {FavoritesEmptyScreen} from 'components/favorites-empty-screen/favorites-empty-screen';
 import {FavoritesScreen} from 'components/favorites-screen/favorites-screen';
 import {formatCityCode} from 'utils/format-city-code';
 import {getAuthorizationStatus} from 'store/user/selector';
@@ -21,24 +20,20 @@ import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {LoginScreen} from 'components/login-screen/login-screen';
 import {logoutUser} from 'store/user/api-action';
 import {NotFoundScreen} from 'components/not-found-screen/not-found-screen';
-import {Offers} from 'types/offer';
 import {PropertyScreen} from 'components/property-screen/property-screen';
 import {PrivateRoute} from 'components/private-route/private-route';
 import {
   resetCityCode,
   setCityCode
-} from 'store/city/action';
+} from 'store/city/city-reducer';
 import {
   useAppDispatch,
   useAppSelector
 } from 'hooks/use-redux-hooks';
 import {useEffect} from 'react';
 
-type AppScreenProps = {
-  favoriteOffers: Offers;
-};
 
-function App({favoriteOffers}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersLoaded = useAppSelector(getIsOffersLoaded);
 
@@ -57,8 +52,8 @@ function App({favoriteOffers}: AppScreenProps): JSX.Element {
         navigate(AppRoute.Root);
         break;
     }
-    if (matchCityRoute && matchCityRoute.params.cityCode) {
-      dispatch(setCityCode({cityCode: formatCityCode(matchCityRoute.params.cityCode) as CityCode}));
+    if (matchCityRoute?.params?.cityCode) {
+      dispatch(setCityCode(formatCityCode(matchCityRoute.params.cityCode) as CityCode));
     }
   });
 
@@ -91,20 +86,16 @@ function App({favoriteOffers}: AppScreenProps): JSX.Element {
           element={<LoginScreen />}
         />
         <Route
-          path={`${AppRoute.Property}`}
+          path={AppRoute.Property}
           element={<PropertyScreen/>}
         />
         <Route
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <FavoritesScreen offers={favoriteOffers} />
+              <FavoritesScreen />
             </PrivateRoute>
           }
-        />
-        <Route
-          path={AppRoute.FavoritesEmpty}
-          element={<FavoritesEmptyScreen />}
         />
       </Route>
       <Route

@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import CardBookmarkButton from 'components/card-bookmark-button/card-bookmark-button';
 import {getIsUserAuthorized} from 'store/user/selector';
 import {
   getNearbyOffers,
@@ -6,42 +6,36 @@ import {
   getSortedReviews
 } from 'store/offer/selector';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
-import {
-  getOfferById,
-  getOfferNearbyOffers,
-  getOfferReviews
-} from 'store/offer/api-action';
+import {loadOfferData} from 'store/offer/api-action';
 import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {Map} from 'components/map/map';
 import {PropertyHost} from 'components/property-host/property-host';
 import {PropertyNearPlaces} from 'components/property-near-places/property-near-places';
 import {PropertyReviews} from 'components/property-reviews/property-reviews';
 import {PropertyReviewsForm} from 'components/property-reviews-form/property-reviews-form';
-import {resetToInitialState} from 'store/offer/action';
+import {useAppSelector} from 'hooks/use-redux-hooks';
 import {
-  useAppDispatch,
-  useAppSelector
-} from 'hooks/use-redux-hooks';
-import {useEffect} from 'react';
+  useEffect,
+  useMemo
+} from 'react';
 import {useParams} from 'react-router-dom';
 
 function PropertyScreen(): JSX.Element {
   const params = useParams();
-  const dispatch = useAppDispatch();
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const offer = useAppSelector(getOffer);
   const offerReviews = useAppSelector(getSortedReviews);
   const offerNearbyOffers = useAppSelector(getNearbyOffers);
-  const id = Number(params.id);
+  const id = +(params?.id || 0);
 
   useEffect(() => {
     if (!offer || offer.id !== id) {
-      dispatch(resetToInitialState());
-      dispatch(getOfferById(id));
-      dispatch(getOfferReviews(id));
-      dispatch(getOfferNearbyOffers(id));
+      loadOfferData(id);
     }
-  }, [dispatch, id, offer, offerNearbyOffers, offerReviews]);
+  }, [id, offer, offerNearbyOffers, offerReviews]);
+
+  const mapOffers = useMemo(() => !offer ? [] : [offer, ...offerNearbyOffers],
+    [offer, offerNearbyOffers]);
 
   if (!offer) {
     return (
@@ -50,6 +44,11 @@ function PropertyScreen(): JSX.Element {
   }
 
   const reviewsForm = (isUserAuthorized) ? <PropertyReviewsForm offerId={offer.id}/> : undefined;
+
+  const iconSize = {
+    width: 31,
+    height: 33,
+  };
 
   return (
     <main className="page__main page__main--property">
@@ -76,15 +75,7 @@ function PropertyScreen(): JSX.Element {
               <h1 className="property__name">
                 {offer.title}
               </h1>
-              <button
-                className={clsx('property__bookmark-button', {'property__bookmark-button--active': offer.isFavorite}, 'button')}
-                type="button"
-              >
-                <svg className="property__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark" />
-                </svg>
-                <span className="visually-hidden">{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-              </button>
+              <CardBookmarkButton offer={offer} cardType={'Property'} iconSize={iconSize}/>
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
@@ -126,7 +117,7 @@ function PropertyScreen(): JSX.Element {
           </div>
         </div>
         <section className="property__map map">
-          <Map offers={[offer, ...offerNearbyOffers]} activeOfferId={offer.id}/>
+          <Map offers={mapOffers} activeOfferId={offer.id}/>
         </section>
       </section>
       <div className="container">

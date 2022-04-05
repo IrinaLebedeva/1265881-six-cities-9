@@ -1,3 +1,5 @@
+import './css/spin-wrapper.css';
+
 function LoadingScreen(): JSX.Element {
   return (
     <div className="spin-wrapper">

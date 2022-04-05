@@ -1,11 +1,9 @@
 import {AuthorizationStatus} from 'settings/authorization-status';
-import {createReducer} from '@reduxjs/toolkit';
 import {
-  resetUser,
-  setAuthorization,
-  setErrorMessage,
-  setUser
-} from 'store/user/action';
+  createSlice,
+  PayloadAction
+} from '@reduxjs/toolkit';
+import {NameSpace} from 'settings/name-space';
 import {User} from 'types/user';
 
 interface InitialState {
@@ -28,20 +26,34 @@ const initialState: InitialState = {
   user: initialUser,
 };
 
-const reducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(setAuthorization, (state, action) => {
+const userReducer = createSlice({
+  name: NameSpace.User,
+  initialState,
+  reducers: {
+    setAuthorization: (state, action:PayloadAction<AuthorizationStatus>) => {
       state.authorizationStatus = action.payload;
-    })
-    .addCase(setErrorMessage, (state, action) => {
+    },
+    setErrorMessage: (state, action:PayloadAction<string>) => {
       state.errorMessage = action.payload;
-    })
-    .addCase(setUser, (state, action) => {
+    },
+    setUser: (state, action:PayloadAction<User>) => {
       state.user = action.payload;
-    })
-    .addCase(resetUser, (state) => {
+    },
+    resetUser: (state) => {
       state.user = initialUser;
-    });
+    },
+  },
 });
 
-export {reducer as userReducer};
+export {
+  initialUser,
+  userReducer
+};
+
+export const {
+  setAuthorization,
+  setErrorMessage,
+  setUser,
+  resetUser,
+} = userReducer.actions;
+
