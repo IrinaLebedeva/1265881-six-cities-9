@@ -52,8 +52,3 @@ export const makeFakeNearbyOffers = ():Offers => Array.from(
   Array(FakeConstants.NearbyOffersNumber),
   () => makeFakeOffer(),
 );
-
-export const makeFakeFavoriteOffers = ():Offers => Array.from(
-  Array(FakeConstants.FavoriteOffersNumber),
-  () => makeFakeOffer(),
-);
