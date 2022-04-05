@@ -23,7 +23,6 @@ import {
   setOfferNearbyOffers,
   setOfferReviews
 } from 'store/offer/offer-reducer';
-import {NameSpace} from 'settings/name-space';
 
 export const getOfferById = createAsyncThunk(
   'offer/getOfferById',
@@ -83,15 +82,7 @@ export const getOfferNearbyOffers = createAsyncThunk(
   },
 );
 
-export const loadOfferData = (id?: number) => {
-  if (!id) {
-    id = store.getState()[NameSpace.Offer].offer?.id;
-
-    if (typeof id === 'undefined') {
-      return;
-    }
-  }
-
+export const loadOfferData = (id: number) => {
   store.dispatch(getOfferById(id));
   store.dispatch(getOfferReviews(id));
   store.dispatch(getOfferNearbyOffers(id));
