@@ -18,6 +18,7 @@ enum FakeConstants {
   GoodsNumber = 7,
   OffersNumber = 10,
   NearbyOffersNumber = 3,
+  FavoriteOffersNumber = 4,
   BedroomsMaxNumber = 8,
 }
 
@@ -49,5 +50,10 @@ export const makeFakeOffers = ():Offers => Array.from(
 
 export const makeFakeNearbyOffers = ():Offers => Array.from(
   Array(FakeConstants.NearbyOffersNumber),
+  () => makeFakeOffer(),
+);
+
+export const makeFakeFavoriteOffers = ():Offers => Array.from(
+  Array(FakeConstants.FavoriteOffersNumber),
   () => makeFakeOffer(),
 );
