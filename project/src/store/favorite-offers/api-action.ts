@@ -8,6 +8,7 @@ import {FavoriteOfferStatusData} from 'types/favorite-offer-status-data';
 import {getOffers} from 'store/offers/api-action';
 import {handleError} from 'services/handleError';
 import {loadOfferData} from 'store/offer/api-action';
+import {NameSpace} from 'settings/name-space';
 import {Offers} from 'types/offer';
 import {setFavoriteOffers} from 'store/favorite-offers/favorite-offers-reducer';
 
@@ -30,7 +31,11 @@ export const setFavoriteOfferStatus = createAsyncThunk(
       await api.post(`${ApiRoute.FavoriteOffers}/${offerId}/${status}`);
       store.dispatch(getOffers());
       store.dispatch(getFavoriteOffersData());
-      loadOfferData();
+
+      const id = store.getState()[NameSpace.Offer].offer?.id;
+      if (typeof id !== 'undefined') {
+        loadOfferData(id);
+      }
     } catch (error) {
       handleError(error);
     }
