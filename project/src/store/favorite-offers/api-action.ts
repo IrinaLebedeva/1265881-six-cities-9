@@ -6,9 +6,8 @@ import {ApiRoute} from 'settings/api';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {FavoriteOfferStatusData} from 'types/favorite-offer-status-data';
 import {getOffers} from 'store/offers/api-action';
+import {getOfferById} from 'store/offer/api-action';
 import {handleError} from 'services/handleError';
-import {loadOfferData} from 'store/offer/api-action';
-import {NameSpace} from 'settings/name-space';
 import {Offers} from 'types/offer';
 import {setFavoriteOffers} from 'store/favorite-offers/favorite-offers-reducer';
 
@@ -29,13 +28,9 @@ export const setFavoriteOfferStatus = createAsyncThunk(
   async ({offerId, status}: FavoriteOfferStatusData) => {
     try {
       await api.post(`${ApiRoute.FavoriteOffers}/${offerId}/${status}`);
+      store.dispatch(getOfferById(offerId));
       store.dispatch(getOffers());
       store.dispatch(getFavoriteOffersData());
-
-      const id = store.getState()[NameSpace.Offer].offer?.id;
-      if (typeof id !== 'undefined') {
-        loadOfferData(id);
-      }
     } catch (error) {
       handleError(error);
     }
