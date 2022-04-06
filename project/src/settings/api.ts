@@ -6,9 +6,10 @@ export enum Api {
 
 export enum ApiRoute {
   GetOffers = '/hotels',
+  GetOfferById = '/hotels/:offerId',
   Login = '/login',
   Logout = '/logout',
-  OfferReviews = '/comments',
+  OfferReviews = '/comments/:offerId',
   GetOfferNearbyOffers = '/hotels/:offerId/nearby',
   FavoriteOffers = '/favorite',
 }
