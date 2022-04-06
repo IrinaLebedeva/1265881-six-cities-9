@@ -6,6 +6,7 @@ import {ApiRoute} from 'settings/api';
 import {AuthData} from 'types/auth-data';
 import {AuthorizationStatus} from 'settings/authorization-status';
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import {getOffers} from 'store/offers/api-action';
 import {handleError} from 'services/handleError';
 import {deleteApiAuthToken, saveApiAuthToken} from 'services/api-auth-token';
 import {
@@ -77,6 +78,7 @@ export const logoutUser = createAsyncThunk(
       deleteApiAuthToken();
       store.dispatch(setAuthorization(AuthorizationStatus.NotAuth));
       store.dispatch(resetUser);
+      store.dispatch(getOffers());
     } catch(error) {
       handleError(error);
       store.dispatch(setAuthorization(AuthorizationStatus.NotAuth));
