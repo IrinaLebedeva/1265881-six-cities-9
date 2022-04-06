@@ -12,13 +12,12 @@ import {
 } from 'types/offer';
 import {RatingMaxValue} from 'settings/const';
 
-enum FakeConstants {
+export enum FakeConstants {
   DescriptionSentenceNumber = 3,
   ImagesNumber = 5,
   GoodsNumber = 7,
   OffersNumber = 10,
   NearbyOffersNumber = 3,
-  FavoriteOffersNumber = 4,
   BedroomsMaxNumber = 8,
 }
 
