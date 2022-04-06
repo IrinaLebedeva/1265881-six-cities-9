@@ -43,9 +43,16 @@ function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
     if (formRef.current) {
       formRef.current.querySelectorAll('input, textarea, button').forEach(
         (element) => {
-          (isActive || (element.nodeName === 'BUTTON' && isActive && isValid)) ?
-            element.removeAttribute('disabled') :
+          let isNotDisabled = isActive;
+          if (element.nodeName === 'BUTTON') {
+            isNotDisabled = isActive && isValid;
+          }
+
+          if (isNotDisabled) {
+            element.removeAttribute('disabled');
+          } else {
             element.setAttribute('disabled', 'disabled');
+          }
         });
     }
   }, [isValid]);
