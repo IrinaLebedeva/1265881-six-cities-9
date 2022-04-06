@@ -8,7 +8,7 @@ import {
   useRef
 } from 'react';
 import {Offer} from 'types/offer';
-import {setFavoriteOfferStatus} from 'store/favorite-offers/api-action';
+import {toggleFavoriteOfferStatus} from 'store/favorite-offers/api-action';
 import {
   useAppDispatch,
   useAppSelector
@@ -51,12 +51,7 @@ function CardBookmarkButton(
       navigate(AppRoute.Login);
     }
     if (buttonRef.current) {
-      const isFavoriteCurrent = buttonRef.current.classList.contains(cssClassNameFavorite);
-      dispatch(setFavoriteOfferStatus({
-        offerId: offer.id,
-        status: isFavoriteCurrent ? 0 : 1,
-      }));
-
+      dispatch(toggleFavoriteOfferStatus(offer.id));
       buttonRef.current.classList.toggle(cssClassNameFavorite);
     }
 
