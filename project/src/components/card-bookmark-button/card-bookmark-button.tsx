@@ -4,7 +4,8 @@ import {getIsUserAuthorized} from 'store/user/selector';
 import {
   memo,
   MouseEvent,
-  useCallback
+  useCallback,
+  useRef
 } from 'react';
 import {Offer} from 'types/offer';
 import {setFavoriteOfferStatus} from 'store/favorite-offers/api-action';
@@ -39,30 +40,38 @@ function CardBookmarkButton(
   const dispatch = useAppDispatch();
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
   const navigate = useNavigate();
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  const cssClassByType = CardCssClassByType[cardType];
+  const cssClassNameFavorite = `${cssClassByType}-button--active`;
 
   const handleButtonClick = useCallback((evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     if (!isUserAuthorized) {
       navigate(AppRoute.Login);
     }
+    if (buttonRef.current) {
+      const isFavoriteCurrent = buttonRef.current.classList.contains(cssClassNameFavorite);
+      dispatch(setFavoriteOfferStatus({
+        offerId: offer.id,
+        status: isFavoriteCurrent ? 0 : 1,
+      }));
 
-    dispatch(setFavoriteOfferStatus({
-      offerId: offer.id,
-      status: offer.isFavorite ? 0 : 1,
-    }));
-  }, [dispatch, isUserAuthorized, navigate, offer]);
+      buttonRef.current.classList.toggle(cssClassNameFavorite);
+    }
 
-  const cssClassByType = CardCssClassByType[cardType];
+  }, [cssClassNameFavorite, dispatch, isUserAuthorized, navigate, offer]);
 
   return (
     <button
       className={clsx(
         `${cssClassByType}-button`,
-        offer.isFavorite && `${cssClassByType}-button--active`,
+        offer.isFavorite && cssClassNameFavorite,
         'button',
       )}
       type="button"
       onClick={handleButtonClick}
+      ref={buttonRef}
     >
       <svg className={`${cssClassByType}-icon`} width={iconSize.width} height={iconSize.height}>
         <use xlinkHref="#icon-bookmark"/>

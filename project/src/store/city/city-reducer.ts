@@ -6,11 +6,11 @@ import {
 import {DEFAULT_CITY_CODE} from 'settings/const';
 import {NameSpace} from 'settings/name-space';
 
-type InitialState = {
+export type CityReducerInitialState = {
   cityCode: CityCode;
 }
 
-const initialState: InitialState = {
+const initialState: CityReducerInitialState = {
   cityCode: DEFAULT_CITY_CODE,
 };
 
@@ -27,4 +27,7 @@ export const cityReducer = createSlice({
   },
 });
 
-export const {resetCityCode, setCityCode} = cityReducer.actions;
+export const {
+  resetCityCode,
+  setCityCode,
+} = cityReducer.actions;

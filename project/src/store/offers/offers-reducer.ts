@@ -7,13 +7,13 @@ import {Offers} from 'types/offer';
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
 import {NameSpace} from 'settings/name-space';
 
-type InitialState = {
+export type OffersReducerInitialState = {
   offers: Offers;
   offersSortType: OffersSortTypeKey;
   isOffersLoaded: boolean;
 }
 
-const initialState: InitialState = {
+const initialState: OffersReducerInitialState = {
   offers: [],
   offersSortType: DEFAULT_OFFERS_SORT_TYPE,
   isOffersLoaded: false,

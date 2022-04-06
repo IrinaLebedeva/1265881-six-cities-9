@@ -65,7 +65,7 @@ function PropertyScreen(): JSX.Element {
             })}
           </div>
         </div>
-        <div className="property__container container">
+        <div className="property__container container" data-testid="property-container">
           <div className="property__wrapper">
             {(!offer.isPremium) ? '' :
               <div className="property__mark">

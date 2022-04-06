@@ -7,6 +7,7 @@ import {NewReviewSendStatus} from 'settings/new-review-send-status';
 import React, {
   ChangeEvent,
   FormEvent,
+  useCallback,
   useEffect,
   useRef,
   useState
@@ -34,6 +35,21 @@ function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
   const formRef = useRef<HTMLFormElement | null>(null);
   const newReviewSendStatus = useAppSelector(getNewReviewSendStatus);
 
+  const isValid = rating >= ReviewRestriction.RatingMinValue &&
+    comment.length >= ReviewRestriction.CommentMinLength &&
+    comment.length <= ReviewRestriction.CommentMaxLength;
+
+  const setFormIsActive = useCallback((isActive: boolean) => {
+    if (formRef.current) {
+      formRef.current.querySelectorAll('input, textarea, button').forEach(
+        (element) => {
+          (isActive || (element.nodeName === 'BUTTON' && isActive && isValid)) ?
+            element.removeAttribute('disabled') :
+            element.setAttribute('disabled', 'disabled');
+        });
+    }
+  }, [isValid]);
+
   useEffect(() => {
     if (newReviewSendStatus === NewReviewSendStatus.InProcess) {
       setFormIsActive(false);
@@ -48,7 +64,7 @@ function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
     setFormIsActive(true);
     dispatch(setNewReviewSendStatus(NewReviewSendStatus.NotSend));
 
-  }, [newReviewSendStatus, dispatch, offerId]);
+  }, [newReviewSendStatus, dispatch, offerId, setFormIsActive]);
 
   const resetForm = () => {
     if (formRef.current) {
@@ -57,21 +73,6 @@ function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
       setComment('');
     }
   };
-
-  const setFormIsActive = (isActive: boolean) => {
-    if (formRef.current) {
-      formRef.current.querySelectorAll('input, textarea, button').forEach(
-        (element) => {
-          (isActive) ?
-            element.removeAttribute('disabled') :
-            element.setAttribute('disabled', 'disabled');
-        });
-    }
-  };
-
-  const isValid = ReviewRestriction.RatingMinValue &&
-    comment.length >= ReviewRestriction.CommentMinLength &&
-    comment.length <= ReviewRestriction.CommentMaxLength;
 
   const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(evt.target.value);

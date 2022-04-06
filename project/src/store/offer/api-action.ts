@@ -23,13 +23,14 @@ import {
   setOfferNearbyOffers,
   setOfferReviews
 } from 'store/offer/offer-reducer';
-import {NameSpace} from 'settings/name-space';
 
 export const getOfferById = createAsyncThunk(
   'offer/getOfferById',
   async (offerId: number) => {
     try {
-      const {data} = await api.get<Offer>(`${ApiRoute.GetOffers}/${offerId}`);
+      const {data} = await api.get<Offer>(
+        generatePath(ApiRoute.GetOfferById, {offerId: `${offerId}`}),
+      );
       store.dispatch(setOffer(data));
     } catch (error) {
       handleError(error);
@@ -41,8 +42,10 @@ export const getOfferById = createAsyncThunk(
 export const getOfferReviews = createAsyncThunk(
   'offer/getOfferReviews',
   async (offerId: number) => {
+    const {data} = await api.get<Reviews>(
+      generatePath(ApiRoute.OfferReviews, {offerId: `${offerId}`}),
+    );
     try {
-      const {data} = await api.get<Reviews>(`${ApiRoute.OfferReviews}/${offerId}`);
       store.dispatch(setOfferReviews(data));
     } catch (error) {
       handleError(error);
@@ -56,7 +59,7 @@ export const setOfferReview = createAsyncThunk(
     try {
       const {offerId, comment, rating} = newOfferReview;
       await api.post(
-        `${ApiRoute.OfferReviews}/${offerId}`,
+        generatePath(ApiRoute.OfferReviews, {offerId: `${offerId}`}),
         {comment, rating},
       );
       store.dispatch(setNewReviewSendStatus(NewReviewSendStatus.Success));
@@ -72,9 +75,7 @@ export const getOfferNearbyOffers = createAsyncThunk(
   async (offerId: number) => {
     try {
       const {data} = await api.get<Offers>(
-        generatePath(ApiRoute.GetOfferNearbyOffers, {
-          offerId: `${offerId}`,
-        }),
+        generatePath(ApiRoute.GetOfferNearbyOffers, {offerId: `${offerId}`}),
       );
       store.dispatch(setOfferNearbyOffers(data));
     } catch (error) {
@@ -83,15 +84,7 @@ export const getOfferNearbyOffers = createAsyncThunk(
   },
 );
 
-export const loadOfferData = (id?: number) => {
-  if (!id) {
-    id = store.getState()[NameSpace.Offer].offer?.id;
-
-    if (typeof id === 'undefined') {
-      return;
-    }
-  }
-
+export const loadOfferData = (id: number) => {
   store.dispatch(getOfferById(id));
   store.dispatch(getOfferReviews(id));
   store.dispatch(getOfferNearbyOffers(id));
