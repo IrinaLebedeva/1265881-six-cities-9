@@ -4,6 +4,8 @@ import {generatePath} from 'react-router-dom';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {Link} from 'react-router-dom';
 import {Offer} from 'types/offer';
+import {offerTypes} from 'settings/offer-types';
+import {OfferTypeCode} from 'types/offer-type-code';
 
 type FavoritesCardProps = {
   offer: Offer;
@@ -40,7 +42,7 @@ function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
         <h2 className="place-card__name">
           <Link to={generatePath(AppRoute.Property, {id: `${offer.id}`})}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{offerTypes[offer.type as OfferTypeCode]}</p>
       </div>
     </article>
   );

@@ -9,6 +9,8 @@ import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {loadOfferData} from 'store/offer/api-action';
 import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {Map} from 'components/map/map';
+import {offerTypes} from 'settings/offer-types';
+import {OfferTypeCode} from 'types/offer-type-code';
 import {PropertyHost} from 'components/property-host/property-host';
 import {PropertyNearPlaces} from 'components/property-near-places/property-near-places';
 import {PropertyReviews} from 'components/property-reviews/property-reviews';
@@ -88,7 +90,7 @@ function PropertyScreen(): JSX.Element {
             </div>
             <ul className="property__features">
               <li className="property__feature property__feature--entire">
-                {offer.type}
+                {offerTypes[offer.type as OfferTypeCode]}
               </li>
               <li className="property__feature property__feature--bedrooms">
                 {offer.bedrooms} Bedrooms

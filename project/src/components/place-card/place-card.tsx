@@ -6,6 +6,8 @@ import {
 } from 'react-router-dom';
 import {getRatingInPercent} from 'utils/get-rating-in-percent';
 import {Offer} from 'types/offer';
+import {OfferTypeCode} from 'types/offer-type-code';
+import {offerTypes} from 'settings/offer-types';
 import {useCallback} from 'react';
 
 type CallbackType = (offerId: number) => void;
@@ -58,7 +60,7 @@ function PlaceCard({offer, onMouseOverAndLeave}: PlaceCardProps): JSX.Element {
         <h2 className="place-card__name">
           <Link to={generatePath(AppRoute.Property, {id: `${offer.id}`})}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{offerTypes[offer.type as OfferTypeCode]}</p>
       </div>
     </article>
   );
