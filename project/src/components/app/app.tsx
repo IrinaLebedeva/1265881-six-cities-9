@@ -11,10 +11,12 @@ import {
 import {cityCodes} from 'settings/city';
 import {CityCode} from 'types/city-code';
 import {CityScreen} from 'components/city-screen/city-screen';
+import {DataLoadedStatus} from 'settings/data-loaded-status';
+import {ErrorPageScreen} from 'components/error-page-screen/error-page-screen';
 import {FavoritesScreen} from 'components/favorites-screen/favorites-screen';
 import {formatCityCode} from 'utils/format-city-code';
 import {getAuthorizationStatus} from 'store/user/selector';
-import {getIsOffersLoaded} from 'store/offers/selector';
+import {getDataLoadedStatus} from 'store/offers/selector';
 import {Layout} from 'components/layout/layout';
 import {LoadingScreen} from 'components/loading-screen/loading-screen';
 import {LoginScreen} from 'components/login-screen/login-screen';
@@ -35,7 +37,7 @@ import {useEffect} from 'react';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isOffersLoaded = useAppSelector(getIsOffersLoaded);
+  const dataLoadedStatus = useAppSelector(getDataLoadedStatus);
 
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -57,9 +59,18 @@ function App(): JSX.Element {
     }
   });
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || !isOffersLoaded) {
+  if (
+    authorizationStatus === AuthorizationStatus.Unknown ||
+    dataLoadedStatus === DataLoadedStatus.InProcess
+  ) {
     return (
       <LoadingScreen />
+    );
+  }
+
+  if (dataLoadedStatus === DataLoadedStatus.Error) {
+    return (
+      <ErrorPageScreen title="An error occurred while loading data. Please try to visit us later." />
     );
   }
 

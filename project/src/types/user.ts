@@ -5,5 +5,3 @@ export type User = {
   isPro: boolean;
   name: string;
 };
-
-export type Users = User[];

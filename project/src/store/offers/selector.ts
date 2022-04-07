@@ -2,6 +2,7 @@ import {State} from 'types/state';
 import {City} from 'settings/city';
 import {CityCode} from 'types/city-code';
 import {createSelector} from 'reselect';
+import {DataLoadedStatus} from 'settings/data-loaded-status';
 import {Offers} from 'types/offer';
 import {OfferSortCode} from 'settings/offers-sort-type';
 import {OffersSortTypeKey} from 'types/offers-sort-type-key';
@@ -16,7 +17,7 @@ const getCurrentCityCode = (state: State): CityCode => state[NameSpace.City].cit
 
 const getOffers = (state: State): Offers => state[NameSpace.Offers].offers;
 
-const getIsOffersLoaded = (state: State): boolean => state[NameSpace.Offers].isOffersLoaded;
+const getDataLoadedStatus = (state: State): DataLoadedStatus => state[NameSpace.Offers].dataLoadedStatus;
 
 const getOffersByCity = createSelector(
   [getCurrentCityCode, getOffers], (currentCityCode, offers) => (
@@ -47,7 +48,7 @@ const getSortedOffers = createSelector(
 
 export {
   getCurrentCityCode,
-  getIsOffersLoaded,
+  getDataLoadedStatus,
   getOffersSortType,
   getSortedOffers
 };
