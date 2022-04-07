@@ -20,6 +20,8 @@ import {
 } from 'react';
 import {useParams} from 'react-router-dom';
 
+const GALLERY_MAX_IMAGES_NUMBER = 6;
+
 function PropertyScreen(): JSX.Element {
   const params = useParams();
   const isUserAuthorized = useAppSelector(getIsUserAuthorized);
@@ -55,7 +57,7 @@ function PropertyScreen(): JSX.Element {
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">
-            {offer.images.map((image, index) => {
+            {offer.images.slice(0, GALLERY_MAX_IMAGES_NUMBER).map((image, index) => {
               const key = `${index}-image`;
               return (
                 <div className="property__image-wrapper" key={key}>
