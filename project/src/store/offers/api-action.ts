@@ -4,9 +4,13 @@ import {
 } from 'store/store';
 import {ApiRoute} from 'settings/api';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {Offers} from 'types/offer';
-import {setOffers} from 'store/offers/offers-reducer';
+import {DataLoadedStatus} from 'settings/data-loaded-status';
 import {handleError} from 'services/handleError';
+import {Offers} from 'types/offer';
+import {
+  setOffers,
+  setDataLoadedStatus
+} from 'store/offers/offers-reducer';
 
 export const getOffers = createAsyncThunk(
   'offers/getOffers',
@@ -16,6 +20,7 @@ export const getOffers = createAsyncThunk(
       store.dispatch(setOffers(data));
     } catch (error) {
       handleError(error);
+      store.dispatch(setDataLoadedStatus(DataLoadedStatus.Error));
     }
   },
 );
