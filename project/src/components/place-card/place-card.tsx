@@ -29,6 +29,7 @@ function PlaceCard({offer, onMouseOverAndLeave}: PlaceCardProps): JSX.Element {
       className="cities__place-card place-card"
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
+      data-testid="place-card"
     >
       {
         offer.isPremium &&
