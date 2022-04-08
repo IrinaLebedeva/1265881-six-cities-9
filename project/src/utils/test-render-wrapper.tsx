@@ -17,13 +17,19 @@ const store = mockStore({
   },
 });
 
-const Wrapper: React.FC = ({children}) => (
-  <Provider store={store}>
-    <HistoryRouteContainer history={history}>
-      {children}
-    </HistoryRouteContainer>
-  </Provider>
-);
+type WrapperProps = {
+  children: React.ReactNode;
+}
+
+function Wrapper({children}: WrapperProps): React.ReactNode {
+  return (
+    <Provider store={store}>
+      <HistoryRouteContainer history={history}>
+        {children}
+      </HistoryRouteContainer>
+    </Provider>
+  );
+}
 
 const testRenderWrapper = (component: React.ReactElement, params = {}) => testRender(component, {
   wrapper: Wrapper, ...params,
