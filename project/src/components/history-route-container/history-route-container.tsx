@@ -1,4 +1,4 @@
-import type {BrowserHistory} from 'history';
+import {BrowserHistory} from 'history';
 import {
   useState,
   useLayoutEffect

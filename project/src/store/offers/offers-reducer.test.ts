@@ -1,3 +1,4 @@
+import {DataLoadedStatus} from 'settings/data-loaded-status';
 import {
   DEFAULT_OFFERS_SORT_TYPE,
   OfferSortCode
@@ -14,7 +15,7 @@ import {OffersSortTypeKey} from 'types/offers-sort-type-key';
 const fakeOffersInitialState: OffersReducerInitialState = {
   offers: [],
   offersSortType: DEFAULT_OFFERS_SORT_TYPE,
-  isOffersLoaded: false,
+  dataLoadedStatus: DataLoadedStatus.Unknown,
 };
 
 const fakeOffers = makeFakeOffers();
@@ -30,7 +31,7 @@ describe('offersReducer', () => {
       .toEqual({
         offers: fakeOffers,
         offersSortType: DEFAULT_OFFERS_SORT_TYPE,
-        isOffersLoaded: true,
+        dataLoadedStatus: DataLoadedStatus.Success,
       });
   });
 
@@ -42,7 +43,7 @@ describe('offersReducer', () => {
       .toEqual({
         offers: [],
         offersSortType: OfferSortCode.PriceHighToLow,
-        isOffersLoaded: false,
+        dataLoadedStatus: DataLoadedStatus.Unknown,
       });
   });
 
