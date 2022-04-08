@@ -18,6 +18,8 @@ import {
   useAppSelector
 } from 'hooks/use-redux-hooks';
 
+import './css/disabled.css';
+
 enum ReviewRestriction {
   RatingMinValue = 1,
   CommentMinLength = 50,
@@ -53,6 +55,12 @@ function PropertyReviewsForm({offerId}: PropertyReviewsFormProps): JSX.Element {
           } else {
             element.setAttribute('disabled', 'disabled');
           }
+        });
+      formRef.current.querySelectorAll('label').forEach(
+        (element) => {
+          isActive ?
+            element.classList.remove('disabled') :
+            element.classList.add('disabled');
         });
     }
   }, [isValid]);
