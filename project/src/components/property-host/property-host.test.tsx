@@ -9,10 +9,9 @@ const mockOffer = makeFakeOffer();
 
 describe('Component: PropertyHost', () => {
   it('should render correctly', () => {
-    render(
-      <PropertyHost offer={mockOffer}/>
-    );
+    render(<PropertyHost offer={mockOffer}/>);
 
     expect(screen.getByTestId('property-host')).toBeInTheDocument();
+    expect(screen.getByText(mockOffer.host.name)).toBeInTheDocument();
   });
 });

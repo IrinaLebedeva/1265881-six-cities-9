@@ -40,7 +40,7 @@ function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Property, {id: `${offer.id}`})}>{offer.title}</Link>
+          <Link to={generatePath(AppRoute.Property, {id: `${offer.id}`})} data-testid="link-to-offer">{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offerTypes[offer.type as OfferTypeCode]}</p>
       </div>

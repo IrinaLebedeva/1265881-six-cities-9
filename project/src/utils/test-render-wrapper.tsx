@@ -26,7 +26,7 @@ const Wrapper: React.FC = ({children}) => (
 );
 
 const testRenderWrapper = (component: React.ReactElement, params = {}) => testRender(component, {
-  wrapper: Wrapper, ...params
+  wrapper: Wrapper, ...params,
 });
 
 export {testRenderWrapper};
