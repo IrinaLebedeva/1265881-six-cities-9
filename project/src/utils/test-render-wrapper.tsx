@@ -18,10 +18,10 @@ const store = mockStore({
 });
 
 type WrapperProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-function Wrapper({children}: WrapperProps): React.ReactNode {
+function Wrapper({children}: WrapperProps): JSX.Element {
   return (
     <Provider store={store}>
       <HistoryRouteContainer history={history}>
